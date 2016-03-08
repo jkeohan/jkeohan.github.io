@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="earnings col-md-offset-4 col-md-4">
+			<h3>My Earnings</h3>
+			<div>
+			<!-- 	<label>Total Tip</label><span ng-bind="totalTip | number:2">0.00</span> -->
+				<label>Total Tip</label><span ng-bind="totalTip">0.00</span>
+			</div>
+			<div>
+				<label>Meal Count</label><span ng-bind="mealCount">0</span>
+			</div>
+			<div>
+			<label>Avg Tip Per Meal</label><span ng-bind="avgTip | number:2">0.00</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="reset col-md-offset-4 col-md-4">
+				<button class="resetAll" ng-click="resetAll()">Reset All</button>
+		</div>
+	</div>
+</div>

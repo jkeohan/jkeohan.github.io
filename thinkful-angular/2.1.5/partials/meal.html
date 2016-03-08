@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="mealInput col-md-offset-4 col-md-4">			
+			<h3>Enter Meal Details</h3>
+		<!-- 		<form name="mealForm" ng-submit="submit()" novalidate class="ng-invalid ng-invalid-required"> -->
+			<form name="mealForm" novalidate>
+					<div class="details">
+						<label for="mealPrice">Base Meal Price: $</label>
+						<input type="number" ng-model="mealPrice" required=""/>
+					</div>
+					<div class="details">
+						<label for="mealTax">Tax Rate: %</label>
+						<input type="number" step="0.00" ng-model="mealTax" required=""/>
+					</div>
+					<div class="details">
+						<label for="mealTip">Meal Tip: %</label>
+						<input type="number" step="1" ng-model="mealTip" required=""/>
+					</div>
+					<div class="error" ng-show="mealForm.$dirty && mealForm.$invalid && mealForm.$submitted">Please fill out all fields</div>
+					<div class="buttons">
+						<button class="submit" type="submit" ng-click="submit()">Submit</button>	
+						<button class="cancel" ng-click="cancel(mealForm)">Cancel</button>				
+					</div>	
+				</form>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="mealOutput col-md-offset-4 col-md-4">
+				<h3>Charges</h3>
+			<div class="charges">
+				<div>
+					<label>Subtotal</label><span ng-bind="subtotal | number:2">0.00</span>
+				</div>
+				<div>
+					<label>Tip</label><span ng-bind="tip | number:2">0.00</span>
+				</div>
+				<hr>
+			</div><!--charges-->
+			<div class="total">
+				<label>Total</label><span ng-bind="total | number:2">0.00</span>
+			</div>		
+			</div><!--col-md-7-->
+		</div>
+	</div>
+</div>

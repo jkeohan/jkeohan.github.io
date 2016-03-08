@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Angular -->
+		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  	<script src="js/app.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+	</head>
+	<body ng-class="{loading: isLoading}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-4 col-md-4">
+					<h1>Waitstaff Calc</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-4 col-md-4">
+					<nav>
+						<ul class="nav nav-pills">
+							<li><a href="/#/home">Home</a></li>
+							<li><a href="/#/meal">New Meal</a></li>
+							<li><a href="/#/earnings">My Earnings</a></li>
+							<li><a href="/#/error">Error</a></li>
+						</ul>
+					</nav>	
+				</div>
+			</div>	
+
+			<!-- <div class="ui-view"></div> -->
+
+			<div class="animate-view-container">
+				<div class="ui-view animate-view">
+			</div>
+	</div>
+	</div>
+	</body>
+	</html>
