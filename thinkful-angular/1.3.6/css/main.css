@@ -1,0 +1,67 @@
+/*div { border: 1px solid black;}*/
+
+body {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", 
+	"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+h1,h3 { 
+	text-align:center;
+}
+
+h3 { padding-bottom:5px;}
+
+label { width:150px; text-align: right; padding:10px;     margin-right: 10px;}
+
+.wrapper {
+	    width: 60%;
+    margin: 0 auto;
+    overflow:hidden;
+}
+
+.buttons {
+	      text-align: center;
+    padding: -1px;
+}
+
+.buttons .cancel {
+	  margin-left:20px;
+}
+
+.reset{
+
+    text-align: center;
+    padding: 16px;
+}
+
+.mealForm {
+
+}
+
+.mealInput {
+text-align: center;
+border: solid 1px gray;
+}
+
+.mealOutput {
+	border: solid 1px gray;
+	    line-height: 1;
+    padding: 10px;
+}
+
+.mealOutput label {
+	padding:0;
+}
+
+.earnings {
+
+	border: solid 1px gray;
+	    line-height: 1;
+    padding: 10px;
+
+}
+
+.earnings label {
+	padding:0;
+}
+
