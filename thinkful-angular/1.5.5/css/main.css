@@ -5,6 +5,10 @@
 
 h1 { margin-bottom:40px;}
 
+.notificationMsg { 
+	margin-top:20px;
+}
+
 .searchInit {
 	margin-top: 20px;
 }
@@ -50,7 +54,6 @@ h1 { margin-bottom:40px;}
 .animate.ng-enter.ng-enter-active,
 .animate.ng-leave {
   opacity: 1;
-
 }
 
 .animate.ng-enter-stagger {

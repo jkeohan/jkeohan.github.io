@@ -28,17 +28,9 @@
 								ng-model="searchQuery" 
 								placeholder="enter a tag to search" 
 								ng-required="true"/>
-										<div class="formInvalid" ng-show="searchForm.searchQuery.$invalid && searchForm.searchQuery.$touched">Please enter a search term....</div>
 							<button type="submit" ng-click="submit()">Submit</button>
 						</form>
-						<div ng-if="searchMsg" class="searchInit animate" >
-							Searching Flickr for photos tagged with "{{searchQueryCopy}}"
-						</div>
-						<div ng-if="resultsMsg" class="searchResults animate" >
-							We found {{results}} search results for "{{searchQueryCopy}}"
-						</div>
-						<div class="formInvalid" ng-show="searchForm.$invalid && searchForm.$submitted">Please enter a search term....</div>
-						<div class="errorMsg" ng-if="errorMsg">There was an issue running the query</div>
+						<div ng-if="notificationMsg" class="notificationMsg animate">{{notificationMsg}}</div>
 					</div>
 				</div>
 				<div id="main" class="row">
@@ -54,3 +46,8 @@
 	</div>
 	</body>
 	</html>
+
+	<!-- 
+ISSUE: Search box will display msg if search is run and results cleared from box
+RESOLUTION:
+	 -->
