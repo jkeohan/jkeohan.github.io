@@ -27,7 +27,7 @@ function init() {
 						.attr("viewBox", "0 0 " + w + " " + h)
 
 			// //Load in GeoJSON data
-			d3.json("../data/countries/mapshaper_output.json", function(json) {
+			d3.json("../D3/data/countries/mapshaper_output.json", function(json) {
 
 			var legendKeys = d3.nest().key(function(d) { return d["properties"]["continent"] } ).entries(json.features)
 			var legendVals = legendKeys.map(function(d) { return d.key })
