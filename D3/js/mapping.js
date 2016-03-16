@@ -58,7 +58,7 @@
 	
 
 			//Load in GeoJSON data
-			d3.json("../data/countries/mapshaper_output.json", function(json) {
+			d3.json("../D3/data/countries/mapshaper_output.json", function(json) {
 	
 				//Bind data and create one path per GeoJSON feature
 				svg.selectAll("path")
