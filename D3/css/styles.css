@@ -1,0 +1,40 @@
+.container, .row {
+	/*border: 1px solid black;*/
+}
+
+#map {
+	/*width:500px;*/
+	height:300px;
+}
+
+.col1, .col2{
+	text-align: center !important;
+}
+
+.middle {
+		text-align: center;
+}
+
+.col2 a {
+
+}
+
+ .country:hover {
+   stroke: #fff;
+   stroke-width: .7px;
+ }
+
+ #section1map svg {
+ 	margin-top:20px;
+ }
+
+ a.tributary {
+ 	    margin-top: 25px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 24px
+ }
+
+ blockquote {
+ 	font-size: 14px
+ }

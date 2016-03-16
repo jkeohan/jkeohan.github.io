@@ -5,6 +5,11 @@
 
 h1 { margin-bottom:40px;}
 
+input {
+	  border: 2px solid black;
+    text-align: center;
+}
+
 .notificationMsg { 
 	margin-top:20px;
 }
@@ -56,6 +61,7 @@ h1 { margin-bottom:40px;}
   opacity: 1;
 }
 
+/*stagger will delay the appearance of each subsequent image when ng-repeat is kicked off*/
 .animate.ng-enter-stagger {
     transition-delay: 0.5s;
 }

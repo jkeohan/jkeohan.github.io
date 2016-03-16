@@ -1,0 +1,277 @@
+	<style>
+.initial-map
+	</style>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Chloropleth Maps</h2>
+			</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-6">GEOJSON & TOPOJSON</div>
+		<div class="col-md-6">GEOJSON & TOPOJSON
+		http://geojson.org/geojson-spec.html
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Working with Projections and Path Generators</h2></div>
+		<div class="col-md-4 left">
+			<h3>Define map projection</h3>
+			<p>Projections transforms spherical coordinates (in degrees) to Cartesian coordinates (in pixels). </p>
+			<blockquote>
+				var projection = d3.geo.mercator()
+				   .center([ 0, 40 ])
+				   .translate([ w/2, h/2 ])
+				   .scale([ w/10 ]);
+			 </blockquote>
+			 	<h3>Define path generator</h3>
+			 	<p>The primary mechanism for displaying geographic data is d3.geo.path. This class is similar to d3.svg.line and the other SVG shape generators: given a geometry or feature object, it generates the path data string suitable for the "d" attribute of an SVG path element.</p>
+				<blockquote>
+					var path = d3.geo.path()
+							 .projection(projection);
+				</blockquote>
+		 </div>
+
+		<div class="col-md-5 middle">	
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-warning" onclick=changeGeo("mercator")>Mercator</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-success" onclick=changeGeo("orthographic")>Orthographic</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-info" onclick=changeGeo("stereographic")>Stereographic</button>
+			  </div>
+			</div>
+				<div id="section1map"></div>
+	   		<a class="tributary" href="http://tributary.io/inlet/eae9e630e544c02b8433" target="_">Tributary</a>
+		</div>
+
+
+		<div class="col-md-3 right">
+		<p>There are quite a few geo projections to work with, including the following: 
+		</p>
+
+
+	<!--	
+		<blockquote>
+		0: Object
+			geometry: Object
+				coordinates: Array[1]
+					0: Array[69]
+					0: Array[2]
+					0: 61.210817091725744
+					1: 35.650072333309225
+	-->
+	</blockquote>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Applying Colors</h2></div>
+
+		<div class="col-md-4 left">
+
+		<p>Adding colors requires that the 'fill' attribute of the path element be assigned a color.  
+			<blockquote>
+				svg.selectAll("path")
+				   .data(json.features)
+				   .enter()
+				   .append("path")
+				   .attr("fill", function(d,i) { return colors(i)})	
+				   .attr("d", path)
+			</blockquote>
+			<p>
+			D3 provides several 
+			<a target="_" href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#categorical-colors">Categorical Color</a> scales which can be used to quickly assign colors.  This examples uses category20(): <strong>var colors = d3.scale.category20() </strong>
+			</p>
+		
+			<br>
+			<p>Categorical color scales are an example of Ordinal Scales which have a discret domain and continuous range. Another option is to use a <a target="_" href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear-scales">Linear Scale</a> whhere both domain and range are continuous</p>	
+			</div>
+		<div class="col-md-4 middle">
+			<div id="chloropleth"></div>
+			<a class="tributary" target = "_" href = "http://tributary.io/inlet/b9305d9f0981169f2fc9">Tributary</a>
+		</div>
+
+		<div class="col-md-4 right">
+			<h4>Colorbrewer</h4>
+			<p>
+				D3 also bundles some fantastic categorical color scales created by Cynthia Brewer for <a href="http://colorbrewer2.org/">Colorbrewer</a>. You can find those in either CSS or JavaScript form in <a href="https://github.com/mbostock/d3/tree/master/lib/colorbrewer">lib/colorbrewer</a>
+			</p>
+			<blockquote>
+			var colors = d3.scale.ordinal()
+		    .domain(json.features.length)
+		    .range(colorbrewer.RdBu[9]);
+		  </blockquote>
+
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-warning" onclick=changeColors("RdBu")>RdBu</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-success" onclick=changeColors("ylGn")>YlGn</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-info" onclick=changeColors("PuBuGn")>PuBuGn</button>
+			  </div>
+			</div>
+
+			<h4>Additional D3 Color Spaces</h4>
+		  <p>So D3 provides representations for various color spaces, including RGB, HSL, LAB and HCL,</p>
+		</div>
+		
+
+	</div>
+	<div class="col-md-12">
+		<h4>NOTES</h4>
+	<p>Constructing visualizations often involves working with colors. Even though your browser understands a lot about colors, it doesn't offer much help in manipulating colors through JavaScript. So D3 provides representations for various color spaces, including RGB, HSL, LAB and HCL, allowing specification, interpolation, conversion and manipulation (such as making colors brighter or darker).
+
+   Note: while you can work with colors directly, you might also want to take a look at D3's built-in color interpolation, such as interpolateRgb, interpolateHsl and scales. If you are looking for color palettes, see the ordinal scales reference.
+	</p>
+
+
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Legends</h2></div>
+		<div class="col-md-4">
+			<p>Adding colors to a map will certainly add to it's visual appeal but we still need a way to convey what the colors represent.
+			This is usually done using a a legend.  
+			</p>
+			<h4>Obtaining Keys</h4>
+			<p>Most times it's quite easy to manually define a set of legend keys.  If we wanted to visualize regions on a world map
+			then the legend could be something like: ["Asia","Africa"..ect]</p>
+			<p>Although this method works I think a more reusable approach would be to iliicit the keys from the data set itself as 
+			some regions might be included or excluded with each data pull.</p>
+	
+<!--
+<pre>
+var legendKeys = d3.nest().key(function(d) 
+ {return d["properties"]["continent"]})
+ .entries(json.features)
+
+var legendVals = legendKeys
+.map(function(d) { return d.key })
+</pre>
+-->
+	
+		<pre>
+var legendKeys = d3.set(json.features.map(function(d) 
+{ return d["properties"]["continent"] }) ).values()
+		</pre>
+			</div>
+		<div class="col-md-8">
+			<div id="legends"></div>
+					<pre>
+var legendKeys = d3.set(json.features.map(function(d) 
+{ return d["properties"]["continent"] }) ).values()
+		</pre>
+		</div>
+
+		<div class="col-md-12">
+			<h4>Notes</h4>
+		
+		</p>
+		</div>
+	</div>
+</div>
+<!--TOOLTIPS-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Tooltips</h2></div>
+		<div class="col-md-4">
+			Adding colors is a map definetly increases it's visual appeal but a legend is needed to help convey
+			the actual values being mapped to their corresponding colors. 
+				<blockquote>		
+				</blockquote>
+			</div>
+		<div class="col-md-4">
+			<div id="tooltips"></div>
+		</div>
+		<div class="col-md-4">
+			
+		</div>
+		<div class="col-md-12">
+			<h4>Notes</h4>	
+		</div>
+	</div>
+</div>
+
+<!--TRANSITIONS-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Transitions</h2></div>
+		<div class="col-md-4">
+			Adding colors is a map definetly increases it's visual appeal but a legend is needed to help convey
+			the actual values being mapped to their corresponding colors. 
+				<blockquote>		
+				</blockquote>
+			</div>
+		<div class="col-md-4">
+			<div id="transitions"></div>
+		</div>
+		<div class="col-md-4">		
+		</div>
+		<div class="col-md-12">
+			<h4>Notes</h4>	
+		</div>
+	</div>
+</div>
+
+<!--REUSABLE CODE-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Reusable Code</h2></div>
+		<div class="col-md-4">
+
+				<blockquote>		
+				</blockquote>
+			</div>
+		<div class="col-md-4">
+			<div id="reusable"></div>
+		</div>
+		<div class="col-md-4">		
+		</div>
+		<div class="col-md-12">
+			<h4>Notes</h4>	
+		</div>
+	</div>
+</div>
+
+<!-- ADD ONS-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>D3 Supporting Libraries</h2></div>
+		<div class="col-md-4">
+			<h4>Queue.js</h4>
+			<p>A queue evaluates zero or more deferred asynchronous tasks with configurable concurrency: you control how many tasks run at the same time. When all the tasks complete, or an error occurs, the queue passes the results to your await callback. </p>
+				<blockquote>		
+				</blockquote>
+			</div>
+		<div class="col-md-4">
+			<div id="suplibs"></div>
+		</div>
+		<div class="col-md-4">		
+		</div>
+		<div class="col-md-12">
+			<h4>Notes</h4>	
+		</div>
+	</div>
+</div>
+ <script src="./js/mapping.js"></script>
+ <script src="./js/chloropleth.js"></script>
+ <script src="./js/legends.js"></script>
+ <script src="./js/reusable.d3.charts.js"></script>
+
+

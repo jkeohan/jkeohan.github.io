@@ -1,0 +1,183 @@
+  <div class="header">
+  <a style="float:right;margin-right:20px" href="../">Main Menu</a>
+  <h1>Examples</h1>
+  <ul>
+    <li>
+      <a href="#d3">d3</a>
+    </li>
+    <li>
+      <a href="#jason">jason davies</a>
+    </li>
+    <li>
+      <a href="#topojson">topojson</a>
+    </li>
+    <li>
+      <a href="#tutorials">tutorials</a>
+    </li>
+
+  </ul>
+  </div>
+  <div class="content">
+
+  <div name="d3" id="d3" class="section">
+    <h2>d3</h2>
+    <div class="sidebyside">
+      <div class="left">
+      <h3>Galleries</h3>
+        <p><a href="https://github.com/mbostock/d3/wiki/Gallery">
+          Official d3.js examples
+        </a></p>
+        <p><a href="http://christopheviau.com/d3list/gallery.html#visualizationType=map">
+          Community Gallery (tagged with Maps)
+        </a></p>
+        <p><a href="http://bost.ocks.org/mike/">
+          Mike Bostock's blog
+        </a></p>
+        <p><a href="http://bl.ocks.org/mbostock">
+          Mike Bostock's blocks
+        </a></p>
+        <p><a href="https://github.com/d3/d3-geo-projection/">
+          d3's extra projections
+        </a></p>
+        <p><a href="http://bl.ocksplorer.org/#/search/d3.geo">
+          Examples that use d3.geo API functions
+        </a></p>
+
+        <h3>Some cool projects</h3>
+        <p><a href="http://halftone.co/">
+          Work by Halftone
+        </a></p>
+        <p><a href="http://www.billdwhite.com/wordpress/2013/11/26/d3-minimap-pan-and-zoom-demo/">
+          Minimap with d3
+        </a></p>
+        <p><a href="http://bl.ocks.org/shawnbot/9240915">Uniformly Scaled geo thumbnails</a> 
+          <a href="http://bl.ocks.org/shawnbot/9259701">(Mercator)</a>
+        </p>
+        <p><a href="http://earth.nullschool.net/">
+          World wind map
+        </a></p>
+        <p><a href="http://twenalizer-ukraine.germanlena.com.ar/">
+          Tweets about Ukraine
+        </a></p>
+        <p><a href="http://bl.ocks.org/andrewxhill/4532421">
+          Exploding globe
+        </a></p>
+        <p><a href="http://bl.ocks.org/andrewxhill/5588084">
+          A rain of meteors
+        </a></p>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+
+   <div name="jason" id="jason" class="section">
+    <h2>Jason davies</h2>
+    <div class="sidebyside">
+      <div class="left">
+        <p><a href="https://www.jasondavies.com/">
+          Personal site
+        </a></p>
+        <p><a href="https://www.jasondavies.com/maps/">
+          Map related projects
+        </a></p>
+        <p><a href="https://www.jasondavies.com/maps/transition/">
+          Transitioning between projections
+        </a></p>
+        <p><a href="https://www.jasondavies.com/maps/countries-by-area/">
+          Countries by area
+        </a></p>
+        <p><a href="https://www.jasondavies.com/maps/antipodes/">
+          Antipodes
+        </a></p>
+        <p><a href="https://www.jasondavies.com/maps/rotate/">
+          Rotating the globe
+        </a></p>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+
+  <div name="topojson" id="topojson" class="section">
+    <h2>topojson</h2>
+    <div class="sidebyside">
+      <div class="left">
+        <p><a href="https://github.com/mbostock/topojson/wiki">
+          TopoJSON wiki
+        </a></p>
+        <p><a href="https://github.com/mbostock/topojson/wiki/Gallery">
+          TopoJSON example gallery
+        </a></p>
+        <p><a href="http://bost.ocks.org/mike/topology/">
+          How TopoJSON works
+        </a></p>
+        <p><a href="https://github.com/mbostock/topojson/wiki/Command-Line-Reference">
+          Command Line Reference
+        </a></p>
+        <p><a href="http://blog.thematicmapping.org/2013/06/converting-shapefiles-to-topojson.html">
+          Converting shapefiles to TopoJSON
+        </a></p>
+        <p><a href="http://stackoverflow.com/questions/17404239/topojson-list-of-differences-between-v0-and-v1">
+          Gotchas between TopoJSON v0 and v1 (breaking API changes)
+        </a></p>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+
+  <div name="tutorials" id="tutorials" class="section">
+    <h2>tutorials</h2>
+    <div class="sidebyside">
+      <div class="left">
+        <p><a href="http://bost.ocks.org/mike/map/">
+          Let's make a map
+        </a></p>
+        <p><a href="http://bost.ocks.org/mike/bubble-map/">
+          Let's make a bubble map
+        </a></p>
+        <p><a href="http://bost.ocks.org/mike/leaflet/">
+          d3 + Leaflet
+        </a></p>
+        <p><a href="http://vallandingham.me/shapefile_to_geojson.html">
+          Converting shapefiles to GeoJSON
+        </a></p>
+        </p>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <script>
+    var matches = function(node, selector) {
+      var _ref;
+      if (node.matches) {
+        return node.matches(selector);
+      }
+      return ((_ref = node.parentNode) != null ? _ref.querySelector(selector) : void 0) === node;
+    };
+    var containingParent = function(node, selector) {
+      while (node) {
+        if (matches(node, selector)) {
+          return node;
+        }
+        node = node.parentNode;
+      }
+    };
+    d3.select(document.body).on("click", function() {
+      var target = d3.select(d3.event.target);
+      var contains = containingParent(target.node(), ".editor");
+      if(!target.classed("range") && !contains) {
+        d3.selectAll(".inlet_slider").style("visibility", "hidden");
+        d3.selectAll(".ColorPicker").style("display", "none");
+      }
+    })
+    d3.selectAll("svg").attr("title", "Right click and Inspect me");
+  </script>
+  
+  <a href="#">Top</a>
+  </div>

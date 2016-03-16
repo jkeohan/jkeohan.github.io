@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12"><h2>Centering</h2></div>
+		<div class="col-md-4">
+			Centering  the map so that it best fills out the containers height\width can be done done using the 
+						<blockquote>
+				svg.selectAll("path")
+				   .data(json.features)
+				   .enter()
+				   .append("path")
+				   .attr("fill", function(d,i) { return colors(i)})	
+				   .attr("d", path)
+				</blockquote>
+			</div>
+		<div class="col-md-4">
+			<div id="chloropleth"></div>
+		</div>
+		<div class="col-md-4">
+			
+		</div>
+		<div class="col-md-12">
+			<h4>Notes</h4>
+			<a href="http://tutorials.jenkov.com/svg/svg-viewport-view-box.html">http://tutorials.jenkov.com/</a>
+			<p>The viewport is the visible area of the SVG image. An SVG image can logically be as wide and high as you want, but only a certain part of the image can be visible at a time. The area that is visible is called the viewport.  This example creates an <svg> element with a width of 500 pixels and a height of 200. The viewBox attribute of the <svg> contains four coordinates. These coordinates define the view box of the <svg> element. The coordinates are x y width height of the view box.
+		</p>
+		</div>
+	</div>
+</div>

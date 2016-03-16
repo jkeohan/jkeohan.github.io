@@ -1,0 +1,27 @@
+{
+  "name": "D3 Demo",
+  "homepage": "https://github.com/jkeohan/jkeohan.github.io",
+  "authors": [
+    "Joe Keohah <jkeohan@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "^3.5.16",
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-ui-router": "^0.2.18"
+  }
+}
