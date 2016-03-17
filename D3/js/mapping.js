@@ -69,7 +69,7 @@
 			    	var projection = d3.geo.stereographic()	
 							 .scale(50)
 					    .translate([w1 / 2, h1 / 2])
-					    //.rotate([-20, 0])
+					    .rotate([-20, 0])
 					    .clipAngle(180 - 1e-4)
 					    .clipExtent([[0, 0], [w1,h1]])
 					    .precision(.1);

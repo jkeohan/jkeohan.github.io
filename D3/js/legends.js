@@ -41,6 +41,36 @@ function init() {
 					.fontSize(15).width(0)
 					.inputScale(colorScale)
 				svg.call(rlegend)
+  
+
+			svg.append("g")
+			  .attr("class", "legendOrdinal")
+			  .attr("transform", "translate(200,300)");
+
+			var legendOrdinal = d3.legend.color()
+			  .shape("path", d3.svg.symbol().type("cross").size(150)())
+			  .shapePadding(10)
+			  .orient("horizonal")
+			  .scale(colorScale);
+
+			svg.select(".legendOrdinal")
+			  .call(legendOrdinal);
+
+<!--LEGEND 3-->
+     var legend = d3.select(".rightleg").append("div").attr("class","wrapper")
+        //.style({position: "absolute", top:"0", width: "100%"})
+        .append("div").attr("class","row1")
+        .style({ overflow: "hidden", "font-size": ".8em", "line-height": "1.5", "padding-left": "5px"})
+      	.selectAll(".legend").data(colorScale.domain())
+        
+      legend.enter().append("div").attr("class","legend")
+      //.style({float:"left" } ) //, width:"15%" })
+
+      legend.html(function(d,i) { return d})
+      .style("background-color", function(d){ return colorScale(d)})
+      .style({ "text-align": "center", display:"inline-block", width: "50%",color: "white"})
+      .style("border",function(d) { return "1px solid " + colorScale(d)})
+
 
 				//Bind data and create one path per GeoJSON feature
 				svg.append('g').selectAll("path")
