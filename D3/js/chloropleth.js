@@ -4,12 +4,13 @@
 
 			function init() {
 			var target = "#chloropleth"
-			//w = canvasSize(target)[0];
+			w = canvasSize(target)[0];
 
 			var color = d3.scale.category20();
 			brew = d3.scale.ordinal()
 
-			w = 300;
+
+			//w = 300;
 			h = 300;
 		
 			//Define map projection

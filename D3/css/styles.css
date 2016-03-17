@@ -15,13 +15,20 @@
 		text-align: center;
 }
 
-.col2 a {
-
+.code {
+	    padding: 10px;
+    background-color: #F2F1F1;
 }
 
- .country:hover {
+.country {
+  stroke: #fff;
+  /*stroke-linejoin: round;*/
+}
+
+.country:hover {
    stroke: #fff;
-   stroke-width: .7px;
+   fill:lightblue;
+   stroke-width: 2px;
  }
 
  #section1map svg {
@@ -35,6 +42,30 @@
     font-size: 24px
  }
 
+ a.supLink {
+ 	display:inline-block;
+ 	margin-top:10px;
+ }
+
  blockquote {
  	font-size: 14px
  }
+
+
+/* .land {
+  fill: #6FC480;
+  stroke: #000000;
+}*/
+
+circle {
+  fill: #ffffff;
+  stroke: #CC0A48;
+  fill-opacity: 0.2
+}
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-opacity: .5;
+  stroke-width: .5px;
+}

@@ -7,9 +7,9 @@ d3App.config(function($stateProvider, $urlRouterProvider) {
 			url:"/",
 			templateUrl:'partials/home.html'
 		})
-		.state('/chloropleth', {
-			url:"/chloropleth",
-			templateUrl:"chloropleth/chloropleth.html"
+		.state('/mapping', {
+			url:"/mapping",
+			templateUrl:"chloropleth/mapping.html"
 		})
 })
 

@@ -1,30 +1,7 @@
 
-
-
-			
-
-			//Logic
-			//map gets drawn on first render
-			//then transitions into diff projection
-			//-tranistion will occur on path being updated to new projection and then applying them to all paths
-
-
-			//what functions are needed?
-			//init(), render()
-
-			//init should include:
-			//svg, colors, canvasSize, d3.json, .data().enter().append(path)
-
-			//render() should include:
-			//projection
-			//all path elements and attr(d,path)
-			
-			//what has to be defined first?
-			//svg, colors, canvas
-
-			//
-
 			init()
+
+
 
 		function init() {
 
@@ -34,27 +11,26 @@
 			//w = 400;
 				h1 = 300;
 
-				//Define map projection
-
 				//Create SVG
-				var svg = d3.select(target)
+				svg = d3.select(target)
 							.append("svg")
 							.attr("width", w1)
 							.attr("height", 300);
 				
-				// var projection = d3.geo.mercator()	
-				//    .center([ 0, 0 ])
-				//    .translate([ w/2, h/1.5232 ])
-				//    .scale([ w/8 ]);
-
 					var projection = d3.geo.mercator()	
 					   .center([ 0, 0 ])
 					   .translate([ w1/2, h1/1.5232 ])
 					   .scale([ w1/5 ]);
 
 			//Define path generator
-			var path = d3.geo.path()
+				path = d3.geo.path()
 							 .projection(projection);
+			//Define graticule
+				var graticule = d3.geo.graticule()
+				svg.append("path")
+						    .datum(graticule)
+						    .attr("class", "graticule")
+						    .attr("d", path);
 	
 
 			//Load in GeoJSON data
@@ -64,7 +40,7 @@
 				svg.selectAll("path")
 				   .data(json.features)
 				   .enter()
-				   .append("path").attr("class","country section1map")
+				   .append("path").attr("class","country land section1map")
 				   .attr("d", path);	
 			});
 			}//init()			
@@ -85,7 +61,6 @@
 					   .center([ 0, 0 ])
    					.translate([ w1/2, h1/2 ])
    					.scale([ w1/3 ])
-
 					  redraw(projection)
 				  	break;
 			   	}
@@ -117,6 +92,5 @@
 					return [width]
 				}//canvasSize
 
-			// //Load in GeoJSON data
 
 		

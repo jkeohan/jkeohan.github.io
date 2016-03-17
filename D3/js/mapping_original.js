@@ -4,20 +4,13 @@
 (function() { 
 			var target = "#section1map"
 			w = canvasSize(target)[0];
-
-		//w = 400;
 			h = 300;
 
 			//Define map projection
-			
 			var projection = d3.geo.mercator()	
 			   .center([ 0, 0 ])
 			   .translate([ w/2, h/1.5232 ])
 			   .scale([ w/8 ]);
-
-			// var projection = d3.geo.orthographic()
-			//   .translate([ w/2, h/2.0471808 ])
-   // 			.scale([ w/3 ]);
 
 			//Define path generator
 			var path = d3.geo.path()

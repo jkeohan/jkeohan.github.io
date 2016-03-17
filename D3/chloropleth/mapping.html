@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Chloropleth Maps</h2>
+			<h2>Mapping Using D3</h2>
 			</div>
 	</div>
 </div>
@@ -12,10 +12,29 @@
 <div class="container">
 	<div class="row">
 
-		<div class="col-md-6">GEOJSON & TOPOJSON</div>
-		<div class="col-md-6">GEOJSON & TOPOJSON
-		http://geojson.org/geojson-spec.html
+		<div class="col-md-6">
+		<h4><a href="http://geojson.org/geojson-spec.html" target="_">GEOJSON</a></h4>
+		geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            61.210817091725744,
+                            35.650072333309225
+                        ],
+                        [
+                            62.230651483005886,
+                            35.270663967422294
+                        ],
+                        [
+                            61.210817091725744,
+                            35.650072333309225
+                        ]
+                    ]
+                ]
+            }
 		</div>
+		<div class="col-md-6"><H4>TOPOJSON</H4></div>
 	</div>
 </div>
 
@@ -27,9 +46,9 @@
 			<p>Projections transforms spherical coordinates (in degrees) to Cartesian coordinates (in pixels). </p>
 			<blockquote>
 				var projection = d3.geo.mercator()
-				   .center([ 0, 40 ])
-				   .translate([ w/2, h/2 ])
-				   .scale([ w/10 ]);
+				   .center([ 0, 0 ])
+				   .translate([ w1/2, h1/1.5232 ])
+				   .scale([ w/5 ]);
 			 </blockquote>
 			 	<h3>Define path generator</h3>
 			 	<p>The primary mechanism for displaying geographic data is d3.geo.path. This class is similar to d3.svg.line and the other SVG shape generators: given a geometry or feature object, it generates the path data string suitable for the "d" attribute of an SVG path element.</p>
@@ -98,12 +117,12 @@
 			<br>
 			<p>Categorical color scales are an example of Ordinal Scales which have a discret domain and continuous range. Another option is to use a <a target="_" href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear-scales">Linear Scale</a> whhere both domain and range are continuous</p>	
 			</div>
-		<div class="col-md-4 middle">
+		<div class="col-md-5 middle">
 			<div id="chloropleth"></div>
 			<a class="tributary" target = "_" href = "http://tributary.io/inlet/b9305d9f0981169f2fc9">Tributary</a>
 		</div>
 
-		<div class="col-md-4 right">
+		<div class="col-md-3 right">
 			<h4>Colorbrewer</h4>
 			<p>
 				D3 also bundles some fantastic categorical color scales created by Cynthia Brewer for <a href="http://colorbrewer2.org/">Colorbrewer</a>. You can find those in either CSS or JavaScript form in <a href="https://github.com/mbostock/d3/tree/master/lib/colorbrewer">lib/colorbrewer</a>
@@ -138,10 +157,11 @@
 
    Note: while you can work with colors directly, you might also want to take a look at D3's built-in color interpolation, such as interpolateRgb, interpolateHsl and scales. If you are looking for color palettes, see the ordinal scales reference.
 	</p>
-
-
 	</div>
 </div>
+
+<!--LEGENDS-->
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12"><h2>Legends</h2></div>
@@ -149,36 +169,43 @@
 			<p>Adding colors to a map will certainly add to it's visual appeal but we still need a way to convey what the colors represent.
 			This is usually done using a a legend.  
 			</p>
-			<h4>Obtaining Keys</h4>
+			<h4>Obtaining Key Values</h4>
 			<p>Most times it's quite easy to manually define a set of legend keys.  If we wanted to visualize regions on a world map
 			then the legend could be something like: ["Asia","Africa"..ect]</p>
 			<p>Although this method works I think a more reusable approach would be to iliicit the keys from the data set itself as 
 			some regions might be included or excluded with each data pull.</p>
+			<p>D3 has several helper methods that can be used to format data and\or create new arrays\objects.  
+			One of those is d3.set which is used below to map through each feature and retur continent. The .values() method
+			is then used to remove duplicates.</p>
 	
-<!--
-<pre>
-var legendKeys = d3.nest().key(function(d) 
- {return d["properties"]["continent"]})
- .entries(json.features)
+				<!--
 
-var legendVals = legendKeys
-.map(function(d) { return d.key })
-</pre>
--->
+				var legendKeys = d3.nest().key(function(d) 
+				 {return d["properties"]["continent"]})
+				 .entries(json.features)
+
+				var legendVals = legendKeys
+				.map(function(d) { return d.key })
+				</pre>
+				-->
 	
-		<pre>
-var legendKeys = d3.set(json.features.map(function(d) 
-{ return d["properties"]["continent"] }) ).values()
-		</pre>
+				<div class="code">
+				var legendKeys = d3.set(json.features.map(function(d) 
+				{ return d["properties"]["continent"] }) ).values()
+				</div>
+				<a class="supLink" target="_" href="https://groups.google.com/forum/#!topic/d3-js/CMhrCqUg35o">Filter JSON Keys Forum Post</a>
 			</div>
-		<div class="col-md-8">
+		<div class="col-md-5 middle">
 			<div id="legends"></div>
-					<pre>
-var legendKeys = d3.set(json.features.map(function(d) 
-{ return d["properties"]["continent"] }) ).values()
-		</pre>
+					<a class="tributary" target="_" href="http://tributary.io/inlet/d447bbec378d19b006a6">Tributary</a>
 		</div>
+		<div class="col-md-3 right">
+			<h4>Buiilding The Legend</h4>
+			<p>For this example we choose to pull continent names which will now be used to build the legend. 
 
+
+
+			</p></div>
 		<div class="col-md-12">
 			<h4>Notes</h4>
 		
