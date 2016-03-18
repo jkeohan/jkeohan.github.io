@@ -1,0 +1,25 @@
+<div class="inputWrapper"><input ng-model="sorter" placeholder="Filter by Country"></div>
+<table>
+	<tr class="tableHeader">
+		<td width="337" ng-click="changeOrder('countryName')">Name</td>
+		<td width="108" ng-click="changeOrder('countryCode')">Country Code</td>
+		<td width="222" ng-click="changeOrder('capital')">Capital</td>
+		<td width="91" ng-click="changeOrder('areaInSqKm')">Area (km2)</td>
+		<td width="113" ng-click="changeOrder('population')">Population</td>
+		<td width="77" ng-click="changeOrder('continent')">Continent</td>
+	</tr>
+	</thead>
+</table>
+<table class="content">
+	<tr ng-repeat="c in countries | orderBy:order:reverseSort | filter:{countryName:sorter}" 
+			ng-click="changeLocation(c.countryCode)">
+		<td width="337">{{c.countryName}}</td>
+		<td width="108">{{c.countryCode}}</td>
+		<td width="222">{{c.capital}}</td>
+		<td width="91">{{c.areaInSqKm | number: 0}}</td>
+		<td width="113">{{c.population | number: 0}}</td>
+		<td width="77">{{c.continent}}</td>
+	</tr>
+</table>
+
+<div class="buttonWrapper"><a class="button" href="#/">Home</a></div>

@@ -1,0 +1,163 @@
+body, input, label, button {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	margin: 0;
+}
+
+h1 {
+	font-weight: normal;
+	border-bottom: 3px solid black;
+	text-align: center;
+	padding-bottom: 20px;
+	font-size: 48px;
+}
+
+.info a {
+	color: #ba050f;
+}
+
+.home, .info {
+	width: 480px;
+	margin: 0 auto;
+}
+
+.container {
+	margin: 0 auto;
+	position: relative;
+	width: 960px;
+}
+
+.tableHeader td {
+	cursor: pointer;
+	color: #ba050f;
+	margin-bottom: 10px;
+	box-sizing:;
+	/*text-align: center;*/
+	border: 1px solid black;
+}
+
+td{
+	padding: 0 5px;
+}
+
+tr {
+	cursor: pointer;
+}
+
+.content{
+	height: 500px;
+	overflow-y: scroll;
+	border-top: none;
+}
+.content tr:nth-child(odd) {
+	background: #FFD1DB;
+}
+
+table {
+	border: 3px solid black;
+	display: block;
+	width: 980px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+
+
+.buttonWrapper{
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.button {
+	margin-top: 25px;
+	padding: 10px;
+	background: white;
+	border: 3px solid black;
+	cursor: pointer;
+	font-size: 16px;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+}
+
+.button:hover {
+	background: #ddd;
+}
+
+h2 {
+	font-weight: normal;
+	font-size: 36px;
+	text-align: center;
+}
+
+.info label {
+	width: 200px;
+	display: inline-block;
+	text-align: right;
+	padding-right: 10px;
+	padding-bottom: 20px;
+}
+
+.images {
+	width: 480px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+#map{
+	max-width: 240px;
+	position: absolute;
+	left: 0;
+}
+
+#flag {
+	max-width: 240px;
+	position: absolute;
+	right: 0;
+}
+
+.neighbors label {
+	float: left;
+}
+
+.neighbors .neighbor {
+	float: left;
+}
+
+.inputWrapper {
+	text-align: center;
+}
+.inputWrapper input{
+	padding: 5px;
+	width: 240px;
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 20px;
+	border: 3px solid black;
+}
+
+.loading {
+  position:absolute;
+  height:100%;
+  top:0;left:0;bottom:0;right:0;
+}
+.loading:before {
+  position:absolute;
+  content:"";
+  left:0;
+  bottom:0;
+  right:0;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,0.95) no-repeat center center;
+  background-image: url('./loading-animation.gif');
+  background-size: 50px;
+}
+
+.animate-view-container { position:relative; min-height: 100%; }
+.animate-view.ng-enter {
+    transition:1.5s linear all;
+}
+.animate-view.ng-enter { opacity:0; z-index:100; }
+.animate-view.ng-enter.ng-enter-active { opacity:1;}

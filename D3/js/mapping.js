@@ -25,7 +25,8 @@
 			//Define path generator
 				path = d3.geo.path()
 							 .projection(projection);
-			//Define graticule
+
+							 		//Define graticule
 				var graticule = d3.geo.graticule()
 				svg.append("path")
 						    .datum(graticule)

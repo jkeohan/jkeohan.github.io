@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html ng-app="countriesApp">
+<head>
+<!-- build:css ./_assets/combined.css -->
+<link rel="stylesheet" type="text/css" href="./blog.css" />
+<link rel="stylesheet" type="text/css" href="app/css/styles.css" />
+<!-- endbuild -->
+<meta charset="UTF-8" />
+<title>Countries and Capitals</title>
+</head>
+
+<body ng-class="{loading: isLoading}">
+
+<div class="navbar">
+  <h1>Countries & Capitals</h1>
+</div>
+<!-- <div class="animate-view-container container">
+	<div ng-view class="animate-view animate-out"></div>
+</div> -->
+
+
+<div class="animate-view-container container">
+	<div class="ui-view animate-view animate-out">
+</div>
+  
+<!-- build:js ./_assets/combined.js -->
+
+<script type="text/javascript" src="app/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script type="text/javascript" src="app/bower_components/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/country/countryCtrl.js"></script>
+<script type="text/javascript" src="app/countries/countriesCtrl.js"></script>
+<script type="text/javascript" src="app/home/homeCtrl.js"></script>
+<script type="text/javascript" src="app/home/homeCtrl.js"></script>
+<script type="text/javascript" src="app/country-lib.js"></script>
+
+<!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,12 @@
+ code {
+    padding: 2px 4px;
+    color: #d14;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+}
+
+aside {
+	display:inline-block;
+	margin:10px;
+	border:1px solid black;
+}

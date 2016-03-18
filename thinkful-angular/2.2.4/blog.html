@@ -1,0 +1,268 @@
+<link rel="stylesheet" type="text/css" href="./blog.css" />
+
+<!-- (.api>h1) -->
+<!-- (.api>h1+p) -->
+<div class="api">
+	<h1>API Endpoints and Access</h1>
+	<p>The following api endpoints are needed in the app</p>
+<!-- (ul>li*3) -->
+<ul>
+	<li>countryInfoJSON</li>
+	<li>neighbours</li>
+	<li>search</li>
+</ul>
+
+	<p>In addition to these API endpoints, the following images are also needed: </p>
+	<ul>
+		<li>flag images: src="http://www.geonames.org/flags/x/??.gif"</li>
+		<li>map images: src="http://www.geonames.org/img/country/250/??.png"</li>
+	</ul>
+	flag images for individual countries using the following url schema for img sources:  , where ?? stands for a two letter, lowercase country code.</p>
+
+</div>
+
+	<p>The best way to start this project is to break it down into milestones  and complete each one prior to moving on to the next.  This would also help provide definitive estimates to these milestones which could then be evaluated later and perhaps streamlined for better performace.  So here is how I broke the project down:</p>
+
+	<ul>
+		<li>Setup The Project</li>
+		<li></li>
+	</ul>
+
+	<h2>Setup The Project</h2>
+	<p>Setting up the project required that I define the required functionality and then use bower to download the necessary libraries and\or manually create the supporting html\css\js files.  The following functionality is needed</p>
+
+<div>
+	<aside class="libraries">
+	<h4>Angular Specific Libraries</h4>
+	<ul>
+		<li>angular.js</li>
+		<li>angular-ui-router.js</li>
+		<li>angular-animate.js</li>
+	</ul>
+	</aside>
+
+		<aside class="libraries">
+	<h4>Application Files</h4>
+	<ul>
+		<li>app.js</li>
+		<li>countries-library.js</li>
+	</ul>
+	</aside>
+
+		<aside class="libraries">
+	<h4>Views</h4>
+	<ul>
+		<li>home.html</li>
+		<li>country.html</li>
+<!-- 		<li>countries.html</li> -->
+	</ul>
+	</aside>
+
+		<aside class="libraries">
+	<h4>CSS</h4>
+	<ul>
+		<li>style.css</li>
+		<li></li>
+		<li></li>
+	</ul>
+	</aside>
+<aside class="libraries">
+	<h4>Additional Funtionality</h4>
+	<ul>
+		<li>GULP</li>
+		<li></li>
+		<li></li>
+	</ul>
+	</aside>
+</div>
+
+	<p>Now that I have a better idea of what what needs to be done I could start setting up the project.  First things is to setup the main project folder which will be called Countries.  Once this is done then its onto using bower.  Bower is a tool used for managing client-side dependencies and downloading the supporting libraries. It can also be used to create a bower.json file that allows you to provide application speciic metadata such as project name, version, owner and specifies all of the packages required by the application.  The application could then exclude these dependencies when uploaded to Github at which point anyone who wants to run the app would only need to run <code>bower install</code> which would download all required libraries specified in th bower.json file.</p>
+
+	<p>So using the console I navigate into the Countries folder and run the following bower command to setup the project: <code>bower init</code>.  This will initiate bower to collect information about the project.  The only input I'm providing is name, author and moduleType of "globals".  WHAT IS MODUELTYPE OF GLOBAL?
+
+	<pre>
+	{
+  "name": "countires-app",
+  "homepage": "",
+  "authors": [
+    "Joe Keohah <jkeohan@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+	}</pre>
+
+  The last thing needed before using bower to download the dependencies is to tell it where to place the files. I've created an app folder which iThis can be done by creating a .bowerrc file in Countries root folder and adding the following code. I've gone ahead and created the app folder and bower will then create the bower_components folder after we download our first dependency.   
+
+  <pre>{
+  "directory": "app/bower_components"
+	}
+	</pre>
+	</p>
+
+ <p>Now were ready to run the following bower commands:
+
+ <pre>
+$ bower install --save angular
+$ bower install --save angular-animate
+$ bower install --save angular-ui-router
+ </pre>
+
+Bower will then update bower.json to reflect these new dependencies:
+
+<pre>
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-ui-router": "^0.2.18"
+  }
+</pre>
+ </p>
+
+	<p>
+		Now that the project folder and supporting libraries are all in place it's time to start coding the app.js & countries-library.js application files.  The resaon for the the additional countries-library.js file is based on idea of separation of concerns.  The purpose of each file is summarized below:
+
+		<aside>
+			<h4>app.js</h4>
+			<ul>
+				<li>Create the anular module with the following methods</li>
+				<ul>
+					<li>.run():  This will monitor state change events, such as $stateChangeError, $stateChangeStart, $stateChangeSuccess which will be used to redirect users to an error page and update $rootScope.isLoading variable to call the animation.gif file between start and success states
+					</li>
+					<li>.config(): This leverages the $stateProvider and $urlRouterProvider to display the proper view and call the corresponding controller when as the url states change.</li>
+					<li>.controller(): There are two controllers which be responsible for managing the thier corresponding views: countries and country</li>
+				</ul>
+			</ul>
+		</aside>
+
+<div class="links">
+			<a href="https://github.com/angular-ui/ui-router/wiki">State Change Events</a>
+		</div>
+				<aside>
+			<h4>countries-library.js</h4>
+			<ul>
+				<li>Contains an additional angular.module with .constants set to define global variables for goenames url\username and the following .factory() methods:
+					<ul>
+						<li>countriesURL: makes the actual API call and setups up the .then() promise</li>		
+						<li>countriesAll: retrieves all country info to display in table on countries view</li>
+						<li>countryInfo: retrieves specific country info to display in country view</li>
+						<li>countryNeighbors: retrieves all neighbors for specific country also viewed on country view</li>
+					</ul>
+					</li>
+			</ul>
+		</aside>
+	</p>
+
+Setting up App.js
+
+Breaking down the logic for the individual js files provided some insight into thier functionality and now it's off to coding the files to fulfill thier purpose. The first file we will setup is app.js. Creating an Angular modules requires the follwing:  
+
+-name: countriesApp
+-dependencies: ui-router, ngAnimate, 
+
+angular.module('ccApp', ['ngRoute', 'ngAnimate', 'ccLibrary'])
+
+	<h3>Controllers</h3>
+	<h4>CountriesCtrl</h4>
+	<ul>Dependencies:
+		<li>$scope</li>
+		<li>$rootScope</li>
+		<li>$location</li>
+		<li>
+			<p>countries</p>
+	
+	<p>
+	countries is defined and populated in a resolve within  configured on the .state('/countries').A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change.  This means you can wait for data to become available before showing a view, and simplify the initialization of the model inside a controller because the initial data is given to the controller instead of the controller needing to go out and fetch the data.
+	</p>
+
+	<p>
+	resolve: {
+  	countries: ['ccCountries', function(ccCountries){
+  		return ccCountries();
+	 }]
+	</p>
+		<p>
+	The above resolve is used to execute the ccCounties() factory below and store results in countries variable. It will return the following: 
+	</p>
+	<p>
+	.factory('ccCountries', ['ccURL',
+		function(ccURL){
+			return function(){
+				return ccURL('countryInfo');
+		}		
+	}])
+
+	</p>
+	<p>
+		The ccCountries factory is configured to run and return the promise from ccURL factory which is configured to make the API call to the GEONAME API. ccURL will accept both a path and params parameters and is hardcoded to populate the params data, 
+		however the path will be:  http://api.geonames.org/countryInfo.
+
+		The promise returned contains the geonames array: 
+
+		Promise {$$state: Object}
+			$$state: Object
+			status: 1
+			value: Object
+			<strong>geonames: Array[250]</strong>
+			[0 … 99]
+			[100 … 199]
+			[200 … 249]
+			length: 250
+
+	</p>
+	<a href=http://odetocode.com/blogs/scott/archive/2014/05/20/using-resolve-in-angularjs-routes.aspx>Using Resolve in Angular Routes</a>
+
+
+		</li>
+
+	</p>
+
+Requirements
+
+For this app, you'll be provided minimal sketches for the different views along with some specs for the behavior for each view. It's not necessary that you produce a pixel perfect implementation of the sketches. Instead, the sketches indicate the components and functionality each view requires. You are free to adjust the layout and appearance of any of the views as long as you implement the required functionality.
+
+Views
+Your app will consist of three views, described below. Note that all three views share some page components, and you should avoid repeating this shared code.
+
+Index View
+index view for countries capital app
+
+This view is just responsible for displaying some explanatory text about your app. It's perfectly fine to use lorem filler, but if you're looking to create a more polished experience, you might include an image, graphic, or other visual embellishment.
+
+Countries List
+countries index view for countries capital app
+
+This view is responsible for letting the user see all of the countries about which they can view more detailed information. Each row entry has the following summary information: name, country code, capital, area in square kilometers, population and continent code.
+The URL for this view should be /countries
+To get the data for this view, you'll need to use this API endpoint.
+Also, your app should cache the data it gets back from the server. The countries list should only be gotten from the server once.
+Note that both area and population should be formatted with commas after every third digit place (e.g., 1,000 not 1000).
+There should be a button that takes the user back to the home screen.
+When you click on a row entry, you should be taken to the country detail view for that country.
+Country Detail
+country detail view for countries capital app
+
+This view shows users detailed information about a country. The following data should be displayed: country name, population of country, area, capital, population of capital, continent, timezone and number and names of neighbors.
+This view should also display an image of the flag and map for the country, as explained above in "API Endpoints and Access".
+The URL for this view should be /countries/:country/capital
+There should be two buttons in this view, one to go back to the home view and one to go to the country list view.
+The countries listed as neighbors should link to respective country detail view.
+To get the population information for country capitals, you'll want to use the search endpoint. Have a look at the parameters you can supply in your requests to this endpoint. Hint: you'll probably want to use: q, country, name_equals, and isNameRequired. You'll also need to plan for the fact that this API endpoint may return more than one item.
+To get the neighbors information, you'll need to use the neighbors API endpoint.
+Animations and Loading
+To get more practice with animations, create a loading state that gets displayed when AJAX calls are being made when the user visits a country or city detail view. You should use a timeout to ensure that the animation animations for waiting for AJAX call and processing, with minimum return time, timeout
+
+Additionally, you should use transitions to smooth the transition between all of the views in the app.
+
+Project Layout and Build Process
+For this project, follow the best practices for app layout you learned in the previous assignment. Also, create a Gulp task that minifies and builds your files for live deployment, like you did earlier in this unit.
