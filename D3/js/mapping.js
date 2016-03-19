@@ -28,6 +28,7 @@
 
 							 		//Define graticule
 				var graticule = d3.geo.graticule()
+
 				svg.append("path")
 						    .datum(graticule)
 						    .attr("class", "graticule")
@@ -62,6 +63,7 @@
 					   .center([ 0, 0 ])
    					.translate([ w1/2, h1/2 ])
    					.scale([ w1/3 ])
+   					.clipAngle(90)
 					  redraw(projection)
 				  	break;
 			   	}
