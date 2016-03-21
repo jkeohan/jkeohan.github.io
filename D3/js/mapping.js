@@ -1,8 +1,5 @@
 
-			init()
-
-
-
+		init()
 		function init() {
 
 				var target = "#section1map"
@@ -16,8 +13,11 @@
 							.append("svg")
 							.attr("width", w1)
 							.attr("height", 300);
+
+								 		//Define graticule
+				var graticule = d3.geo.graticule()
 				
-					var projection = d3.geo.mercator()	
+				var projection = d3.geo.mercator()	
 					   .center([ 0, 0 ])
 					   .translate([ w1/2, h1/1.5232 ])
 					   .scale([ w1/5 ]);
@@ -26,14 +26,10 @@
 				path = d3.geo.path()
 							 .projection(projection);
 
-							 		//Define graticule
-				var graticule = d3.geo.graticule()
-
 				svg.append("path")
 						    .datum(graticule)
 						    .attr("class", "graticule")
 						    .attr("d", path);
-	
 
 			//Load in GeoJSON data
 			d3.json("../D3/data/countries/mapshaper_output.json", function(json) {
@@ -44,8 +40,9 @@
 				   .enter()
 				   .append("path").attr("class","country land section1map")
 				   .attr("d", path);	
-			});
-			}//init()			
+				});
+
+		}//init()		
 
 			function  changeGeo(proj) {
 				switch(proj) {
@@ -80,15 +77,15 @@
 					  redraw(projection)
 				  	break;
 			   	}
-				}
+				}//switch
 
-				function redraw(proj) {
+			function redraw(proj) {
 					var path = d3.geo.path().projection(proj);
 					d3.selectAll("path.section1map").transition().duration(1000).attr("d",path)
-			}
+			}	
+		}//changeGeo
 
-			}//render()
-
+		
 			function canvasSize(target) { 
 					//var height = parseFloat(d3.select(target).node().clientHeight)
 					var width = parseFloat(d3.select(target).node().clientWidth)

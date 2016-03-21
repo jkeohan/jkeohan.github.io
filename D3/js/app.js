@@ -11,6 +11,10 @@ d3App.config(function($stateProvider, $urlRouterProvider) {
 			url:"/mapping",
 			templateUrl:"chloropleth/mapping.html"
 		})
+		.state('circles', {
+			url:"/circles",
+			templateUrl:"circles/circles.html"
+		})
 })
 
 // myApp.config(function($stateProvider, $urlRouterProvider) {

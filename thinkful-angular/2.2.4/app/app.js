@@ -37,7 +37,7 @@ countriesApp.config(function($stateProvider, $urlRouterProvider) {
 			   controller : 'CountriesCtrl',
 		    	// controller : 'app/countries/CountriesCtrl.js',
 		    resolve: {
-	    	countries: ['ccCountries', function(ccCountries){
+	    		countries: ['ccCountries', function(ccCountries){
 	    		return ccCountries();
 	    	}]
 
