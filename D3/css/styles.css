@@ -21,7 +21,7 @@
 }
 
 .country {
-  stroke: #fff;
+  stroke: #000;
   /*stroke-linejoin: round;*/
 }
 
@@ -51,17 +51,25 @@
  	font-size: 14px
  }
 
+#circles {
+  height: 100;
+}
+
+.circlesdemo9{
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.3),0 0 0 1px #000;
+}
+
 
 /* .land {
   fill: #6FC480;
   stroke: #000000;
 }*/
 
-circle {
+/*circle {
   fill: #ffffff;
   stroke: #CC0A48;
   fill-opacity: 0.2
-}
+}*/
 
 .graticule {
   fill: none;

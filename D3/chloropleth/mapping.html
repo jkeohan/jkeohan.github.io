@@ -12,29 +12,19 @@
 <div class="container">
 	<div class="row">
 
-		<div class="col-md-6">
+		<div class="col-md-12">
 		<h4><a href="http://geojson.org/geojson-spec.html" target="_">GEOJSON</a></h4>
-		geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            61.210817091725744,
-                            35.650072333309225
-                        ],
-                        [
-                            62.230651483005886,
-                            35.270663967422294
-                        ],
-                        [
-                            61.210817091725744,
-                            35.650072333309225
-                        ]
-                    ]
-                ]
-            }
+		<p>
+		GeoJSON is a format for encoding a variety of geographic data structures. A GeoJSON object may represent a geometry, a feature, or a collection of features. GeoJSON supports the following geometry types: Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection. Features in GeoJSON contain a geometry object and additional properties, and a feature collection represents a list of features.</p>
+		<p>
+		A GeoJSON object will is constructed as follows: 
+		</p>
+
+		{ "type":"FeatureCollection","features":[{"type":"Feature","properties":{"one or more properties"},"geometry":{"type":"Polygon","coordinates":[ [ [61,35],[62,36],[61,35] ] ]}}}
+	
+
 		</div>
-		<div class="col-md-6"><H4>TOPOJSON</H4></div>
+		<div class="col-md-12"><H4>TOPOJSON</H4></div>
 	</div>
 </div>
 
@@ -317,8 +307,12 @@
 		</div>
 	</div>
 </div>
- <script src="./js/mapping.js"></script>
- <script src="./js/chloropleth.js"></script>
+  
+<!--
+/*<script src="./js/graticule.js"></script>  */
+-->
+<script src="./js/mapping.js"></script>
+<script src="./js/chloropleth.js"></script>
  <script src="./js/legends.js"></script>
  <script src="./js/reusable.d3.charts.js"></script>
 
