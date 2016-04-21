@@ -32,11 +32,20 @@
 
 //Images in circles
 //1. (EM) Chap ?...circles
+
+//Story line
+//Once there was a circle...As with all circles one dy he wasn't here and then..he was...
+//He explored his new wolrd...going forward and backward
+//Going up and down...
+//Sometimes he even jupmed into the sky and flew around like superman...
+//Othertimes he just layed back and looked at the stars and dreamed
+//After sometime he felf lenely...and sad...wishing he had a someone to play with..
+//And so the gods being kind and generous decided to not only send him one friend...but two
 var canvas = canvasSize(".circledemo1")
 var w = canvas[0];
-var h = canvas[1]
+//var h = canvas[1]
+var h = 100;
 var data = [1,2,3]
-
 
 var cd1 = d3.select('.circledemo1').append('svg').attr({width:w, height:h})
 var cd1circles = cd1.selectAll(".circledemo1").data(data)
@@ -52,7 +61,7 @@ var cd2circles = cd2.selectAll(".circledemo2").data(data)
 cd2circles.enter().append("circle")
 	.attr("cx", function(d,i) { return i * 50 + 30})
 	.attr("cy", 50)
-	.attr("r", 5)
+	.attr("r", 20)
 	.attr("fill", color)
 
 var cd3 = d3.select('.circledemo3').append('svg').attr({width:w, height:h})
@@ -60,8 +69,10 @@ var cd3circles = cd3.selectAll(".circledemo3").data(data)
 cd3circles.enter().append("circle")
 	.attr("cx", function(d,i) { return i * 50 + 30})
 	.attr("cy", 50)
-	.attr("r", 5)
+	.attr("r", 15)
 	.attr("fill", color)
+	.attr("stroke", "rgba(230,230,230, .5)")
+	.attr("stroke-width", 20)
 
 var cd5 = d3.select('.circledemo5').append('svg').attr({width:w, height:h})
 var cd5circles = cd5.selectAll(".circledemo5").data(data)
@@ -86,32 +97,132 @@ cd6circles.enter().append("circle")
 var cd7 = d3.select('.circledemo7').append('svg').attr({width:w, height:h})
 var cd7circles = cd7.selectAll(".circledemo7").data(data)
 cd7circles.enter().append("circle")
-	.attr("cx", function(d,i) { return i * 50 + 30})
-	.attr("cy", -10)
-	.attr("fill", color)
-	.attr("r",0)
-	.transition().delay(function(d,i) { return i / data.length * 2000})
-	.transition().duration(2000)
-	.attr("cy", 50)
-	.attr("r",5)
+function initcircleDemo7() {
+	cd7circles
+		.attr("cx", function(d,i) { return i * 50 + 30})
+		.attr("cy", -10)
+		.attr("fill", color)
+		.attr("r",0)
+		.transition().delay(function(d,i) { return i / data.length * 2000})
+		.transition().duration(1000)
+		.attr("cy", 50)
+		.attr("r",5)
+}
+initcircleDemo7()
+d3.select('.cd7').on('click', function() { initcircleDemo7() })
 
 var cd8 = d3.select('.circledemo8').append('svg').attr({width:w, height:h})
 var cd8circles = cd8.selectAll(".circledemo8").data(data)
 cd8circles.enter().append("circle")
-	.attr("cx", function(d,i) { return i * 50 + 30})
-	.attr("cy", 50)
-	.attr("fill", color)
-	.attr("r",10)
-	.attr("stroke", "rgba(230,230,230, .8)")
-	.attr("stroke-width",1)
-	.transition().delay(function(d,i) { return i / data.length * 2000})
-	.transition().duration(1000)
-	.ease("bounce")
-	.attr("r",8)
-	.attr("stroke-width",6)
+function initcircleDemo8() {
+	cd8circles
+		.attr("cx", function(d,i) { return i * 50 + 30})
+		.attr("cy", 50)
+		.attr("fill", color)
+		.attr("r",20)
+		.attr("stroke", "rgba(230,230,230, .8)")
+		.attr("stroke-width",1)
+		.transition().delay(function(d,i) { return i / data.length * 2000})
+		.transition().duration(1000)
+		.ease("bounce")
+		.attr("r",8)
+		.attr("stroke-width",6)
+}
+initcircleDemo8()
+d3.select('.cd8').on("click", function() { initcircleDemo8() })
 
-	
+var cd9 = d3.select('.circledemo9').append('svg').attr({width:w, height:h})
+var cd9circles = cd9.selectAll(".circledemo8").data(data)
+cd9circles.enter().append("circle")
+function initcircleDemo9() {
+	cd9circles
+		.attr("cx", function(d,i) { return i * 50 + 30})
+				.attr("cy", 50)
+				  .attr("fill-opacity",0)
+		  .style("stroke-width",0)
+		  .attr("fill","#d4ee80")
+		.transition().delay(function(d,i) { 
+		  return i / data.length * 2000})	
+		  .attr("r",15)
+		.transition().duration(500)
+		  .attr("stroke", "#59b318")
+		  .attr("fill-opacity",1)
+		  .attr("fill","#59b318")
+		  .attr("r",5)
+		  //.style("stroke-width",10)
+		  .attr("stroke-opacity",.8)
+		.transition()
+		          .duration(1000)
+		          .ease(Math.sqrt)
+				  .attr("r",6)
+		          //.style("fill-opacity", 1e-6)
+					 .style("stroke-width",40)
+		          .attr("stroke-opacity", 1e-6)
+}
+initcircleDemo9()
+d3.select('.cd9').on("click", function() { initcircleDemo9() })
 
+
+var cd10 = d3.select('.circledemo10').append('svg').attr({width:w, height:h})
+var cd10circlesa = cd10.selectAll(".circledemo10a").data(data)
+
+cd10circlesa.enter().append("circle")
+function initcircleDemo10() {
+	cd10circlesa
+		.attr("cx", function(d,i) { return i * 50 + 40})
+				.attr("cy", 50)
+		  //.style("stroke-width",0)
+		  .attr("fill","#d4ee80")
+		  .attr("class","circledemo10a")
+		.transition().delay(function(d,i) { 
+		  return i / data.length * 2000})	
+		  .attr("r",15)
+		//.transition().duration(500)
+		  //.attr("stroke", "#59b318")
+		  //.attr("fill-opacity",1)
+		  //.attr("fill","#59b318")
+
+var cd10circlesb = cd10.selectAll(".circledemo10b").data(data)
+
+cd10circlesb
+	.attr("cx", function(d,i) { return i * 50 + 40})
+		.attr("cy", 50)
+		.attr("fill","white")
+		.attr("fill-opacity",0)
+		.attr("r",15)
+		.attr("class","circledemo10b")
+		.attr("stroke","white")
+	.transition().delay(function(d,i) { return i/data.length * 2000 }).duration(1000)
+		.attr("stroke","#d4ee80")
+		.attr("stroke-width",3)
+		.attr("r",20)
+
+cd10circlesb.enter().append("circle")
+	//.transition().delay(1000)
+		.attr("cx", function(d,i) { return i * 50 + 40})
+		.attr("cy", 50)
+		.attr("fill","white")
+		.attr("fill-opacity",0)
+		.attr("r",15)
+		.attr("class","circledemo10b")
+		.attr("stroke","white")
+	.transition().delay(function(d,i) { return i/data.length * 2000 }).duration(1000)
+		.attr("stroke","#d4ee80")
+		.attr("stroke-width",3)
+		.attr("r",20)
+		  //.attr("r",5)
+		  //.style("stroke-width",10)
+		  //.attr("stroke-opacity",.8)
+		// .transition()
+		//           .duration(1000)
+		//           .ease(Math.sqrt)
+		// 		  .attr("r",6)
+		//           //.style("fill-opacity", 1e-6)
+		// 			 .style("stroke-width",40)
+		//           .attr("stroke-opacity", 1e-6)
+}
+initcircleDemo10()
+d3.select('.cd10').on("click", function() { initcircleDemo10() })
 	//.attr("stroke",)
 // cd1circles.enter().append("circle")
 // 		.attr("cx",0)

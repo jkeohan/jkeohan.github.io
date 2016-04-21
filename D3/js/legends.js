@@ -29,32 +29,43 @@ function init() {
 			// //Load in GeoJSON data
 			d3.json("../D3/data/countries/mapshaper_output.json", function(json) {
 
-				var legendKeys = d3.nest().key(function(d) { return d["properties"]["continent"] } ).entries(json.features)
-				var legendVals = legendKeys.map(function(d) { return d.key })
+				// var legendKeys = d3.nest().key(function(d) { return d["properties"]["continent"] } ).entries(json.features)
+				// var legendVals = legendKeys.map(function(d) { return d.key })
 
-				var legendKeys2 = d3.set(json.features.map(function(d) { return d["properties"]["continent"] }) ).values()//.sort(d3.descending)			
+				var legendKeys = d3.set(json.features.map(function(d) { return d["properties"]["continent"] }) ).values()//.sort(d3.descending)			
 				//console.log(legendKeys2)
-				colorScale.domain(legendKeys2)
+				colorScale.domain(legendKeys)
 
+				//my custom legend
 				var rlegend = d3.models.legend()
-					.translate([0,300])
+					.transX(0).transY(250)
 					.fontSize(15).width(0)
 					.inputScale(colorScale)
+					.position("vertical")
 				svg.call(rlegend)
-  
 
+				var rlegend2 = d3.models.legend()
+				//.translate([0,300])	
+				.fontSize(15).width(0)
+				.inputScale(colorScale)
+				.position("horizonal")
+
+				var joeslegend = d3.select(".joeslegend")
+				joeslegend.call(rlegend2)
+  
 			svg.append("g")
 			  .attr("class", "legendOrdinal")
 			  .attr("transform", "translate(200,300)");
 
-			var legendOrdinal = d3.legend.color()
-			  .shape("path", d3.svg.symbol().type("cross").size(150)())
-			  .shapePadding(10)
-			  .orient("horizonal")
-			  .scale(colorScale);
+			//susie lui legend
+			// var legendOrdinal = d3.legend.color()
+			//   .shape("path", d3.svg.symbol().type("cross").size(150)())
+			//   .shapePadding(10)
+			//   .orient("horizonal")
+			//   .scale(colorScale);
 
-			svg.select(".legendOrdinal")
-			  .call(legendOrdinal);
+			// svg.select(".legendOrdinal")
+			//   .call(legendOrdinal);
 
 <!--LEGEND 3-->
      var legend = d3.select(".rightleg").append("div").attr("class","wrapper")

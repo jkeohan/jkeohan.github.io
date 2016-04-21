@@ -1,0 +1,188 @@
+  <script src="https://d3js.org/d3-queue.v2.min.js"></script>
+  <script>
+
+  </script>
+  <div class="demo navbar navbar-default">
+    <!-- ul>li.nav.nav-tabs -->
+    <ul class="demo nav nav-tabs">
+      <li class="story"><a href="">S1</a></li>
+      <li class="story"><a href="">S2</a></li>
+      <li class="story"><a href="">S3</a></li>
+      <li class="story"><a href="">S4</a></li>
+      <li class="story"><a href="">S5</a></li>
+      <li class="story"><a href="">S6</a></li>
+      <li class="story"><a href="">S7</a></li>
+      <li class="story"><a href="">S8</a></li>
+      <li class="story"><a href="">S9</a></li>
+    </ul>
+  </div>
+  <div class="section s1" id="s1">
+   <div class="wrapper">
+    <h1>DATA VISUALIZATION</h1>
+  </div>
+  </div>
+  <div class="section s2" id="s2">
+   <div class="wrapper">
+    <h2>What should be the first question asked when building out a data viz?</h2>
+   </div>
+  </div>
+
+  <div class="section s3" id="s3">
+   <div class="wrapper">
+     <h2>Answers could be...</h2>
+     <h3>What question are you trying to answer? </h3>
+     <h3><a target="_" href="http://www.datavizcatalogue.com/search.html">What are you trying to show?</a></h3>
+   </div>
+  </div>
+
+   <div class="section s4" id="s4">
+     <div class="wrapper">
+       <h2>What naturally would be the second question you now need to ask?</h2>
+    </div>
+  </div>
+
+  <div class="section s5" id="s5">
+   <div class="wrapper">
+     <h2>How tocoose which visualization(s) best represents answering either or both of those questions?</h2>
+   </div>
+  </div>
+
+  <div class="section s6" id="s6">
+   <div class="wrapper">
+     <h2>Based on our data set, which represents funding provided to Oregon per state, what 
+     questions could we ask?</h2>
+   </div>
+  </div>
+
+    <div class="section s7" id="s7">
+   <div class="wrapper">
+     <h2>Naturally the following questions could be proposed?</h2>
+     <ul>
+       <li>Which state(s) provide the most funding?</li>
+       <li>Which state(s) provided the least?</li>
+     </ul>
+    <h2>But the following are also viable questions to consider.</h2>
+      <ul>
+       <li>What was the average (mean) per state?</li>
+       <li>How much the average state contributed?</li>
+     </ul>
+   </div>
+  </div>
+
+  <div class="section s8" id="s8">
+   <div class="wrapper">
+     <h2>Let's start with asking - "Which state(s) provided the most funding?"</h2>
+   </div>
+  </div>
+    <div class="section s9" id="s9">
+   <div class="wrapper">
+     <h2>"Which state(s) provided the most funding?"</h2>
+     <div class="navbar navbar-default">
+       <ul class="nav nav-tabs">
+        <li class="withlegend"><a href="">With Legend</a></li>
+         <li class="withoutlegend"><a href="">Without Legend</a></li>
+      </ul>
+     </div>
+     <div class="maps"></div>
+   </div>
+  </div>
+
+  <h1></h1>
+  <div id="wmap1"></div>
+  <div id="barchart1">
+    <!-- <label><input type="checkbox"> Sort values</label> -->
+  </div>
+    <div id="barchart2"></div>
+
+
+
+<style>
+
+#barchart1 {
+  position:relative;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.section {
+  width: 1024px;
+  height:300px;
+  margin:0 auto;
+  opacity:1;
+  display:block;
+}
+
+.section .wrapper{
+  padding:100px;
+}
+
+.s1,.s2, .s3, .s4, .s5, .s6, .s7{
+  text-align: center;
+}
+
+.section .s9 .wrapper {
+  padding:10px;
+  height:600px;
+}
+
+ul.demo{
+      width: 50%;
+    margin: 0 auto;
+    text-align: left;
+    border:none;
+}
+
+.demo.navbar {
+  min-height:100%;
+}
+label {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+}
+
+.scalemaps {
+      float: left;
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.s9 .navbar.navbar-default{
+      width: 75%;
+    margin: 0 auto;
+    background-color: white;
+    border: none;
+}
+
+.s9  ul.nav.nav-tabs {
+
+    border: none;
+}
+
+</style>
+
+  <script src="demo/scales-demo.js"></script>
+
+ <!-- // <script src="demo/s1.js"></script> -->
+

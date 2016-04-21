@@ -7,6 +7,9 @@ d3.models.legend = function () {
 	var fontSize = 15;
 	var width = 650;
 	var height = 400;
+	var transX = 0;
+	var transY = 0;
+	//var translate = [0,0];
 	var legendValues;
 	var position = "vertical";
 // One way for the module to expose events to the outside world is by using  d3.dispatch to declare 
@@ -20,7 +23,8 @@ d3.models.legend = function () {
 			console.log(selection)
 			if(position === "vertical") { 
 	        //D3 Vertical Legend//////////////////////////
-	        var legend = selection.selectAll("legend").data(legendValues).enter().append("g")
+	        var legend = selection.append('g').attr("transform", function (d, i) { return "translate(" + transX + "," + transY  + ")" })//attr("transform",function(d,i) { return "translate(" + transX + ',' + transY ")"} )
+	        .selectAll("legend").data(legendValues).enter().append("g")
 							.attr("class", "legend")
 	            .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")" })
 	            .on("mouseover",dispatch.mouseOver) //dispath name cannot be same as event
@@ -72,6 +76,21 @@ d3.models.legend = function () {
 	render.height = function(_x) {
 		if (!arguments.length) return height;
 		height = _x;
+		return this;
+	}
+	// render.translate = function(_x) {
+	// 	if (!arguments.length) return translate;
+	// 	translate = _x;
+	// 	return this;
+	// }
+	render.transX = function(_x) {
+		if(!arguments.length) return transX
+		transX = _x
+		return this;
+	}
+	render.transY = function(_x) {
+		if(!arguments.length) return transY
+		transY = _x
 		return this;
 	}
 	render.inputScale = function(_x) {

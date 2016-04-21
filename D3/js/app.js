@@ -15,6 +15,10 @@ d3App.config(function($stateProvider, $urlRouterProvider) {
 			url:"/circles",
 			templateUrl:"circles/circles.html"
 		})
+		.state('present', {
+			url:"/present",
+			templateUrl:"demo/present.html"
+		})
 })
 
 // myApp.config(function($stateProvider, $urlRouterProvider) {

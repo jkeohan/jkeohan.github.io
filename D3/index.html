@@ -10,9 +10,15 @@
 
 <!-- D3 -->
  	<script src="./libraries/bower_components/d3/d3.min.js"></script>
+  <script src="./libraries/bower_components/d3-queue/d3-queue.js"></script>
+  <!-- // <script src="./libraries/bower_components/d3-topojson-layer/index.js"></script> -->
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="./libraries/bower_components/colorbrewer/colorbrewer.js"></script>
   <link  rel="stylesheet" href="./libraries/bower_components/colorbrewer/colorbrewer.css"></script>
+<!--Susie Lui's Legend -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.6.0/d3-legend.js"></script>
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 <!-- ANGULAR -->
  	<script type="text/javascript" src="./libraries/bower_components/angular/angular.js"></script>
@@ -31,6 +37,7 @@
 
 </head>
   <body ng-app="d3App" ng-class="{loading: isLoading}">
+       </script>
    <nav class="navbar navbar-default">
           <div class="navbar-header">
           
@@ -59,6 +66,8 @@
            <div class="collapse navbar-collapse" id="collapsemenu">
               <ul class="nav navbar-nav pull-right">
               <li><a href="#/mapping">Mapping</a></li>
+              <li><a href="#/circles">Circles</a></li>
+              <li><a href="#/present">Demo</a></li>
             </ul>    
           </div>
       </nav>
