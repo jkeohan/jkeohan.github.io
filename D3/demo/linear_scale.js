@@ -69,7 +69,7 @@
                 .attr('d', path)
                 .attr("class", function(d) { 
 
-                  return "state " + d.properties.name})
+                  return "state " + d.properties.name.replace(' ','_')}) // just replacing space with _
                 .style("fill",function(d) {return color(d.properties.value)})
 
         addLegend(svg,color)
