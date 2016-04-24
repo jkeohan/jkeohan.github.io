@@ -1,4 +1,4 @@
-// (function() {
+(function() {
    var width = 650;
       var height = 400;
 
@@ -133,6 +133,7 @@ function renderTable(data) {
         .data(data).enter()
         .append('tr')
         .style("background-color", function(d) {return color(d.contributed)})
+        .style("opacity",1)
         .attr("class",function(d) {
           return "state-table " + d.title})
         .on("mouseover",function(d) { highlightOn(d) } )
@@ -163,7 +164,7 @@ function highlightOn(item) {
   var mapStates = d3.selectAll(".state").style("opacity", .3)
   var currentMap = mapStates.filter("."+state).style("opacity",1).style("stroke","black")
 
-  var tableStates = d3.selectAll(".state-table").style("opacity", .3)
+  var tableStates = d3.selectAll(".state-table ").style("opacity", .3)
   var currentRow = tableStates.filter("."+state).style("opacity",1)
 
 }
@@ -174,5 +175,5 @@ function highlightOff(item) {
 }
 
 
-
+})()
 

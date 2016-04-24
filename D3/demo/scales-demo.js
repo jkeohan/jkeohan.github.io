@@ -94,9 +94,9 @@
                 .append('path')
                 .attr('d', path)
                 .style("fill",function(d) {
-
-                  if(d === null || d.properties.value) { return color.scale(0) }//"#f0efef" }
-                  else { return  color.scale(d.properties.value) }
+                  return color.scale(d.properties.value)
+                  // if(d.properties.value === null) { return "#f0efef"  } //color.scale(0) }//"#f0efef" }
+                  // else { return  color.scale(d.properties.contributed) }
                 })
          addLegend(svg,color)
 
@@ -170,8 +170,6 @@
             d3.selectAll(".legend").style("opacity",0).transition().duration(1000).style("opacity",1)
            }
 
-
-
            d3.selectAll(".story a").on("click",tellstory)
 
         $(document).ready(function() {
@@ -179,7 +177,7 @@
             });
            function tellstory(param){
             var name;
-            //UPDATE BACKGROUND COLOR FOR ACTIVE BUTTON
+            //console.log(this)
             if(param == "s1") { 
               name = "#s1"
               d3.select(".story.s1 a").style("background-color","rgb(238, 238, 238)")
@@ -190,7 +188,6 @@
               d3.select(".story"+"."+text + " a").style("background-color","rgb(238, 238, 238)") 
               name = "#" + d3.select(this).text().toLowerCase()
            }
-           
            console.log(name)
             d3.selectAll(".section")
               .transition().duration(500)
@@ -198,11 +195,9 @@
             d3.selectAll(".section").filter(name)
               .transition().duration(1000)
               .style("opacity",1).style("display","block")
-
-            d3.selectAll(".s4 h2.dontsee").classed(".dontsee",false).transition().duration(2000).style("opacity",1)
        }
 
-     
+     //  d3.selectAll(".s4 h2.dontsee").classed(".hide",false).transition().duration(2000).style("opacity",1)
 
 })()
 
