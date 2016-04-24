@@ -1,19 +1,14 @@
-
+(function() {
       //Width and height
       var width = 450;
       var height = 200;
 
       var cb = colorbrewer;
-      console.log(cb)
+      //console.log(cb)
 
        var domainRange = [100, 1000, 10000, 100000, 1000000, 10000000]
           var colorRange  = cb.Greens[6]
 
-      // var scales = [
-      //  {"scale":"linear","function":d3.scale.ordinal(),"range":"cb.Greens[7]"},
-      //  {"scale":"linear","function":d3.scale.linear(),"range":"cb.Greens[7]","domain":[100, 1000, 10000, 100000, 1000000, 10000000, 100000000]}
-      //  ]//,"linear","quantize","threshhold"]
-      //Define map projection
       var projection = d3.geo.albersUsa()
                    //.center([ 0, 40])
                    .translate([ width/2 - 50, height/2]) //moving left or right
@@ -54,8 +49,8 @@
             //color.domain(d3.extent(states.filter(function(d) { return +d.value < 350000}).map(function(d){ return +d.value })))
             var max = d3.max(states.map(function(d) { return +d.value }))
             var extent = d3.extent(states.map(function(d) { return +d.value }))
-            console.log(max)
-            console.log(extent)
+            //console.log(max)
+            //console.log(extent)
                 
           //  draw(error,us,states)
           var scales = [];
@@ -71,16 +66,15 @@
           // var scale = scales[0].scale
           // for(prop in colors) { console.log(scale.invertExtent(colors[prop])) }
           smallmultiples(error,us,scales)
-          //visualize(error,us,scales)
+         
         })
 
       function smallmultiples(error,us,scales) {
-  
         var visualizationWrapper = d3.select(".s9 .maps")
         scales.forEach(function(scale,i) {
           var wrapper = visualizationWrapper.append("div").style("width",width).style("height",height).style("float","left")
            .attr("class","scalemaps")
-        
+
         createMap(wrapper, us, scales[i])
             })
       };
@@ -100,8 +94,10 @@
                 .append('path')
                 .attr('d', path)
                 .style("fill",function(d) {
-        
-                  return color.scale(d.properties.value)})
+
+                  if(d === null || d.properties.value) { return color.scale(0) }//"#f0efef" }
+                  else { return  color.scale(d.properties.value) }
+                })
          addLegend(svg,color)
 
        }
@@ -118,7 +114,6 @@
             .enter().append("g")
             .attr("class", "legend")
 
-
             var ls_w = 20, ls_h = 20;
 
             legend.append("rect")
@@ -126,9 +121,7 @@
             .attr("y", function(d, i){ return i * 20 } )
             .attr("width", ls_w)
             .attr("height", ls_h)
-            .style("fill", function(d, i) { 
-          
-              return d })
+            .style("fill", function(d, i) { return d })
             .style("opacity", 0.8);
 
             legend.append("text")
@@ -137,7 +130,6 @@
             .attr("dy",-5)
             .text(function(d, i){ 
               var val = newArr[i]
-              //console.log(newArr[i])
                 if(val != undefined) {
                   return (newArr[i].toString().replace(","," - "))
                 }
@@ -163,9 +155,7 @@
             //console.log(color.scale.domain().map(function(d) { return d3.format('$.2s')(d)  } ) )
             newArr = color.scale.domain().map(function(d) { return d3.format('$.2s')(d)  } )
           }
-
            return newArr
-
        }
 
        d3.select(".withoutlegend").on("click",hideLegend)
@@ -177,34 +167,43 @@
         d3.select(".withlegend").on("click",showLegend)
 
        function showLegend() {
-        d3.selectAll(".legend").style("opacity",0).transition().duration(1000).style("opacity",1)
+            d3.selectAll(".legend").style("opacity",0).transition().duration(1000).style("opacity",1)
+           }
+
+
+
+           d3.selectAll(".story a").on("click",tellstory)
+
+        $(document).ready(function() {
+            tellstory("s1")
+            });
+           function tellstory(param){
+            var name;
+            //UPDATE BACKGROUND COLOR FOR ACTIVE BUTTON
+            if(param == "s1") { 
+              name = "#s1"
+              d3.select(".story.s1 a").style("background-color","rgb(238, 238, 238)")
+            }
+            else {
+              var text = d3.select(this).text().toLowerCase()
+              d3.selectAll(".story a").style("background-color","#f8f8f8")  
+              d3.select(".story"+"."+text + " a").style("background-color","rgb(238, 238, 238)") 
+              name = "#" + d3.select(this).text().toLowerCase()
+           }
+           
+           console.log(name)
+            d3.selectAll(".section")
+              .transition().duration(500)
+              .style("opacity",0).style("display","none")
+            d3.selectAll(".section").filter(name)
+              .transition().duration(1000)
+              .style("opacity",1).style("display","block")
+
+            d3.selectAll(".s4 h2.dontsee").classed(".dontsee",false).transition().duration(2000).style("opacity",1)
        }
 
-       d3.selectAll(".story a").on("click",tellstory)
+     
 
-    $(document).ready(function() {
-        tellstory("s1")
-        });
-       function tellstory(param){
-        var name;
-        console.log(this)
-        if(param == "s1") { 
-          name = "#s1"
-        }
-        else {
-          console.log("button clicked")
-          name = "#" + d3.select(this).text().toLowerCase()
-       }
-       console.log(name)
-        d3.selectAll(".section").transition().duration(500).style("opacity",0).style("display","none")
-        d3.selectAll(".section").filter(name).transition().duration(1000).style("opacity",1).style("display","block")
-        //var cur = $('.section').hide()
-
-
-        // d3.selectAll(".section").style("display","none")
-        // d3.select(current).style("display","block")
-       }
-
-
+})()
 
    //Demo a map of the US without color
