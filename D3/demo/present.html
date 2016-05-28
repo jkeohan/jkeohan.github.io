@@ -19,46 +19,94 @@
   </div>
   <div class="section s1" id="s1">
    <div class="wrapper">
-    <h1>DATA VISUALIZATION</h1>
+    <h1>DATA VISUALIZATION USING D3</h1>
+    <h2>MAPPING 101</h2>
   </div>
   </div>
   <div class="section s2" id="s2">
-   <div class="wrapper">
-    <h2>What should be the first question asked when building out a data viz?</h2>
-   </div>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <h3>A step by step tutorial project to build an interactive map with D3.js</h3>
+            <ol class="blogpost-serie">
+        <li class="blogpost">
+          <div class="blogpost-article">Introduction and finding data.</div>
+        </li>
+        <li class="blogpost">
+          <div class="blogpost-article">Converting Shapefiles to GEOJSON and TOPOJSON.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part3-9.html">Demo 3</a>
+          <div class="blogpost-article">Render a map.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part4-9.html">Demo 4</a>
+          <div class="blogpost-article">Enhance to a choropleth.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part5-9.html">Demo 5</a>
+          <div class="blogpost-article">Zoom functionality.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part6-9.html">Demo 6</a>
+          <div class="blogpost-article">Add labels to the map.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part7-9.html">Demo 7</a>
+          <div class="blogpost-article">Adding a legend to interpret the data.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part8-9.html">Demo 8</a>
+          <div class="blogpost-article">Interactive tooltips for detailed information.</div>
+        </li>
+        <li class="blogpost">
+          <a class="blogpost-demo" href="Prototype/part9-9.html">Demo 9</a>
+          <div class="blogpost-article">Display several years of data with a time series.</div>
+        </li>
+      </ol>
+    </div>
   </div>
+</div>
+<!--    <div class="wrapper">
+    <h2>What should be the first question asked when building out a data viz?</h2>
+   </div> -->
+  </div>
+
+
 
   <div class="section s3" id="s3">
    <div class="wrapper">
-     <h2></h2>
-     <h3>What question are you trying to answer? </h3>
-     <h3><a target="_" href="http://www.datavizcatalogue.com/search.html">What are you trying to show?</a></h3>
+        <h4><a href="http://geojson.org/geojson-spec.html" target="_">GEOJSON</a></h4>
+    <p>
+      GeoJSON (geojson.org) is a way of encoding geodata in JSON format. Each <code>feature</code> in a <code>featureCollection</code>s is a JSON object that stores the border of the feature in a coordinates array as well as metadata about the feature in a properties hash object.
+    </p>
+    <p>
+    A GeoJSON object is constructed as follows: 
+    </p>
+
+    { "type":"FeatureCollection","features":[{"type":"Feature","properties":{"one or more properties"},"geometry":{"type":"Polygon","coordinates":[ [ [61,35],[62,36],[61,35] ] ]}}}
+   <div class="col-md-12"><H4>TOPOJSON</H4></div>
    </div>
   </div>
 
    <div class="section s4" id="s4">
      <div class="wrapper">
-       <h2>What naturally would be the second question you now need to ask?</h2>
-       <h2 class="dontsee">How to choose which visualization(s) best represents answering either or both of those questions?</h2>
     </div>
   </div>
 
   <div class="section s5" id="s5">
    <div class="wrapper">
-     <h2>How to choose which visualization(s) best represents answering either or both of those questions?</h2>
    </div>
   </div>
 
   <div class="section s6" id="s6">
    <div class="wrapper">
-     <h2>Based on our data set, which represents funding provided to Oregon per state, what kind of
-     questions could we ask?</h2>
    </div>
   </div>
 
     <div class="section s7" id="s7">
    <div class="wrapper">
-     <h2>How about...</h2>
+<!--      <h2>How about...</h2>
      <ul>
        <li>Which state(s) contributed the most funding?</li>
        <li>Which state(s) contributedthe least?</li>
@@ -68,14 +116,12 @@
       <ul>
        <li>What was the average (mean) per state?</li>
        <li>How much the average state contributed?</li>
-     </ul>
+     </ul> -->
    </div>
   </div>
 
   <div class="section s8" id="s8">
    <div class="wrapper">
-     <h2>Let's start with asking...</h2>
-     <h2>"Which state(s) provided the most funding?"</h2>
    </div>
   </div>
 
@@ -95,12 +141,6 @@
    <div class="section s10" id="s10">
     <div class="wrapper">
       <h2>"Which state(s) provided the most funding?"</h2>
-     <!--  <div class="navbar navbar-default">
-       <ul class="nav nav-tabs">
-        <li class="withlegend"><a href="">With Legend</a></li>
-         <li class="withoutlegend"><a href="">Without Legend</a></li>
-       </ul>
-      </div><!--navbar-->
       <div class="linear-scale"></div>
     </div><!--wrapper-->
   </div>
@@ -141,7 +181,7 @@ ul.nav.nav-tabs{
 }
 
 path {
-  fill:red;
+  fill:lightgray;
 }
 
 .axis path,
@@ -155,10 +195,15 @@ path {
   display: none;
 }
 
+.overlay {
+  fill:none;
+  pointer-events: all;
+}
+
 .section {
-  width: 1024px;
+  width: 100%;
   height:300px;
-  margin:0 auto;
+  /*margin:0 auto;*/
 /*  opacity:1;*/
   display:block;
 }
@@ -167,7 +212,25 @@ path {
   padding:40px 40px;
 }
 
-.section.s9 .wrapper{
+.section.s1 .wrapper {
+  position:absolute;
+  left:30%;
+  top:35%;
+
+}
+
+.section.s1 .wrapper h1,h2 {
+  font-family: fantasy;
+  font-weight: 800;
+  text-align: center;
+}
+
+.section.s2 h3 { text-align:center; font-size: 35px; margin-bottom:50px;}
+.section.s2 ol.blogpost-serie { font-size:30px;}
+.section.s2 li.blogpost a.blogpost-demo { float:right;}
+
+
+.section.s9 .wrapper {
   padding:50px;
   overflow:hidden;
 }
@@ -194,6 +257,7 @@ ul.demo{
 
 .demo.navbar {
   min-height:100%;
+  margin-bottom:0px;
 }
 label {
   position: absolute;
@@ -221,6 +285,10 @@ label {
     border: none;
 }
 
+.linear-scale{
+  position:relative;
+}
+
 .linear-scale table{
   float:right;
 }
@@ -231,6 +299,10 @@ table.scroll {
     border-spacing: 0;
     border: 2px solid black;
     width:25%;
+    position: absolute;
+   top: 47px;
+    right: 261px;
+
 }
 
 table.scroll tbody,
@@ -243,8 +315,8 @@ thead tr th {
     /* text-align: left; */
 }
 
-thead tr th.tr-state{
-  width: 49%;
+thead tr th.tr-state {
+    width: 28%;
 }
 
 table.scroll tbody {
@@ -254,10 +326,13 @@ table.scroll tbody {
 }
 
 tbody { 
-
   border-top: 
   2px solid black; 
   text-align: center;
+}
+
+tbody tr.state-table {
+  cursor: default;
 }
 
 tbody td, thead th {
@@ -271,11 +346,11 @@ tbody td:last-child, thead th:last-child {
     border-right: none;
 }
 
-
 </style>
-
-  <script src="demo/scales-demo.js"></script>
+   <script src="demo/navigation.js"></script>
+   <script src="demo/scales-demo.js"></script>
   <script src="demo/linear_scale.js"></script>
+    <script src="demo/slide1.js"></script>
 
  <!-- // <script src="demo/s1.js"></script> -->
 

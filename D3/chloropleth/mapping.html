@@ -11,13 +11,15 @@
 
 <div class="container">
 	<div class="row">
-
 		<div class="col-md-12">
+			
+
 		<h4><a href="http://geojson.org/geojson-spec.html" target="_">GEOJSON</a></h4>
 		<p>
-		GeoJSON is a format for encoding a variety of geographic data structures. A GeoJSON object may represent a geometry, a feature, or a collection of features. GeoJSON supports the following geometry types: Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection. Features in GeoJSON contain a geometry object and additional properties, and a feature collection represents a list of features.</p>
+			GeoJSON (geojson.org) is a way of encoding geodata in JSON format. Each <code>feature</code> in a <code>featureCollection</code>s is a JSON object that stores the border of the feature in a coordinates array as well as metadata about the feature in a properties hash object.
+		</p>
 		<p>
-		A GeoJSON object will is constructed as follows: 
+		A GeoJSON object is constructed as follows: 
 		</p>
 
 		{ "type":"FeatureCollection","features":[{"type":"Feature","properties":{"one or more properties"},"geometry":{"type":"Polygon","coordinates":[ [ [61,35],[62,36],[61,35] ] ]}}}
@@ -33,17 +35,40 @@
 		<div class="col-md-12"><h2>Working with Projections and Path Generators</h2></div>
 		<div class="col-md-4 left">
 			<h3>Define map projection</h3>
-			<p>Projections transforms spherical coordinates (in degrees) to Cartesian coordinates (in pixels). </p>
-			<blockquote>
-				<p>var projection = d3.geo.mercator()<p>
+			<p>Projection refers to the process of rendering points on a globe, like the earth, onto a flat plane and transform spherical coordinates (in degrees) to Cartesian coordinates (in pixels). One of the most used types of projections is Mercator, which is the projection used by Google Maps.</p>
+			<blockquote><p>var projection = d3.geo.mercator()<p></blockquote>
+			<p>By defining a projection, you can take advantage of the<code>d3.geo.path</code> generator, which draws geoData onscreen based on your selected projection.</p>
+			<p>Of course there are many more projections than just Mercator and Bostock has put together the <a target="_" href="https://github.com/d3/d3-geo-projection/">Extended Geo Projections</a> github repo to demo them which are also available via d3.geo. </p>
+			<p>
+				Projections require additional methods for transitioning,centering,ect.  Here are three projections and their corresponding methods used in this specific viz:</p>
 
-			 </blockquote>
-			 	<h3>Define path generator</h3>
-			 	<p>The primary mechanism for displaying geographic data is d3.geo.path. This class is similar to <a target="_" href="https://github.com/mbostock/d3/wiki/SVG-Shapes#path-data-generators">d3.svg.line</a> and the other SVG shape generators: given a geometry or feature object, it generates the path data string suitable for the "d" attribute of an SVG path element.</p>
+				<strong>Mercator\Orthographic</strong>
+			<ul>
+				<li>.center[([0,0)]</li>
+				<li>.translate([ w1/2, h1/1.5232 ])</li>
+				<li>.scale([ w/5 ])</li>
+			</ul>
+
+			<strong>Streographic</strong>
+			<ul>
+				<li>.rotate([-20, 0])</li>
+				<li>.translate([w1 / 2, h1 / 2])</li>
+				<li>.scale(50)</li>
+				<li> .clipAngle(180 - 1e-4)</li>
+				<li>.clipExtent([[0, 0], [w1,h1]])</li>
+				<li>.precision(.1)</li>
+			</ul>
+			 
+			<!--	
 				<blockquote>
-					var path = d3.geo.path()
-							 .projection(projection);
-					<p>d3.selectAll("path").transition().duration(1000).attr("d",path)</p>
+				0: Object
+					geometry: Object
+						coordinates: Array[1]
+							0: Array[69]
+							0: Array[2]
+							0: 61.210817091725744
+							1: 35.650072333309225
+			-->
 				</blockquote>
 		 </div>
 
@@ -63,41 +88,16 @@
 	   		<a class="tributary" href="http://tributary.io/inlet/eae9e630e544c02b8433" target="_">Tributary</a>
 		</div>
 
-
 		<div class="col-md-3 right">
-		<p>There are many more projections than this and Bostock has put together an <a target="_" href="https://github.com/d3/d3-geo-projection/">Extended Geo Projections</a> github repo.
+				 	<h3>Define path generator</h3>
+			 	<p>The primary mechanism for displaying geographic data is d3.geo.path. This class is similar to <a target="_" href="https://github.com/mbostock/d3/wiki/SVG-Shapes#path-data-generators">d3.svg.line</a> and the other SVG shape generators in that given a geometry or feature object, it generates the path data string suitable for the "d" attribute of an SVG path element.</p>
+				<blockquote>
+					var path = d3.geo.path()
+							 .projection(projection);
+					<p>d3.selectAll("path").transition().duration(1000).attr("d",path)</p>
+				</blockquote>
 
-			Projections require additional methods for transitioning,centering,ect.  Here are three projections and their corresponding methods used in this specific viz:</p>
-
-			<strong>Mercator\Orthographic</strong>
-		<ul>
-			<li>.center[([0,0)]</li>
-			<li>.translate([ w1/2, h1/1.5232 ])</li>
-			<li>.scale([ w/5 ])</li>
-		</ul>
-
-		<strong>Streographic</strong>
-		<ul>
-			<li>.rotate([-20, 0])</li>
-			<li>.translate([w1 / 2, h1 / 2])</li>
-			<li>.scale(50)</li>
-			<li> .clipAngle(180 - 1e-4)</li>
-			<li>.clipExtent([[0, 0], [w1,h1]])</li>
-			<li>.precision(.1)</li>
-		</ul>
-			 
-	<!--	
-		<blockquote>
-		0: Object
-			geometry: Object
-				coordinates: Array[1]
-					0: Array[69]
-					0: Array[2]
-					0: 61.210817091725744
-					1: 35.650072333309225
-	-->
-	</blockquote>
-		</div>
+		</div><!--col3-->
 	</div>
 </div>
 <div class="container">

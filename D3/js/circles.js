@@ -76,23 +76,34 @@ cd3circles.enter().append("circle")
 
 var cd5 = d3.select('.circledemo5').append('svg').attr({width:w, height:h})
 var cd5circles = cd5.selectAll(".circledemo5").data(data)
-cd5circles.enter().append("circle")
+cd5circles.enter().append("circle").attr("class","circledemo5")
+function initcircleDemo5() {
+	cd5circles
 	.attr("cx", function(d,i) { return i * 50 + 30})
 	.attr("cy", 50)
 	.attr("fill", color)
-	.attr("c",0)
+	.attr("r",0)
 	.transition().delay(function(d,i) { return i / data.length * 2000})
 	.attr("r", 5)
+}
+initcircleDemo5()
+d3.select(".cd5").on('click',function() { initcircleDemo5() })
 
 var cd6 = d3.select('.circledemo6').append('svg').attr({width:w, height:h})
 var cd6circles = cd6.selectAll(".circledemo6").data(data)
 cd6circles.enter().append("circle")
-	.attr("cx",-10)
+function initcircleDemo6() {
+	cd6circles
+		.attr("cx",-10)
 	.attr("cy", 50)
 	.attr("fill", color)
 	.attr("r",5)
 	.transition().delay(function(d,i) { return i / data.length * 2000})
 	 .attr("cx", function(d,i) { return i * 50 + 30})
+}
+
+initcircleDemo6()
+d3.select(".cd6").on('click',function() { initcircleDemo6() })
 
 var cd7 = d3.select('.circledemo7').append('svg').attr({width:w, height:h})
 var cd7circles = cd7.selectAll(".circledemo7").data(data)
@@ -136,11 +147,11 @@ var cd9circles = cd9.selectAll(".circledemo8").data(data)
 cd9circles.enter().append("circle")
 function initcircleDemo9() {
 	cd9circles
-		.attr("cx", function(d,i) { return i * 50 + 30})
-				.attr("cy", 50)
-				  .attr("fill-opacity",0)
-		  .style("stroke-width",0)
-		  .attr("fill","#d4ee80")
+		 .attr("cx", function(d,i) { return i * 50 + 30})
+	   .attr("cy", 50)
+	   .attr("fill-opacity",0)
+		 .attr("stroke-width",0)
+		 .attr("fill","#d4ee80")
 		.transition().delay(function(d,i) { 
 		  return i / data.length * 2000})	
 		  .attr("r",15)
@@ -149,15 +160,12 @@ function initcircleDemo9() {
 		  .attr("fill-opacity",1)
 		  .attr("fill","#59b318")
 		  .attr("r",5)
-		  //.style("stroke-width",10)
 		  .attr("stroke-opacity",.8)
-		.transition()
-		          .duration(1000)
-		          .ease(Math.sqrt)
-				  .attr("r",6)
-		          //.style("fill-opacity", 1e-6)
-					 .style("stroke-width",40)
-		          .attr("stroke-opacity", 1e-6)
+		.transition().duration(1000)
+      .ease(Math.sqrt)
+		  .attr("r",6)
+			.attr("stroke-width",40)
+      .attr("stroke-opacity", 1e-6)
 }
 initcircleDemo9()
 d3.select('.cd9').on("click", function() { initcircleDemo9() })
@@ -165,8 +173,10 @@ d3.select('.cd9').on("click", function() { initcircleDemo9() })
 
 var cd10 = d3.select('.circledemo10').append('svg').attr({width:w, height:h})
 var cd10circlesa = cd10.selectAll(".circledemo10a").data(data)
+var cd10circlesb = cd10.selectAll(".circledemo10b").data(data)
 
 cd10circlesa.enter().append("circle")
+cd10circlesb.enter().append("circle")
 function initcircleDemo10() {
 	cd10circlesa
 		.attr("cx", function(d,i) { return i * 50 + 40})
@@ -177,27 +187,8 @@ function initcircleDemo10() {
 		.transition().delay(function(d,i) { 
 		  return i / data.length * 2000})	
 		  .attr("r",15)
-		//.transition().duration(500)
-		  //.attr("stroke", "#59b318")
-		  //.attr("fill-opacity",1)
-		  //.attr("fill","#59b318")
-
-var cd10circlesb = cd10.selectAll(".circledemo10b").data(data)
 
 cd10circlesb
-	.attr("cx", function(d,i) { return i * 50 + 40})
-		.attr("cy", 50)
-		.attr("fill","white")
-		.attr("fill-opacity",0)
-		.attr("r",15)
-		.attr("class","circledemo10b")
-		.attr("stroke","white")
-	.transition().delay(function(d,i) { return i/data.length * 2000 }).duration(1000)
-		.attr("stroke","#d4ee80")
-		.attr("stroke-width",3)
-		.attr("r",20)
-
-cd10circlesb.enter().append("circle")
 	//.transition().delay(1000)
 		.attr("cx", function(d,i) { return i * 50 + 40})
 		.attr("cy", 50)
@@ -210,16 +201,6 @@ cd10circlesb.enter().append("circle")
 		.attr("stroke","#d4ee80")
 		.attr("stroke-width",3)
 		.attr("r",20)
-		  //.attr("r",5)
-		  //.style("stroke-width",10)
-		  //.attr("stroke-opacity",.8)
-		// .transition()
-		//           .duration(1000)
-		//           .ease(Math.sqrt)
-		// 		  .attr("r",6)
-		//           //.style("fill-opacity", 1e-6)
-		// 			 .style("stroke-width",40)
-		//           .attr("stroke-opacity", 1e-6)
 }
 initcircleDemo10()
 d3.select('.cd10').on("click", function() { initcircleDemo10() })
