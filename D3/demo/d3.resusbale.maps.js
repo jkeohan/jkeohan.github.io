@@ -1,19 +1,26 @@
 (function() { 
 
   d3_queue.queue()
-    .defer(d3.json,"../D3/data/countries/mapshaper_output.json")
-    .defer(d3.csv,"../D3/data/countries/cities.csv")
-    .await(function(error,world,cities) { 
-      drawMap(world)
-      // drawTitle()
-      drawCities(cities)          
-    })//await
+        .defer(d3.json,"../D3/data/countries/mapshaper_output.json")
+        .defer(d3.csv,"../D3/data/countries/cities.csv")
+        .await(function(error,world,cities) { 
+            drawMap(world)
+            // drawTitle()
+            drawCities(cities)
+            
+        })
 
 var canvas = canvasSize('body')
 //console.log(canvas)
 
 w = canvas[0]
 h = 600;
+
+//Define map projection
+var projection = d3.geo.mercator()
+  .center([ 0, 0 ])
+   .translate([ w/2, h/1.74026575872 ])
+   .scale([ w/6.5 ])
 
 var body = d3.select('.section.s1')
 var svg = body.append('svg').attr("width",w).attr("height",h)//style("background-color","#000000")
@@ -47,12 +54,6 @@ function drawTitle(){
 
 function drawMap(countries) {
 
-  //Define map projection
-  var projection = d3.geo.mercator()
-    .center([ 0, 0 ])
-    .translate([ w/2, h/1.74026575872 ])
-    .scale([ w/6.5 ])
-
   //Define path generator
   var path = d3.geo.path()
      .projection(projection);
@@ -63,7 +64,7 @@ function drawMap(countries) {
      .append("path")
      .style("fill",'#337ab7')//"#054bff")
      .attr("d", path);
-}
+ }
 
 function drawCities(cities) {
   console.log("inside drawCities")
@@ -120,13 +121,13 @@ function drawCities(cities) {
   }
 
 }
-//Determine current width\height oftarget div
-function canvasSize(target) { 
-  var height = parseFloat(d3.select(target).node().clientHeight)
-  var width = parseFloat(d3.select(target).node().clientWidth)
-  console.log(d3.select(target).node().clientWidth)
-  
-  return [width,height]
-}//canvasSize
+      //Load in GeoJSON data
+      function canvasSize(target) { 
+        var height = parseFloat(d3.select(target).node().clientHeight)
+        var width = parseFloat(d3.select(target).node().clientWidth)
+        console.log(d3.select(target).node().clientWidth)
+        
+        return [width,height]
+      }//canvasSize
 
 })()

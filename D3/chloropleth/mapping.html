@@ -39,37 +39,6 @@
 			<blockquote><p>var projection = d3.geo.mercator()<p></blockquote>
 			<p>By defining a projection, you can take advantage of the<code>d3.geo.path</code> generator, which draws geoData onscreen based on your selected projection.</p>
 			<p>Of course there are many more projections than just Mercator and Bostock has put together the <a target="_" href="https://github.com/d3/d3-geo-projection/">Extended Geo Projections</a> github repo to demo them which are also available via d3.geo. </p>
-			<p>
-				Projections require additional methods for transitioning,centering,ect.  Here are three projections and their corresponding methods used in this specific viz:</p>
-
-				<strong>Mercator\Orthographic</strong>
-			<ul>
-				<li>.center[([0,0)]</li>
-				<li>.translate([ w1/2, h1/1.5232 ])</li>
-				<li>.scale([ w/5 ])</li>
-			</ul>
-
-			<strong>Streographic</strong>
-			<ul>
-				<li>.rotate([-20, 0])</li>
-				<li>.translate([w1 / 2, h1 / 2])</li>
-				<li>.scale(50)</li>
-				<li> .clipAngle(180 - 1e-4)</li>
-				<li>.clipExtent([[0, 0], [w1,h1]])</li>
-				<li>.precision(.1)</li>
-			</ul>
-			 
-			<!--	
-				<blockquote>
-				0: Object
-					geometry: Object
-						coordinates: Array[1]
-							0: Array[69]
-							0: Array[2]
-							0: 61.210817091725744
-							1: 35.650072333309225
-			-->
-				</blockquote>
 		 </div>
 
 		<div class="col-md-5 middle">	
@@ -98,6 +67,49 @@
 				</blockquote>
 
 		</div><!--col3-->
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Projections require additional methods for transitioning,centering,ect.  Here are three projections and their corresponding methods used in this specific viz:</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<strong>Mercator\Orthographic</strong>
+			<ul>
+				<li>.center[([0,0)]</li>
+				<li>.translate([ w1/2, h1/1.5232 ])</li>
+				<li>.scale([ w/5 ])</li>
+			</ul>
+		</div>
+			<div class="col-md-4">
+				<strong>Streographic</strong>
+			<ul>
+				<li>.rotate([-20, 0])</li>
+				<li>.translate([w1 / 2, h1 / 2])</li>
+				<li>.scale(50)</li>
+				<li> .clipAngle(180 - 1e-4)</li>
+				<li>.clipExtent([[0, 0], [w1,h1]])</li>
+				<li>.precision(.1)</li>
+			</ul>
+			</ul>
+		</div>
+	</div>
+		
+			 
+			<!--	
+				<blockquote>
+				0: Object
+					geometry: Object
+						coordinates: Array[1]
+							0: Array[69]
+							0: Array[2]
+							0: 61.210817091725744
+							1: 35.650072333309225
+			-->
+				</blockquote>
+		</div>
 	</div>
 </div>
 <div class="container">

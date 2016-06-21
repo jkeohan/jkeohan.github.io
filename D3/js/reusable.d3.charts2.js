@@ -1,4 +1,56 @@
 d3.models = {};
+d3.models.maps = function() {
+
+	var fontSize = 15;
+	var width = 650;
+	var transX = 0;
+	var transY = 0;
+	var scale = 10;
+	var dispatch = d3.dispatch("mouseOver", "mouseOut","onClick");
+
+	function render(selection) {
+		selection.each(function(data){
+			
+			var projection = d3.geo.mercator()
+      .scale(scale)
+      .translate( [transX, transY]);
+      var path = d3.geo.path().projection(projection);
+
+      var map = selection.selectAll("path")
+      .data(geo_data.features)
+      .enter()
+      .append("path")
+        .attr("d", path)
+        .style("fill", "lightBlue")
+        .style("stroke", "black")
+        .style("stroke-width", 0.5);
+		})
+	}//render()
+
+	render.geoData = function(_x) {
+	if (!arguments.length) return geoData;
+  geoData = _x;
+	return this;
+	}
+	render.fontSize = function(_x) {
+	if (!arguments.length) return fontSize;
+	fontSize = _x;
+	return this;
+	}
+	render.transX = function(_x) {
+		if(!arguments.length) return transX
+		transX = _x
+		return this;
+	}
+	render.transY = function(_x) {
+		if(!arguments.length) return transY
+		transY = _x
+		return this;
+	}
+	//https://github.com/mbostock/d3/wiki/Internals#rebind
+	d3.rebind(render, dispatch, "on")
+	return render
+}
 // We add the legend module, which is a simple function returning a function. The outer
 // function serves as the scoped closure for our module.
 d3.models.legend = function () {
