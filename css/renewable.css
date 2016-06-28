@@ -1,0 +1,429 @@
+
+
+/*** Start Navigation ***/
+.nav {
+	/*1. images overflowed below the nav...R=added overflow hidden and revmoved set height
+		There is 
+	*/
+/*	height:50px;*/
+	background-color: #85b433;
+	border-bottom: 10px solid #FFB266;
+	opacity:.8;
+}
+.nav a {
+  color: #244774;
+  font-family: 'Poiret One';
+  font-size: 25px;
+  font-weight: bold;
+  padding: 14px 10px;
+  /*text-transform: uppercase;*/
+  text-decoration: none;
+}
+.nav li{
+/* 1. display: inline shortens the border to 1/4; */
+/* 2. display: block: stacks the li's; */
+	display:inline-block;
+}
+.pull-left.border { padding-left:0px;}
+
+.pull-left.border li+li { 
+	border-left: 3px solid #FFB266; 
+/*	height:50px;*/
+}
+.nav .pull-left img {
+		max-height:50px;
+}
+.nav ul {
+	/*1. ul with images had margin-bottom:10px set by bootstrap css. clearing that option then 
+	changed it to 14px but I couldn't find where that was configured. 
+	Grayed out rules are the unset rules, which use a special default stylesheet that is 
+	 applied to all elements(the rules that make the element renderable, because all styles have to have a value).
+	*/
+	margin:auto;
+}
+.nav ul.chart-types{
+	margin-top:8px;
+	/*margin-left:20px;*/
+}
+/*** End Navigation ***/
+
+/*** Start Hero-Shot ***/
+.hero-shot {
+
+/*		background-image: url(http://biopact.com/wp-content/uploads/2013/01/cropped-human-hand-holding-a-city.jpg);
+*/background-image: url(../images/green-energy-technology.jpg);
+
+/* 		background-image: url(http://static6.depositphotos.com/1000423/649/i/950/depositphotos_6491870-Human-hand-holding-a-green-city.jpg);
+*/		width:auto;
+		height:400px;
+  	background-repeat: no-repeat;
+  	background-size: 100%;
+  	margin-top:-100px;
+	}
+/*** End Hero-Shot ***/
+
+/*** Start Main-Content ***/
+#fitwidth{
+	max-width: 970px !important;
+	    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left:0px !important;
+    margin-left: 5%;
+
+}
+.main-content{
+	margin-left:6%;
+	margin-right:5%;
+	margin-top:-5%;
+	background: white;
+	padding-top:10px;
+	padding-left:5px;
+	padding-right: 5px;
+}
+.main-content .main{
+	width:100%;
+}
+.divider{
+	width:200px;
+	margin-top:40px;
+	margin-bottom:20px;
+	border: 3px solid #85b433;
+	clear:both;
+	}
+.number {
+	display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: -10px;
+  vertical-align: middle;
+
+  background-color: #85b433;
+
+  color: #fff;
+  text-align: center;
+  font-weight: 300;
+  line-height: 1.5em;
+  font-size: 0.8em;
+}
+.intro { 
+	font-size: 18px;
+}
+
+.section3 {
+	margin-top:20px;
+}
+/*** End Main-Content ***/
+
+/**** Start D3 Specific ****/
+.Axis line {
+	stroke: #000;
+	stroke-width: .1;
+}
+.Axis path {
+	display:none;
+}
+.Axis text {
+	font-size: 10px;
+}
+/**** Start Scatterplot ****/
+
+#reduceWidth{
+	max-width: 60%;
+}
+#expandWidth{
+	width: 40% ;
+}
+.panel {
+	width: 420px;
+}
+.panel-heading{
+	text-align: center;
+}
+.panel-heading h3{
+	color:black;
+	margin:0px;
+}
+
+pre code{
+	font-size: 13px !important;
+}
+/**** Start Radio Button ****/
+.switch {
+	position: absolute;
+	top: 20px;
+	left: 70px;
+}		
+.switch label:last-of-type{
+	margin-left:15px;
+}
+.switch input {
+	margin-left:5px;
+}
+.switch label{
+	font-weight: normal;
+	font-size:15px;
+}
+/**** End Radio Button ****/
+
+/**** Start Tooltip ****/
+.d3tooltip {
+  position: absolute;
+	padding: 5px;
+  /*pointer-events: none;*/
+  border: 1px solid green;
+  border-radius: 12px;
+	line-height: 20px;
+  opacity: .07;
+  background-color:white;
+}
+.d3tooltiphr {
+	margin:2px 0;
+}
+.regionName{ 
+	font-size:12px;
+	font-weight: bold;
+	text-align: center;
+	display:block;
+	margin-bottom:-20px;
+
+}
+.value {
+	font-size:12px;
+	font-weight: bold;
+	margin-top:-10px;
+}
+.key {
+	font-size:12px;
+}
+/**** End Tooltip ****/
+
+/**** Start Table ****/
+
+table{
+	margin:auto;
+	width:50%;
+}
+tr.section1{
+	border:white;
+	border-bottom: 1px solid #E7E7E7;
+
+}
+tr.section1:last-of-type{
+	border:white;
+}
+tr.section1 td{
+		border-right:1px solid #E7E7E7;;
+			font-size:15px !important;
+}
+tr.section1 td:last-of-type{
+		border-right:white;
+}
+/**** End Table ****/
+
+/*** End Scatterplot ***/
+
+/*** Start Bar Graph ***/
+
+.allContent {
+	width:1000px;
+}
+.barGraph-title h2{
+	text-align: center;
+}
+.barGraphText{
+	position:absolute;
+	top:0px;
+	right:200px;
+}
+.enter, .update{
+	font-weight: normal;
+	font-size:13px;
+}
+.playAll {
+	margin-left:20px;
+	margin-bottom:0px;
+	cursor:pointer;
+}
+.buttonContainer {
+		margin:10px auto;
+		display: inline-block;
+		text-align: center;
+		width:100%;
+		overflow:hidden;
+}
+.button {
+	display: inline-block;
+	margin-left: 10px;
+/*	font-size: 15px;
+*/	border: 1px solid black;
+	padding:5px;
+	cursor:pointer;
+}
+.button.selected {
+	font-weight: bold;
+	border: 3px solid green;
+	color:#296629;
+}
+.clearfix {
+	clear:both;
+}
+#section2 .col-md-4{
+	padding-top:10px;
+}
+/*** End Bar Graph ***/
+
+/*** Start Line Graph ***/
+path:hover {
+	fill: #EED6A5;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+.axis text {
+	font-family: sans-serif;
+	font-size: 11px;
+}
+.line { 
+stroke: black;
+/*			stroke-width: 10px;*/
+opacity: 0.7;
+fill: none;
+}
+.line:hover { 
+/*	stroke: green;*/
+/*			stroke-width:5px;*/
+	opacity:1;
+}
+.label{
+	font-size: small;
+	font-family: avenir;
+}
+/**** Start Tooltip ****/
+.s3tooltip {
+position: absolute;
+padding: 5px;
+pointer-events: none;
+border: 1px solid green;
+border-radius: 12px;
+line-height: 20px;
+opacity: .07;
+background-color:white;
+
+}
+.tooltipTail {
+		position: absolute;
+	/*	width: 0; 
+		height: 0; */
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent; 
+/*		border-right:25px solid green; */
+	}
+.tooltipTail.hidden{
+	display:none;
+	opacity:0;
+}
+.tooltipTail.show{
+	opacity:1;
+}
+/**** End Tooltip ****/
+
+/**** Start Table ****/
+/*#modal {
+  position:absolute;
+  left: 50px;
+  top:0px;
+  z-index:1;
+  background: white;
+  border: 1px black solid;
+5px solid rgba(255, 255, 255, .5);
+  box-shadow: 10px 10px 5px #888888;
+}
+*/
+table{
+width:200px;
+	margin:auto;
+}
+tr {
+  border: 1px gray solid;
+    width:200px;
+    opacity:1;
+}
+td {
+  font-size: 11px;
+  padding-right:10px;
+  padding-left:10px;
+  text-align: center;
+
+}
+th {
+	font-weight: normal;
+}
+
+.tableData tr th {
+	    font-size: 12px;
+    text-align: center;
+
+}
+/*td.data {
+    font-weight: 900;
+  }*/
+.sideBar{
+	height:400px;
+	position: absolute;
+  top: 40px;
+  right: 370px;
+}
+
+tr td.dataTable{
+	padding:0px;
+}
+.fcomponents {
+	clear:both;
+}
+
+/**** End Table ****/
+
+/*** End Line Graph ***/
+
+table { width: 100px; margin-bottom:10px;     line-height: 2;
+    margin-top: 9px;} 
+.countryInfo { margin-left: 10px; }
+.countryInfo  h3 { border-bottom: 1px solid black;}
+.countryInfo  p { margin:0 auto;}
+.countryFlag { float:left;}
+tr,th{text-align: center; line-height: 1.6;}
+.countryInfo  { width: 95%;}
+.yearData { float:right; padding: 5px; border-bottom: 1px solid black}
+.yearValues { float: left;margin-left: 10px;}
+.percentChange { float:left; line-height: 1.6; }
+/* .countryFlag{
+    background-image: url("http://www.geonames.org/flags/x/ch.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100px; height:70px;
+}*/
+.countryFlag img{
+     background-image: url("http://www.geonames.org/flags/x/ch.gif");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100px; height:70px;
+}
+
+.glyphicon { font-size: 40px; margin-left:10px;}
+/*tr:nth-child(even) {background-color: #f2f2f2}*/
+span.percent {margin-left: 10px;
+    /* line-height: .9px; */
+    position:absolute;
+    margin-left: 10px;
+    display: inline-block;
+    height: 50px;
+    margin-left: 10px;
+    line-height: 1.4;
+  }
+.panel.countryInfo-panel { padding-bottom:10px;}

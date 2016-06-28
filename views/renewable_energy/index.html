@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	   <link rel='stylesheet' href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="css/custom.css">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript" src="js/reusable.d3.charts.js"></script>
+		<script type="text/javascript" src="lib/d3-jetpack.js"></script>
+
+	  <script src="lib/angular/angular.min.js"></script>
+		<script src="lib/angular/angular-route.min.js"></script>
+		<script src="lib/angular/angular-animate.js"></script>
+
+	  <script src="js/app.js"></script>
+	  <script src="js/directives.js"></script>
+	  <script src="js/controllers.js"></script>
+	</head>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<h1 id="title">World Renewable Energy Output</h1>
+					<p>Output of 41 countries from 2002 to 2012</p>
+				</div><!--col-->
+				<div class="col-md-3">
+							<article class="socialmediaicons">
+							   <span class="title">Follow Me: &nbsp </span>
+							  <ul class="group">
+							  	<li><a href="https://github.com/jkeohan"><img class="icon" id="github" src="/views/renewable_energy/images/socialmedia/github.png" alt="name"></a></li>
+							  	<li><a href="https://www.linkedin.com/in/jkeohan"><img class="icon" src="/views/renewable_energy//images/socialmedia/linkedin.png" alt="name"></a></li>
+							  	<li><a href="https://jkeohan.wordpress.com/"><img class="icon" src="/views/renewable_energy//images/socialmedia/wordpress.png" alt="name"></a></li>
+							  </ul>
+							</article>
+				</div><!--col-->
+			</div><!--row-->
+		</div><!--container-->
+	</header>
+	<div></div>
+	<body>
+		<div class="container" ng-controller="ChartController">
+				<hr>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="well" id="sidebar">
+					  <div class="search ng-cloak">
+					 <!--    <label>search: </label> -->
+					    <input ng-model="query" placeholder="Search for country" autofocus>
+
+					    <div id="sidebar-content">
+					    	<div id="matched-record" 
+					    		ng-show="filtered.length === 1"><strong>{{filtered[0].location}}</strong> is 
+					    	
+					    		<span class="	{{ (updown === 'up') ? 'up' : 'down' }} "><span class=" {{ updown === 'up' ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down' }}"></span>
+					    			{{ percentage(filtered[0]) }}% 
+					    		</span>
+					    		<span>
+					    			since 2002
+					    		</span>
+
+					    		</div>
+					   	 	<p id="all-countries">All countries begining with: <strong>{{query}}</strong></p>
+					   		<div class="tableheader">
+						   		<div class="country cell">Country</div>
+						    	<div class="year cell">2002 %</div>
+						    	<div class="year cell">2012 %</div>
+					  		</div><!-- col-md-4 -->
+					  		<div class="cf"></div>
+					      <ul class="countryList">
+ 									<li class="country {{country.location}} cf {{color(country)}} animate-repeat" 
+ 											id="{{ filtered.length === 1 ? 'active' : 'inactive' }}" 
+ 											ng-repeat="country in (filtered  = (data_regions | myfilter:query)) track by $index"
+											ng-style = "elmStyle" 
+											ng-click ="choice(country)"
+											ng-mouseover = "mouseover(country)"
+											ng-mouseout = "mouseout()"> 
+						          <div class="country cell" id="coun">{{country.location}}
+						          </div>
+						          <div class="year cell">{{ amount2002(country) }}</div>
+						          <div class="year cell">{{ amount2012(country) }}</div>
+							    </li>
+							    <li class="animate-repeat" ng-if="filtered.length === 0" 
+							    style="text-align:center; padding-top:20px">
+							    	<strong>No results found...</strong>
+							    </li>
+							  </ul>  
+					  	 </div><!-- sidebar-content -->
+							</div><!-- search -->
+						</div><!-- well sidear -->
+				</div><!-- col-md-4 -->
+				<div class="col-md-9">
+					<div class="well" id="graph-container">
+						<div id="graph-legend"></div>
+						<div id="svg-container">
+							<svg class="lineChart"></svg>
+							<line-graph data="lgdata"></line-graph>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/lineChart.js"></script>
+		<script src="js/table.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	</body>
+</html>

@@ -1,20 +1,64 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>jkeohan's github</title>
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
-  <!-- <link rel="stylesheet" type="text/css" href="thinkful-angular/style.css"> -->
-</head>
-<body>
-	<header class="header">
-		<h1>LIST OF PROJECTS</h1>
-	</header>
-	<ul>
-		<li><a href="https://www.github.com/jkeohan">Github</a></li>
-		<li><a href="thinkful-angular">Thinkful Angular</a></li>
-		<li><a href="D3">D3</a></li>
-	<!-- 	<li><a href="d3.course">D3 Course</a></li> -->
-	</ul>
-	<p><a href="https://www.linkedin.com/in/jkeohan">Linkedin</a></p>
-</body>
-</html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<!-- // <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script> -->
+		<!-- D3 and supporting D3 libraries -->
+		<script type="text/javascript" src="js/d3.min.js"></script>	
+		<script type="text/javascript" src="js/reusable.d3.charts.js"></script>
+		<script type="text/javascript" src="js/colorbrewer.js"></script>
+		<script src="https://rawgit.com/gka/d3-jetpack/master/d3-jetpack.js"></script>
+
+		<!-- Angular -->
+		<script src="js/lib/angular/angular.min.js"></script>
+  	<script src="js/lib/angular/angular-route.min.js"></script>
+  	<script src="js/lib/angular/angular-animate.min.js"></script>
+  	<script src="angular/app.js"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<!-- Custom CSS -->
+    <link rel="stylesheet" href="css/mainpage.css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,600" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,600" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+
+	</head>
+	<body>
+
+	<div class="container" style="padding:30px">
+
+		<div class="logo">
+			<img class="mainlogo" src="images/d3js.jpg">
+			<a href ="/">Joe Keohan</a>
+		</div><!--logo-->
+		<div class="masthead">
+			<ul class="nav nav-pills pull-right">
+          <li class="active"><a ng-href="/#/">Home</a></li>
+          <li><a ng-href="#/about">About</a></li>
+          <li><a ng-href="#/feedback">What people have said</a></li>
+        </ul>
+
+        <div class="row">   	
+				<br>
+				<br>
+        <hr> 
+        </div>
+		</div><!--masthead-->
+		
+	<div ng-view></div>
+
+	
+	</div>
+		<script>
+		var active = d3.selectAll("li")
+		active.on("click",function(d) {
+			d3.selectAll("li").classed("active",false)
+			d3.select(this).classed("active",true)
+		})
+		</script>
+	</body>
+	</html>
+

@@ -1,0 +1,88 @@
+<div class="hero-shot"></div>
+    <div class="main-content">
+    	<div class="containter main">
+    		<h1>D3 Charts on Renewable Energy</h1>
+    		<p class="intro">This site was created to demo several D3 charts and graphs developed while taking the <a href="http://journalismcourses.org/D3.html">Data Visualization and Inforgaphics with D3</a> online course provided by JournalismCourses.org. The course consisted of 6 modules and was desinged to introduce data vizualization best practices and then building several charts and graphs using D3. The data set was provided by OECD and consisted of the percentage of Renewable Energy production of 41 countries from 2002 to 2012</p>
+
+  			<span>Source: </span><a href="https://data.oecd.org/energy/renewable-energy.htm#indicator-chart">https://data.oecd.org/energy</a>
+    		<hr class="divider">
+    	</div>
+    	<a name="section1"></a>
+    	<div class="container main">
+    		<h1><span class="number">1 </span>Scatter Plot on Regional Growth</h1>
+    		<div class="row">
+    			<div class="col-md-8" id="reduceWidth">
+    				<div class="switch">
+							<form>
+								<label>Regions<input type="radio" name="choice" value="Regions" class="radio_buttons" checked></label>
+								<label>Countries<input type="radio" name="choice" value="Countries" class="radio_buttons"></label>
+							</form>
+						</div>
+    				<div class="regionalstats" ></div>
+          </div>
+          <div class="col-md-4" id="expandWidth">
+          		<h3>Functional Components</h3>
+          		<p>Some of the d3.methods used in the importing and formatting data used to render the scatterplot included:</p>
+          		<table>
+          			<tr class="section1">
+          				<td>d3.csv</td>
+          				<td>d3.map</td>
+          				<td>d3.set</td>
+          				<td>d3.keys</td>
+          			</tr>
+          			<tr class="section1">
+          				<td>d3.mean</td>
+          				<td>d3.nest</td>
+          				<td>d3.extent</td>
+          				<td>d3.transition</td>
+          			</tr>
+          		</table>
+          		<br>
+          		<p>Additional functionality included:
+          		<ul>
+          			<li>Resuable Legend Module</li>
+          		</ul>
+          		<p>This component was created following best practices outlined by Chris Viau in his book: <a href="http://bleedingedgepress.com/our-books/developing-a-d3-js-edge/">Developing a D3.js Edge".</a> It is called using <code>d3.modlue.legend()</code>.
+          		<pre><code>var rlegend = d3.models.legend().fontSize(15).width(width-160).height(height).inputScale(colorScale)
+								svg.call(rlegend)
+							</code></pre>
+							Also the inputScale method was added after viewing Susie Lu's <a href="https://github.com/emeeks/d3-svg-legend">Reusable Legend</a> and Elijah Meeks <a href="https://github.com/emeeks/d3-svg-legend">d3.svg.legend</a> github.
+          </div>
+    		</div>
+    		<hr class="divider">
+    	</div>	
+    	<a name="section2"></a>
+	    <div class="container main" id="section2">
+	    	<h1><span class="number">2 </span>Bar Graph On Country Growth</h1>
+    		<div class="row">
+    			<div class="col-md-8">
+	    			<div class="playAll"></div>
+						<div class="buttonContainer"></div>
+						<div class="clearfix"></div>
+    				<div class="countrystats"></div>
+          </div>
+          <div class="col-md-4">
+	          <h3>Functional Components</h3>
+	          <p>New functionality includes the ablility to individually or sequentially cycle through the years by clicking the <code>"PLAY ALL YEARS"</code> button.  
+          </div>    
+				</div>
+				<hr class="divider">
+    	</div>
+    		<a name="section3"></a>
+	    	<div class="container main" id="section3">
+	    		<h1><span class="number">3 </span>Line Chart On Country Growth</h1>
+	    		<div class="row">
+	    			<div class="col-md-8">
+	    				<div class="lineChart"></div>
+	          </div>
+	          <div class="col-md-4">
+	          	<div class="sideBar"></div>
+	          	<div class="fcomponents"></div>
+	          </div>
+	        </div>
+	      </div>
+    </div>
+
+    <script type="text/javascript" src="js/section1.js"></script>
+    <script type="text/javascript" src="js/section2.js"></script>
+    <script type="text/javascript" src="js/section3.js"></script>
