@@ -29,29 +29,28 @@
 	<body>
 
 	<div class="container" style="padding:30px">
+		<div class="row">
+			<div class="logo">
+				<img class="mainlogo" src="images/d3js.jpg">
+				<a href ="/">Joe Keohan</a>
+			</div><!--logo-->
+			<div class="masthead">
+				<ul class="nav nav-pills pull-right">
+	          <li class="active"><a ng-href="/#/">Home</a></li>
+	          <li><a ng-href="#/about">About</a></li>
+	          <li><a ng-href="#/feedback">What people have said</a></li>
+	        </ul>
 
-		<div class="logo">
-			<img class="mainlogo" src="images/d3js.jpg">
-			<a href ="/">Joe Keohan</a>
-		</div><!--logo-->
-		<div class="masthead">
-			<ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="/#/">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#/feedback">What people have said</a></li>
-        </ul>
-
-        <div class="row">   	
-				<br>
-				<br>
-        <hr> 
-        </div>
-		</div><!--masthead-->
-		
-	<div ng-view></div>
-
+	        <div class="row">   	
+					<br>
+					<br>
+	        <hr> 
+	        </div>
+			</div><!--masthead-->
+		</div><!--row-->
+	<div class="row" ng-view></div></div>
 	
-	</div>
+	</div><!--container-->
 		<script>
 		var active = d3.selectAll("li")
 		active.on("click",function(d) {
