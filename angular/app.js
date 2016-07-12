@@ -5,6 +5,7 @@ var appControllers = angular.module('appControllers', [])
 myApp.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', { templateUrl: 'views/projects.tpl.html' })
+    .when('/tpl2', { templateUrl: 'views/projects.tpl2.html'})
 		.when('/about', { templateUrl: 'views/login.html' })
 		.when('/feedback', { templateUrl: 'views/feedback.tpl.html'})
 		.when('/renewable', { templateUrl: 'views/renewable.html'})

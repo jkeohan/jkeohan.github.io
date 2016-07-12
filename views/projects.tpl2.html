@@ -1,85 +1,48 @@
 
 	
 		<div class="jumbotron">
-			<p class="lead">D3 + Javascript = Data Visualization Made Possible...</p>
+			<p class="lead">D3...Data Visualization Made Possible...</p>
 		</div><!--jumbotron-->
-		<div class="container">
-			<h2 style="display:inline">Projects</h2>
-			<!-- <div id="filters" class="btn-group btn-group-justified" >
-			  <button class="btn btn-primary" data-filter=".d3">D3</button>
-			  <button class="btn btn-primary">Web Design</button>
-			  <button class="btn btn-primary">Wirefaming</button>
-			</div>
- -->
-			<div class="button-group filter-button-group">
-			  <button data-filter=".d3">D3</button>
-			  <button data-filter=".metal">metal</button>
-			  <button data-filter=".transition">transition</button>
-		</div>
+			<h2>Projects</h2>
+			<div class="row">
+			  
+			  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+			    <div class="hovereffect">
+			        <img class"img-responsive test" src="images/oecd.jpg" alt="D3" width="293" height="250">
+			        <div class="overlay">
+			           <h2>Renewable Energy</h2>
+			           <a class="info" href="#">link here</a>
+			        </div>
+			    </div>
+				</div>
 
-			<div class="row">	
-				<div class="col-md-12 grid">
-					<div class="well project element-item d3">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 overflow">
+			    <div class="hovereffect background" >
+			        <div class="overlay">
+			           <h2>Renewable Energy</h2>
+			           <a class="info" href="http://bl.ocks.org/jkeohan/raw/974c071a5d4d0185a846/" target="_blank">View</a>
+			        </div>
+			    </div>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+					<div class="well project ">
 						<div class="row well-header">
 							<h3 style="display:inline-block">Renewable Energy</h3> 
 							<div class="code">
 							<!-- <span> <a href="https://github.com/jkeohan/d3dashboards" target="_blank" class="btn btn-success" role="button">GitHub</a></span> -->
 							<span> <a href="http://bl.ocks.org/jkeohan/raw/974c071a5d4d0185a846/" target="_blank" class="btn btn-success" role="button">Blocks</a></span>
 							</div><!--code-->
-						</div><!--row well-header-->
-					<br>
-					<a href="renewable.html" target="_blank"><img src="images/oecd.jpg" alt="D3" style="width:100%"></a>
-					</div><!--well project-->
+						</div>			
+						<br>
+						<a href="renewable.html" target="_blank"><img class"img-responsive" src="images/oecd.jpg" alt="D3" style="width:100%"></a>
+						<div class="extrainfo">extra info</div>
+					</div>
+				</div>
 
-					<div class="well project">
-						<div class="row well-header element-item web">
-							<h3 style="display:inline-block">Renewable Energy</h3> 
-							<div class="code">
-							<!-- <span> <a href="https://github.com/jkeohan/d3dashboards" target="_blank" class="btn btn-success" role="button">GitHub</a></span> -->
-							<span> <a href="http://bl.ocks.org/jkeohan/raw/974c071a5d4d0185a846/" target="_blank" class="btn btn-success" role="button">Blocks</a></span>
-							</div><!--code-->
-						</div><!--row well-header-->
-					<br>
-					<a href="renewable.html" target="_blank"><img src="images/oecd.jpg" alt="D3" style="width:100%"></a>
-					</div><!--well project-->
-
-					<div class="well project">
-						<div class="row well-header element-item wire">
-							<h3 style="display:inline-block">Renewable Energy</h3> 
-							<div class="code">
-							<!-- <span> <a href="https://github.com/jkeohan/d3dashboards" target="_blank" class="btn btn-success" role="button">GitHub</a></span> -->
-							<span> <a href="http://bl.ocks.org/jkeohan/raw/974c071a5d4d0185a846/" target="_blank" class="btn btn-success" role="button">Blocks</a></span>
-							</div><!--code-->
-						</div><!--row well-header-->
-					<br>
-					<a href="renewable.html" target="_blank"><img src="images/oecd.jpg" alt="D3" style="width:100%"></a>
-					</div><!--well project-->
+		  </div><!--row-->
 
 
-					<div class="well project">
-						<div class="row well-header">
-							<h3 style="display:inline-block">Renewable Energy</h3> 
-							<div class="code">
-							<!-- <span> <a href="https://github.com/jkeohan/d3dashboards" target="_blank" class="btn btn-success" role="button">GitHub</a></span> -->
-							<span> <a href="http://bl.ocks.org/jkeohan/raw/974c071a5d4d0185a846/" target="_blank" class="btn btn-success" role="button">Blocks</a></span>
-							</div><!--code-->
-						</div><!--row well-header-->
-					<br>
-					<a href="renewable.html" target="_blank"><img src="images/oecd.jpg" alt="D3" style="width:100%"></a>
-					</div><!--well project-->
 
-				</div><!--col-md-12-->
-			</div><!--row-->
-		</div><!--container-->
 
-		<script>
-
-  	$('#filters').on( 'click', 'button', function() {
-    var filterValue = $( this ).attr('data-filter');
-    // use filterFn if matches value
-    filterValue = filterFns[ filterValue ] || filterValue;
-    $container.isotope({ filter: filterValue });
-  });
-
-		</script>
 
