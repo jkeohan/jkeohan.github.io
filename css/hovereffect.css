@@ -1,7 +1,12 @@
+.col-* {
+  overflow:hidden;
+}
+
 .hovereffect {
-/*width: 360px;*/
+max-width:100%;
     height: 250px;
 float:left;
+padding:5px;
 overflow:hidden;
 position:relative;
 text-align:center;
@@ -57,9 +62,14 @@ position:relative;
 -webkit-transition:all .4s linear;
 transition:all .4s linear;
 /*added width,height,transform to make img tag comparable to background-image*/
-    width: 150%;
+/*    width: 150%;*/
+    width:100%;
     height: 100%;
-    transform: translateX(-21px);
+ /*   transform: translateX(-21px);*/
+}
+
+.hovereffect img.oecd{
+   transform: translateX(-21px);
 }
 
 .hovereffect h2 {
