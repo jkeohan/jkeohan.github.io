@@ -20,7 +20,13 @@
 });
 
 myApp.controller('ChartController', function($scope, $http) {
-
+  //compare change of country to world 
+  $scope.greater = function(x){
+    return function(a,b) {
+      return (b > a) > x
+    }
+  };
+  var worldAvg = 
 	$scope.elmStyle;
 	//UPDOWN USED TO ASSIGN CLASS CONFIGURED ON SPAN IN ORDER TO COLOR CODE GLYPHICON GREEN OR RED AND % VALUE
 	$scope.updown = 0;
@@ -29,6 +35,9 @@ myApp.controller('ChartController', function($scope, $http) {
 		var year2002 = d3.format('.2f')(value.years[0].amount )
 		var year2012 = d3.format('.2f')( value.years[10].amount ) 
 		var change = d3.format('.0f')((year2012 - year2002)/year2002 * 100)
+    var change2 = $scope.greater(.3)
+
+    console.log("change is ",change2(parseInt(year2002),parseInt(year2012) ) )
 		if(change < 0) {  $scope.updown = "down"; return change}
 		else { $scope.updown = "up"; return change }
 		//return "up"
