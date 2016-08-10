@@ -26,7 +26,7 @@ myApp.controller('ChartController', function($scope, $http) {
       return (b > a) > x
     }
   };
-  var worldAvg = 
+  var worldAvg = 2;
 	$scope.elmStyle;
 	//UPDOWN USED TO ASSIGN CLASS CONFIGURED ON SPAN IN ORDER TO COLOR CODE GLYPHICON GREEN OR RED AND % VALUE
 	$scope.updown = 0;
