@@ -27,7 +27,7 @@ feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$
 
       $scope.sources = {
         Mashable: {
-          url: "http://mashable.com/stories.json",
+          url: "https://accesscontrolalloworiginall.herokuapp.com/http://mashable.com/stories.json",
           keys: {
             articles: 'news',
             title: 'title',
