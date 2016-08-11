@@ -28,6 +28,9 @@ Originally configured loading gif using the following which was placed inside th
 
 The above code was only a temporary solution to simulate waiting for the data but a better approach would be to add .finally(function(){}) and add remove the loader from there as per this [stackoverflow](http://stackoverflow.com/questions/15033195/showing-spinner-gif-during-http-request-in-angular)
 
+### Accessing string dot notation into an object reference
+[](http://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference)
+
 ### Infinite Scolling
 Here are a list of possible solutions to implement infinite scolling:
 * [jQuery Infinite Scolling](https://www.sitepoint.com/jquery-infinite-scrolling-demos/)
@@ -42,6 +45,9 @@ In order to create one giant object for all the Feedr JSON sources I decided to 
 ## Issues and Resolutions
 
 This section will contain a list of all issues encountered and their resolution
+**ERROR**: angular.js:13920 Error: [ngRepeat:dupes] Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: tag in item.tags, Duplicate key: 
+
+**RESOLUTION**: this issue is specifc to angular, specifically ng-repeat. This has been resolved in the past by adding $track by index after ng-repear="item in itmes", however additional issues arose due to that face that Digg contained the tags within an object with a name key, while Mashable had only one tag per article. I decided to add if\else statements to create a specfic path depending on source = Digg or Mashable.  And for Digg I only chose the first item and not all tags.
 
 **ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
 **RESOLUTION**: Missing comma after first object in sources {} object

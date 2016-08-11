@@ -1,10 +1,10 @@
  $('.closePopUp').click(function() {
     $('#popUp').addClass('loader hidden')
-  })
-
- $('#search').find('img').click(function() {
+    })
+    $('#search').find('img').click(function() {
     $('#search').toggleClass('active')
  })
+
 
   //This was replaced with using Angular's ng-click directive
   // $('.feeds').on("click", "li", function(){

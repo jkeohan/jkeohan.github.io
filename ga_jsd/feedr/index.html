@@ -54,14 +54,14 @@
         </div>
         <!-- ARTICLE CONTENT -->
   
-        <section id="main" class="container">
+        <section id="main" class="container test">
           <article class="article" ng-repeat="item in activeSource">
             <section class="featuredImage">
               <img ng-src={{item.img}} alt="{{item.title}}" />
             </section>
             <section class="articleContent">
                 <a ng-click="overlay(item)" href="#"><h3>{{item.title}}</h3></a>
-                <h6 ng-repeat="tag in item.tags">{{tag.name}}</h6>
+                <h6 ng-repeat="tag in item.tags">{{tag}}</h6>
             </section>
             <section class="impressions">{{item.count}}
             </section>
