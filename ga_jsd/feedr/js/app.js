@@ -2,30 +2,21 @@
   Please add all Javascript code to this file.
 */
 
-var feedrApp = angular.module('feedrApp', ['ui.router', 'ngAnimate'])
+function Newsfeed(url,main,title,image,rank,description,tags,link) {
+  this.main = main;
+  this.title = title;
+  this.image = image;
+  this.rank = rank;
+  this.description = description;
+  this.tags = tags;
+  this.link = link;
+  this.articles = [];
+}
 
-//used for routing
-feedrApp.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
-  $stateProvider
-    // .state('/', {
-    //   url:"/",
-    //   templateUrl:'partials/home.html'
-    // })
-    // .state('/mapping', {
-    //   url:"/mapping",
-    //   templateUrl:"chloropleth/mapping.html"
-    // })
-})
-
-feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$rootScope,$http){
-      $scope.test = [];
-      $scope.sources = {};
-      $scope.sourceKeys; 
-      $scope.activeSource = [];
-      var url = "http://digg.com/api/news/popular.json"
-   
-      $scope.sources = {
+//var Mashable = new Newsfeed('new','title','image','shares.total','content.plain','channel','link')
+//console.log(Mashable)
+      var activeSource = [];
+      var sources = {
         Mashable: {
           url: "https://accesscontrolalloworiginall.herokuapp.com/http://mashable.com/stories.json",
           keys: {
@@ -35,7 +26,7 @@ feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$
             rank: 'shares.total',
             description: 'content.plain',
             tags: 'channel',  
-            url: 'link'
+            link: 'link'
           },
           data: {
             articles: []
@@ -51,7 +42,7 @@ feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$
             rank: "digg_score",
             description: "content.description",
             tags: 'content.tags',//'content.tags[0].name'
-            url: 'content.url'
+            link: 'content.url'
           },
           data: {
             articles: [],
@@ -65,121 +56,100 @@ feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$
           }
         }
       }
+    var mashableUrl = "https://accesscontrolalloworiginall.herokuapp.com/http://mashable.com/stories.json"
+    var diggUrl = 'https://accesscontrolalloworiginall.herokuapp.com/http://digg.com/api/news/popular.json'
 
-
-    function buildObjPath(json,obj,key) {
-      //locate key and determine if if has more than one path
-      if((obj.key).split(".").length > 1) { console.log(obj.key)}
-      return obj.key
-    }
-    $scope.sourceKeys = Object.keys($scope.sources)
-    //console.log($scope.sourceKeys)
-    //if search is !empty show currently choosen feed
-    //if search is true than filter article titles for search term
-    //this will require attaching event listener to input field
-    //and calling a function that filters and then renders results
-
-    // $.get($scope.url)
-    // .done(function(response) { console.log(response)})
-    // .fail(function(response) {console.log(response )})
-
-    //console.log($scope.sources.Digg)
-    function buildObject () {};
-    function updateSearchName(sourceName) { 
-      $('.sourceName').html(sourceName)
-    };
-    // this 
-    $scope.overlay = function(source) {
-      $('#popUp').removeClass()
-      $('#popUp').find('h1').html(source.title)
-      $('#popUp').find('p').html(source.description)
-      $('#popUp').find('.popUpAction').attr('href',source.url)
+    var sites = { sites: Object.keys(sources)  }
+    var activeSite = "Digg"
+    function updateView(res) { 
+      if(activeSite === "Digg") { 
+        buildDiggObj(res)
+      }
+      else if(activeSite === "Mashable") {
+        buildMashObj(res)
+      }
     }
 
-    function objPath(layer, path, value) {
-      //console.log("layer: ",layer)
-      //console.log("path: ",path)
-    var i = 0,
-    path = path.split('.');
-      //console.log(path) 
-    for (; i < path.length; i++)
-        if (value != null && i + 1 === path.length)
-             { layer[path[i]] = value; }
-        else { 
+    var diggUrl = "https://accesscontrolalloworiginall.herokuapp.com/http://digg.com/api/news/popular.json"
+    var mashUrl = "https://accesscontrolalloworiginall.herokuapp.com/http://mashable.com/stories.json"
+    var currentPull = apiPull(updateView)
 
-          //console.log("layer before concatenation: ", layer)
-          console.log("path as path[i] : ", path[i])
-          console.log("layer as layer[path[i]]: ", layer[path[i]])
-          layer = layer[path[i]]; } 
-          //console.log(layer)
-    return layer;
-};
+    handlebarsView('#navHeader',".feedSources", sites) 
+    $('.feedSources').on("click", 'li a', function(event){
+      var currentSite = $(this).html()
+      if(currentSite == "Digg") {
+        activeSite = "Digg"
+        currentPull(diggUrl)
+      }
+      else if (currentSite == "Mashable") {
+        activeSite = "Mashable"
+        currentPull(mashUrl)
+      }
+    })
 
-    function createObj(articles,source,mediaSourceKeys){
-        //var articles = objPath(response.data,mediaSourceKeys.main)//.data.feed
-          $scope.activeSource = [];
-          var obj = {}
-          $.each(articles, function(i,e){
-            obj.title = objPath(articles[i],mediaSourceKeys.title)
-            if(source == "Digg") {
-              obj.img = articles[i]['content']['media']['images'][0].url
-            } else { 
-              obj.img = objPath(articles[i],mediaSourceKeys.image) }
-            obj.count = objPath(articles[i],mediaSourceKeys.rank)
-            obj.description = objPath(articles[i],mediaSourceKeys.description)
-            if(source == "Digg") {
-              obj.tags = [articles[i]['content']['tags'][0].name]
-            } else { 
-              obj.tags = [objPath(articles[i],mediaSourceKeys.tags)] }
-            obj.url = objPath(articles[i],mediaSourceKeys.url)
- 
-            $scope.sources[source].data.articles.push(obj)
-            $scope.activeSource.push(obj)
-            obj = {}
-          })//each
+    function apiPull (func) { 
+      return function(url){     
+        $.get(url)
+          .fail(function(fail){
+            console.log(fail);
+          })
+          .done(function(res){
+             func(res)          
+          })
+      }
     }
 
-    $scope.getContent =  function(url,source){
-      $('.loader').removeClass("hidden")
-      var mediaSourceKeys = $scope.sources[source].keys
+    function handlebarsView(sourceElem,destElem,data){
+      console.log(data)
+      var source = $(sourceElem).html();
+      var template = Handlebars.compile(source);
+      var createElems = $(destElem).append(template(data))
+      //console.log(createElems)
+    }
 
-      $http.get(url.url)
-        .then(function(response) {
-          console.log(mediaSourceKeys)
-          var articles = objPath(response.data,mediaSourceKeys.main)//.data.feed
-          console.log(articles)
-          createObj(articles,source,mediaSourceKeys)
-          updateSearchName(source)
-        }, function(response) {
-        //Second function handles error
-          alert("Something went wrong");
-        }).finally(function(){
-          $('.loader').addClass("hidden")
-          console.log($scope.activeSource)
-        })//then
+    function buildDiggObj(res) {
+        var obj = { articles:[] }
+       $.each(res.data.feed, function(index,articleObj){ 
+        //console.log(articleObj)   
+        obj.articles.title = articleObj.content.title      
+        obj.articles.push( { 
+          "title": articleObj.content.title,
+          "image": articleObj.content.media.images[0].url,
+          "rank": articleObj.digg_score,
+          "description": articleObj.content.description,
+          "tags": articleObj.content.tags[0].name,
+          "link": articleObj.content.url
+         })//push
+       //  //console.log(obj)
+       })
+       handlebarsView('#articles','#main',obj)
+    }
 
-        //this doesn't work while inside the controller
-        //opted to use ng-click
-        // $('.feeds').on("click", "li", function(){
-        //     var val = $(this).val()
-        //    console.log(val,$scope.sources[val])
-        //   getContent($scope.sources[val],val)
-        // })
-       
-    }//function
-}])
+    function buildMashObj(res) {
+        var obj = { articles:[] }
+       $.each(res.new, function(index,articleObj){ 
+        console.log(articleObj)       
+        obj.articles.push( { 
+          "title": articleObj.title,
+          "image": articleObj.image,
+          "rank": articleObj.shares.total,
+          "description": articleObj.content.plain,
+          "tags": articleObj.channel,
+          "link": articleObj.link
+         })//push
+       //  //console.log(obj)
+       })
+       handlebarsView('#articles','#main',obj)
+    }
 
-var help = models
-help.hello("world")
+    //1. Create a higher level function called apiPull that takes in a single param which will be a function
+    //   The function passed in will have the api response passed to it within the .done() method
+    //2. The apiPull function will return an anonymous function that takes in a simple param which will be a url
+    //   The return function will run the $.get() api call and will use the url that was passed in
+    //3. Create another new function completely seprate from apiPull called updateView which will take in one
+    //   param which will be the response data passed to it from within the apiPull function
+    //   The updateView function will merely console.log(res)
+    //4. Create a new variable called pull which will equal the apiPul function with the updateView function as it's param
+    //5. Create 3 new variables for each of the news sources, such as mashPull,diggPull,ect..and have it equal
+    //   to the pull method but also pass into it the url for that specific news source
 
-function value(layer, path, value) {
-    var i = 0,
-        path = path.split('.');
-  console.log(path) 
-    for (; i < path.length; i++)
-        if (value != null && i + 1 === path.length)
-             { console.log("yes"); layer[path[i]] = value; }
-        else { layer = layer[path[i]]; } 
-    console.log(layer)
-    return layer;
-};

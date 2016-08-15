@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <!-- BOOTSTRAP & jQuery-->
+  <link rel="stylesheet" href="../libraries/bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="../libraries/bower_components/jquery/dist/jquery.js"></script>
+  <script src="../libraries/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- D3 -->
+  <script src="./libraries/bower_components/d3/d3.min.js"></script>
+  <script src="./libraries/bower_components/d3-queue/d3-queue.js"></script>
+  <!-- // <script src="./libraries/bower_components/d3-topojson-layer/index.js"></script> -->
+  
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="./libraries/bower_components/colorbrewer/colorbrewer.js"></script>
+  <link  rel="stylesheet" href="./libraries/bower_components/colorbrewer/colorbrewer.css"></script>
+   <script src="https://rawgit.com/gka/d3-jetpack/master/d3-jetpack.js"></script>
+<!--Susie Lui's Legend -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.6.0/d3-legend.js"></script>
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<!-- ANGULAR -->
+  <script type="text/javascript" src="./libraries/bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="./libraries/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="./libraries/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="./js/app.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+
+
+
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Examples</title>
+
+</head>
+  <body ng-app="d3App" ng-class="{loading: isLoading}">
+       </script>
+   <nav class="navbar navbar-default">
+          <div class="navbar-header">
+          
+            <button type="button" 
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#collapsemenu">
+              <span class="icon-bar"></span>        
+              <span class="icon-bar"></span> 
+              <span class="icon-bar"></span> 
+            </button>
+
+        <!--     <button type="button" 
+              class="btn btn-default navbar-toggle collapsed" 
+              data-toggle="collapse"
+              data-target="#collapsemenu"
+              aria-label="Left Align">
+              <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+            </button> -->
+
+        <!-- aria explanation: http://webaim.org/techniques/screenreader/ -->
+
+            <a class="navbar-brand" href="#">D3 Tutorials</a>
+           </div>
+           <!-- <p class="navbar-text">Lovin the navs...</p> -->
+           <div class="collapse navbar-collapse" id="collapsemenu">
+              <ul class="nav navbar-nav pull-right">
+              <li><a href="#/mapping">Mapping</a></li>
+              <li><a href="#/circles">Circles</a></li>
+              <li><a href="#/present">Demo</a></li>
+            </ul>    
+          </div>
+      </nav>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-6">Placeholder for data</div>
+      <div class="col-md-6 initial-map">View the console to see data
+      <div id="map"></div>
+    </div>
+  </div>
+</div> -->
+  </div>
+<div class="animate-view-container">
+  <div class="ui-view animate-vew"></div>
+</div>
+
+</body>
+</html>
