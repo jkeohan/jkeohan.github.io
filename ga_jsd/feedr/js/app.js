@@ -110,8 +110,7 @@ function Newsfeed(url,main,title,image,rank,description,tags,link) {
     function buildDiggObj(res) {
         var obj = { articles:[] }
        $.each(res.data.feed, function(index,articleObj){ 
-        //console.log(articleObj)   
-        obj.articles.title = articleObj.content.title      
+        //console.log(articleObj)        
         obj.articles.push( { 
           "title": articleObj.content.title,
           "image": articleObj.content.media.images[0].url,
@@ -142,6 +141,7 @@ function Newsfeed(url,main,title,image,rank,description,tags,link) {
        handlebarsView('#articles','#main',obj)
     }
 
+    
     //1. Create a higher level function called apiPull that takes in a single param which will be a function
     //   The function passed in will have the api response passed to it within the .done() method
     //2. The apiPull function will return an anonymous function that takes in a simple param which will be a url

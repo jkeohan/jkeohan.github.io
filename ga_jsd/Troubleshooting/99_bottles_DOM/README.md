@@ -13,34 +13,46 @@ Remember the 99 Bottles of Beer assignment? For this assignment, you'll be creat
 | Timing | Type | Topic |
 | --- | --- | --- |
 | 10 min | [Opening](#opening) | Introduction to Troubleshooting |
-| 15 min | [Recap](#recap) |  |
-| 60 min | [Codealong](#codealong1) | Functions as First-Class Objects |
-| 30 min | [Lab](#lab1) | Functions and Callbacks: Independent Practice |
-| 30 min | [Codealong](#codealong2)  | Anonymous Functions and IIFEs  |
-| 30 min | [Lab](#lab2) | IIFE: Independent Practice  |
-| 5 min |  [Conclusion](#conclusion)| Homework, Final Questions & Exit Tickets |
+| 10 min | [Errors](#errortypes) | Types of Errors |
+| 20 min | [Codealong](#codealong1) | Error Types |
+| 15 min | [Lab](#lab1) | Resolve Common Errors |
+| 20 min | [Codealong](#codealong2)  | Console.log,debug,etc...  |
+| 15 min | [Lab](#lab2) | Using Console.log,debug,etc... |
+| 20 min | [Codealong](#codealong2)  | Debugger and Breakpoints |
+| 15 min | [Lab](#lab3) | Setting Debugger and Breakpoints |
+| 20 min | [Codealong](#codealong2)  | Watches,Scope and Call Stack |
+| 15 min | [Lab](#lab4) | Working with Watches,Scopes and Call Stack |
+| 20 min | [Codealong](#codealong2)  | Anticipating Errors |
+| 15 min | [Lab](#lab5) | Using try\catch\finally |
+| 20 min | [Codealong](#codealong2)  | Gulp and additional tools |
+| 15 min | [Lab](#la6) | Extending your troubleshooting toolset |
+| 15 min |  [Conclusion](#conclusion)| Homework, Final Questions & Exit Tickets |
+| 3.25 hrs | Total 
 
 
 ### Objectives
 *After this lesson, students will be able to:*
 
-- Store and use anonymous functions in variables.
-- Pass functions as arguments to functions that expect them.
-- Write functions that take other functions as arguments.
-- Return functions from functions.
+- Find and resolve common errors.
+- Using the console methods
+- Working with debugger and setting breakpoints
+- Creating watches and examining Scopes and Call Stack
+- Anticipating errors using try\catch\finally blocks
+- Understanding of additional troubleshooting tools
 
 ### Preparation
 *Before this lesson, students should already be able to:*
 
-- Implement an AJAX request with Vanilla JS.
-- Reiterate the benefits of separation of concerns – API vs. Client.
-- Understand the difference between function declarations and function expressions.
-- Understand scope and hoisting.
+- Know how to open developer tools and work in the console.
+- Enumerate variables, execute functions and looping constructs.
+- Understanding global vs local scopes and hoisting
 
-> Note: Last class, we learned how to implement an AJAX request with Vanilla JS and a jQuery AJAX client. Check with students to make sure that everyone is comfortable with the materials covered in the last class.
+
+> Note: Last class, we learned how to .....Check with students to make sure that everyone is comfortable with the materials covered in the last class.
 
 <a name = "opening"></a>
-## Introduction to Asynchronous JavaScript (10 min)
+## Introduction to Troubleshooting (10 min)
+
 
 As our programs start relying on user input/behavior and data that might not be available right away, we need to increasingly start thinking about how we can run our code at different times. We refer to this "now and later" programming as asynchronous programming. We have already used asynchronous programming in our code in previous lessons:
 
@@ -50,7 +62,7 @@ As our programs start relying on user input/behavior and data that might not be 
 Although we have used asynchronous programming in our code, we have not discussed _how_ this is all happening. Before we can truly understand how asynchronous programming works in JavaScript, we need to take a deeper look at functions and scope.
 
 ---
-<a name = "recap"></a>
+<a name = "errortypes"></a>
 ## Anonymous Functions and Functions as First-Class Objects: Recap (15 min)
 
 We have worked with numerous scenarios where we have run a block of code after a user has performed an action. Take the following scenario from our DOM and jQuery continued lesson:
