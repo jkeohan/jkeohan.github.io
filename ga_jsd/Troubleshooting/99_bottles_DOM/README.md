@@ -35,20 +35,21 @@
 
 - Know how to open developer tools and work in the console.
 - Enumerate variables, execute functions and looping constructs.
-- Understanding global vs local scopes and hoisting
+- Understanding global vs local scopes and hoisting functions.
 
-> Note: Last class, we learned how to Check with students to make sure that everyone is comfortable with the materials covered in the last class.
+> Note: Check with students to make sure that everyone is comfortable with the preparation materials.
 
 <a name = "opening"></a>
 ## Introduction to Troubleshooting (10 min)
 
+As programers we are tasked with analyzing project requirements, deciding on the best implementation and then coding the functional components to bring the project to life. We then take the time to prioritize each component and assign an estimated time for completion. However the one thing we often fail to take into consideration is time lost for dealing with and resolving errors.  The process of finding these mistakes or bugs in program is called debugging. As bugs will forever find their way into our code it is to our advantage to be as efficient in thier resolution. 
 
-As our programs start relying on user input/behavior and data that might not be available right away, we need to increasingly start thinking about how we can run our code at different times. We refer to this "now and later" programming as asynchronous programming. We have already used asynchronous programming in our code in previous lessons:
+We have already incorporated some troubleshooting techniques in previous lessons, such as:
 
-- We have listened for click and mouse events that execute certain code when that event is complete.
-- We have waited for a return from an AJAX call, and we have executed code for success and error scenarios.
+- Using console.log() to output a value to the console.
+- Examining the console for errors when our code doesn't work 
 
-Although we have used asynchronous programming in our code, we have not discussed _how_ this is all happening. Before we can truly understand how asynchronous programming works in JavaScript, we need to take a deeper look at functions and scope.
+Although we have come proficient in these areas of debugging were going to now delve a bit further into debugging and introduce additional tools and techniques that will help us decrease the time we currently invest in troubleshooting and apply that to writing more efficient code.
 
 ---
 <a name = "errortypes"></a>
