@@ -35,8 +35,8 @@
 
       var rateById = d3.map()
       d3_queue.queue()
-        .defer(d3.json,"../D3/data/geojson/usa.json")
-        .defer(d3.json,"../D3/data/states.json")
+        .defer(d3.json,"data/geojson/usa.json")
+        .defer(d3.json,"data/states.json")
         .await(function(error,us,states) { 
            states.forEach(function(d, i) {
               us.features.forEach(function(e, j) {

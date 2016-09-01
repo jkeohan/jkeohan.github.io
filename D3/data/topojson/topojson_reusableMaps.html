@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mexico</title>
+  <style>
+
+  body { 
+    background-color: grey;
+  }
+
+  svg {
+    background-color: white;
+  }
+  .boundary {
+    fill: none;
+    stroke: #888;
+    stroke-linejoin: round;
+  }
+  path { stroke: white; stroke-width: 0.75px; fill: lightgrey; }
+  
+  svg {
+    border-style: solid;
+    border-width: .75px;
+    border-color: #ccc;
+  }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+<a>
+  <script>
+var d3Edge = {};
+
+d3Edge.dataManager = function module () { 
+
+  var exports = {}
+  var dispatch = d3.dispatch("geoReady","dataLoading","dataReady")
+  var data;
+
+  exports.loadCsvData = function (_file,_cleaningFunc) {
+
+    var loadCsv = d3.csv(_file)
+    loadCsv.on("progress", function() { dispatch.dataLoading(d3.event.loaded)})
+
+    loadCsv.get(function(_err,_response) {
+      _response.forEach(function(d) {
+        _cleaningFunc(d)
+      })
+      data = _response
+      dispatch.dataReady(_response)
+    })
+  }
+
+  exports.getCleanData = function () { return data }
+
+  exports.loadTopoJson = function(_file,_callback) {
+    d3.json(_file, function(_err,_data) { 
+      _callback(_data)
+    })
+  }//loadTopoJson
+
+  d3.rebind(exports,dispatch,"on")
+  return exports
+}//datamanager
+
+d3Edge.map = function module () {
+
+   var dispatch = d3.dispatch('hover', 'stopsEnd', 'routesEnd', 'brushing'),
+    projection, path, b, t, s, svg, center, scale, bound, size, brush,
+    bound = false,
+    boundObject = "countries";
+
+
+    var exports = function (_selection) {
+      svg = svg || _selection
+      svg.datum([])
+
+    projection = projection || d3.geo.mercator()
+    path = path || d3.geo.path().projection(projection)
+   
+    }
+    exports.scale = function(_scale) {
+      if (!arguments.length) return scale;
+      scale = _scale;
+      return this;
+    }
+    exports.translate = function(_translate) {
+      if(!arguments.length) return translate;
+      translate = _translate;
+      return this;
+    }
+    exports.center = function(_center) {
+      if(!arguments.length) return center;
+      center = _center;
+      return this;
+    }
+    exports.bound = function(_bound) {
+      if(!arguments.length) return bound;
+      bound = _bound;
+      return this;
+    }
+     exports.boundOject= function(_boundObject) {
+      if(!arguments.length) return boundObject;
+      boundObject = _boundObject;
+      return this;
+    }
+
+    exports.drawMap = function(_data) {
+      var bounded = topojson.feature(_data, _data.objects. + "boundObject");
+
+      if(bound) {
+        console.log("yes")
+        projection.scale(1).translate([0, 0]);
+        b = path.bounds(bounded);   
+        scale = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+        translate = [(width - scale * (b[1][0] + b[0][0])) / 2, (height - scale * (b[1][1] + b[0][1])) / 2];
+          projection.scale(scale).translate(translate)
+      }
+      else {
+        projection.scale(scale).center(center).translate([translate[0]/2, translate[1]/2]);
+      }
+      svg.selectAll('path')
+      .attr("class","country")
+      .data(countries.features).enter().append("path")
+      .attr('d', function(d) { return path(d) })
+      //dispatch.mapEnd()
+    }
+
+    d3.rebind(exports,dispatch,"on")
+    return exports
+}
+
+var width = 500;
+var height = 300;
+
+var worldDataManager = d3Edge.dataManager()
+
+var worldMap = d3Edge.map()
+  //.center([-122.4376, 37.77])
+  // .center([0,40])
+  // .scale([width/7])
+  // .translate([width, height]);
+  .bound(true)
+  .boundObject("countries")
+
+var svg = d3.select("#map")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .call(worldMap)
+
+worldDataManager.loadTopoJson("../data/countries.topo.json",worldMap.drawMap)
+
+/*
+1. Map not rendering...no errors just no map
+RESOLUTION: Add .selectAll('path') & .enter().append("path") which original code snippets didn't include
+     svg.selectAll('path')
+      .attr("class","country")
+      .data(topojson.feature(_data, _data.objects.countries).features)
+    .enter().append("path")
+      .attr('d', function(d) { return path(d) })
+
+2. See paths in dev tools but don't see the map.  changing the fill color would change it for the whole rectangle.  Got me thinking it was scale issue
+RESOLUTION:  Changed scale from scale(90000) to scale([width/7])
+
+*/
+
+  </script>
+</body>
+
+

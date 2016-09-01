@@ -3,15 +3,15 @@
 }
 
 .col-lg-4.col-md-4.col-sm-6.col-xs-12 {
-        padding: 15px 5px;
+        padding: 5px 5px;
         /*border:1px solid black;*/
 }
 
 .hovereffect {
 max-width:100%;
-    height: 250px;
+    height: 185px;
 float:left;
-padding:5px;
+/*padding:5px;*/
 overflow:hidden;
 position:relative;
 text-align:center;
@@ -63,7 +63,7 @@ transform: scale(1.2);
 
 .hovereffect img {
 display:block;
-object-fit: contain;
+object-fit: cover;
 position:relative;
 -webkit-transition:all .4s linear;
 transition:all .4s linear;

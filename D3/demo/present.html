@@ -1,4 +1,10 @@
-  <script src="https://d3js.org/d3-queue.v2.min.js"></script>
+  <script src="http://d3js.org/d3-queue.v2.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/d3-array.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<!-- <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script> -->
+<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <script>
 
   </script>
@@ -17,62 +23,117 @@
       <li class="story s10"><a href="">S10</a></li>
     </ul>
   </div>
+
   <div class="section s1" id="s1">
+     <script>
+      $('#explore').on("click",function() {
+        $('.mapNavs').css("height","100px")
+        $('aside.leftAside').css("left",0)
+        $('#worldMap').css("margin-left","250px")
+        $('aside.bottomAside').css(
+          {"top":"552px","opacity":"1"})
+         $('.section.s1').css("background","rgb(246,246,246)")
+         $('path.light').css("fill","rgb(220,220,220")
+         $('path.dark').css("fill","rgb(239,239,239")
+        })
+
+      </script>
+   <div>
+    <ul class="mapNavs">
+        <li class="mapNav active" id="courses">Courses</li>
+        <li class="mapNav" id="location">Locations</li>
+        <li class="mapNav" id="stories">Stories</li>
+    </ul> 
+    <aside class="leftAside">
+        <h2 class="info-title">Course Trends By City</h2>
+         <p class="desc">USAID’s public-private partnerships in .<br><span class="info-note"><span class="i r">👤</span>signifies "per capita" calculations.</span></p>
+
+        <h4 class="courses info-list-title">Active Full Time Courses</h4>
+         <ol class="national-trends-list">
+            <li><span class="trends">Android Development</span> <span class="national-trends-total">5</span></li>   
+            <li><span class="trends">Data Scient Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends">IOS Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends">UX Development</span> <span class="national-trends-total">5</span></li>  
+            <li><span class="trends">Web Development</span> <span class="national-trends-total">5</span></li>
+          </ol>
+
+        <h4 class="courses info-list-title">Active Part Time Courses</h4>
+         <ol class="national-trends-list">
+            <li><span class="trends">Android Development</span> <span class="national-trends-total">5</span></li>   
+            <li><span class="trends">Data Scient Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends">IOS Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends">UX Development</span> <span class="national-trends-total">5</span></li>  
+            <li><span class="trends">Web Development</span> <span class="national-trends-total">5</span></li>
+          </ol>
+
+    </aside>
+    <aside class="bottomAside">
+      <button id="dock-left" class="dock-nav" ><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
+      <button id="dock-right" class="dock-nav" ><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
+      <div id="dock-container" style="bottom: 0px;"><ul id="corporate-dock"><li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);"></li>/ul></div>
+    </aside>
+   </div>
    <div class="wrapper">
-    <h1>DATA VISUALIZATION USING D3</h1>
-    <h2>MAPPING 101</h2>
-  </div>
+      <h1>General Assembly's Expansion</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. .</p>
+       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. </p>
+      <button id="explore">Explore Map</button>
+   </div>
+   <svg id="worldMap"></svg>
   </div>
   <div class="section s2" id="s2">
-  <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-    <h3>A step by step tutorial project to build an interactive map with D3.js</h3>
-            <ol class="blogpost-serie">
-        <li class="blogpost">
-          <div class="blogpost-article">Introduction and finding data.</div>
-        </li>
-        <li class="blogpost">
-          <div class="blogpost-article">Converting Shapefiles to GEOJSON and TOPOJSON.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part3-9.html">Demo 3</a>
-          <div class="blogpost-article">Render a map.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part4-9.html">Demo 4</a>
-          <div class="blogpost-article">Enhance to a choropleth.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part5-9.html">Demo 5</a>
-          <div class="blogpost-article">Zoom functionality.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part6-9.html">Demo 6</a>
-          <div class="blogpost-article">Add labels to the map.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part7-9.html">Demo 7</a>
-          <div class="blogpost-article">Adding a legend to interpret the data.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part8-9.html">Demo 8</a>
-          <div class="blogpost-article">Interactive tooltips for detailed information.</div>
-        </li>
-        <li class="blogpost">
-          <a class="blogpost-demo" href="Prototype/part9-9.html">Demo 9</a>
-          <div class="blogpost-article">Display several years of data with a time series.</div>
-        </li>
-      </ol>
+    <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+      <h3>A step by step tutorial project to build an interactive map with D3.js</h3>
+              <ol class="blogpost-serie">
+          <li class="blogpost">
+            <div class="blogpost-article">Introduction and finding data.</div>
+          </li>
+          <li class="blogpost">
+            <div class="blogpost-article">Converting Shapefiles to GEOJSON and TOPOJSON.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part3-9.html">Demo 3</a>
+            <div class="blogpost-article">Render a map.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part4-9.html">Demo 4</a>
+            <div class="blogpost-article">Enhance to a choropleth.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part5-9.html">Demo 5</a>
+            <div class="blogpost-article">Zoom functionality.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part6-9.html">Demo 6</a>
+            <div class="blogpost-article">Add labels to the map.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part7-9.html">Demo 7</a>
+            <div class="blogpost-article">Adding a legend to interpret the data.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part8-9.html">Demo 8</a>
+            <div class="blogpost-article">Interactive tooltips for detailed information.</div>
+          </li>
+          <li class="blogpost">
+            <a class="blogpost-demo" href="Prototype/part9-9.html">Demo 9</a>
+            <div class="blogpost-article">Display several years of data with a time series.</div>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
-</div>
 <!--    <div class="wrapper">
-    <h2>What should be the first question asked when building out a data viz?</h2>
+    <h2>What should be the fi   <aside>
+rst question asked when building out a data viz?</h2>
    </div> -->
   </div>
-
-
 
   <div class="section s3" id="s3">
    <div class="wrapper">
@@ -212,17 +273,132 @@ path {
   padding:40px 40px;
 }
 
+.section.s1 {
+  background:#486276;
+  height:550px;
+  overflow:hidden;
+  transition: all 200ms;
+}
+
 .section.s1 .wrapper {
   position:absolute;
-  left:30%;
-  top:35%;
+    left: 49%;
+    top: 20%;
+     width: 50%;
+    text-align: left;
+    line-height: 2.5;
+    color: white;
 
 }
 
+.section.s1 .wrapper button{
+      background: green;
+    border: 0px;
+    padding: 3px 15px;
+    font-size: 1.2em;
+}
+
+.section.s1 #worldMap{
+      margin-left: 0px;
+      transition: all 400ms;
+}
+
+.section.s1 ul {
+      list-style: none;
+    width: 100%;
+    float: right;
+    margin: 0px;
+    position: absolute;
+    transition: all 1s;
+    height: 0px;
+    overflow: hidden;
+}
+
+.section.s1 ul li {
+      display: inline-block;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: 100;
+    background-color: rgb(201,201,201);
+    margin: 0px;
+    width: 25%;
+    float: left;
+    color: white;
+    border-bottom: 0px solid white;
+    transition: all 200ms;
+    position:absolute;
+}
+
+.section.s1 ul li:hover {
+  /*border-bottom: 5px solid white*/
+}
+
+.section.s1 ul li.active {
+  border-bottom: 5px solid white
+}
+
+.section.s1 ul li#courses { left:25%; } 
+.section.s1 ul li#location { left:50%; } 
+.section.s1 ul li#stories { left:75%; } 
+
+.mapNav#courses { background-color: rgb(201,201,201) }
+.mapNav#location { background-color: rgb(174,23,75) }
+.mapNav#stories { background-color: rgb(52,81,103) }
+
+.mapNav#courses:hover { border-bottom: 5px solid rgba(201,201,201,.7)}
+/*.mapNav#location:hover { border-bottom: 5px solid rgba(174,23,100,1)}*/
+.mapNav#location:hover { border-bottom: 5px solid rgb(33,150,243)}
+aside.leftAside {     width: 25%;
+    height: 550px;
+    position: absolute;
+    background-color:rgb(241,241,241);
+    padding: 0 10px;
+    text-align: left;
+    letter-spacing: 1.2px;
+    left: -25%;
+    transition: all 400ms;
+  }
+aside.bottomAside {
+      top: 650px;
+      opacity:0;
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    height: 50px;
+    width: 75%;
+    transition: all 400ms;
+}
+
+aside.leftAside h4 { 
+    font-size: 18px;
+    padding: 5px;
+    text-align: center;
+    font-weight: 100;
+    color: white;
+  background-color: #c0c0c0
+}
+
+aside.leftAside .trends {
+      width: 200px;
+    display: inline-block;
+}
+
+aside.bottomAside button {
+    background: white;
+    border: 0;
+  }
+
+button#dock-right{
+  float: right;
+}
+
+button#dock-left{
+  float:left;
+}
 .section.s1 .wrapper h1,h2 {
   font-family: fantasy;
   font-weight: 800;
-  text-align: center;
+  text-align: left;
 }
 
 .section.s2 h3 { text-align:center; font-size: 35px; margin-bottom:50px;}
@@ -258,6 +434,7 @@ ul.demo{
 .demo.navbar {
   min-height:100%;
   margin-bottom:0px;
+  display:none;
 }
 label {
   position: absolute;
@@ -347,9 +524,9 @@ tbody td:last-child, thead th:last-child {
 }
 
 </style>
-   <script src="demo/navigation.js"></script>
-   <script src="demo/scales-demo.js"></script>
-  <script src="demo/linear_scale.js"></script>
+     <script src="demo/navigation.js"></script>
+<!--     // <script src="demo/scales-demo.js"></script> -->
+   <!-- // <script src="demo/linear_scale.js"></script> -->
     <script src="demo/slide1.js"></script>
 
  <!-- // <script src="demo/s1.js"></script> -->

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+.feature {
+  fill: #ccc;
+  cursor: pointer;
+}
+
+.feature.active {
+  fill: orange;
+}
+
+.mesh {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500,
+    active = d3.select(null);
+
+var projection = d3.geo.mercator()
+    // .scale(width/6)
+    // .translate([width / 2, height / 2]);
+
+var path = d3.geo.path().projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", reset);
+
+var g = svg.append("g")
+    .style("stroke-width", "1.5px");
+
+d3.json("../data/countries.topo.json", function(error, data) {
+  if (error) throw error;
+
+    var countries = topojson.feature(data, data.objects.countries);
+    console.log(countries)
+      var b, s, t;
+    projection.scale(1).translate([0, 0]);
+    var b = path.bounds(countries);
+    var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+    var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+    projection.scale(s).translate(t);
+
+  g.selectAll("path")
+      .data(topojson.feature(data, data.objects.countries).features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("class", "feature")
+      .on("click", clicked);
+
+  g.append("path")
+      .datum(topojson.mesh(data, data.objects.countries, function(a, b) { return a !== b; }))
+      .attr("class", "mesh")
+      .attr("d", path);
+});
+
+function clicked(d) {
+  console.log(this)
+  if (active.node() === this) return reset();
+  active.classed("active", false);
+  active = d3.select(this).classed("active", true);
+
+  var bounds = path.bounds(d),
+      dx = bounds[1][0] - bounds[0][0],
+      dy = bounds[1][1] - bounds[0][1],
+      x = (bounds[0][0] + bounds[1][0]) / 2,
+      y = (bounds[0][1] + bounds[1][1]) / 2,
+      scale = .9 / Math.max(dx / width, dy / height),
+      translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+  g.transition()
+      .duration(750)
+      .style("stroke-width", 1.5 / scale + "px")
+      .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+}
+
+function reset() {
+  active.classed("active", false);
+  active = d3.select(null);
+
+  g.transition()
+      .duration(750)
+      .style("stroke-width", "1.5px")
+      .attr("transform", "");
+}
+
+/*
+topojson.mesh
+Returns the GeoJSON MultiLineString geometry object representing the mesh for the specified object in the given topology. This is useful for rendering strokes in complicated objects efficiently, as edges that are shared by multiple features are only stroked once.
+
+An optional filter function may be specified to prune arcs from the returned mesh using the topology. The filter function is called once for each candidate arc and takes two arguments, a and b, two geometry objects that share that arc. Each arc is only included in the resulting mesh if the filter function returns true. For typical map topologies the geometries a and b are adjacent polygons and the candidate arc is their boundary. If an arc is only used by a single geometry then a and b are identical. This property is useful for separating interior and exterior boundaries; an easy way to produce a mesh of interior boundaries is:
+*/
+</script>

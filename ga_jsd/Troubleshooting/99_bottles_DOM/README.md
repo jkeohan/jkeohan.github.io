@@ -12,7 +12,7 @@ Remember the 99 Bottles of Beer assignment? For this assignment, you'll be creat
 
 | Timing | Type | Topic |
 | --- | --- | --- |
-| 10 min | [Opening](#opening) | Introduction to Troubleshooting |
+| 5 min | [Opening](#opening) | Introduction to Troubleshooting |
 | 10 min | [Errors](#errortypes) | Types of Errors |
 | 20 min | [Codealong](#codealong1) | Error Types |
 | 15 min | [Lab](#lab1) | Resolve Common Errors |
@@ -33,12 +33,12 @@ Remember the 99 Bottles of Beer assignment? For this assignment, you'll be creat
 ### Objectives
 *After this lesson, students will be able to:*
 
-- Find and resolve common errors.
-- Using the console methods
-- Working with debugger and setting breakpoints
-- Creating watches and examining Scopes and Call Stack
+- Find and resolve common errors
+- Using the following console methods: .log, .error, .table
+- Setting debugger and breakpoints
+- Creating watches and examining scopes and the call stack
 - Anticipating errors using try\catch\finally blocks
-- Understanding of additional troubleshooting tools
+- Review of additional troubleshooting tools
 
 ### Preparation
 *Before this lesson, students should already be able to:*
@@ -47,8 +47,7 @@ Remember the 99 Bottles of Beer assignment? For this assignment, you'll be creat
 - Enumerate variables, execute functions and looping constructs.
 - Understanding global vs local scopes and hoisting
 
-
-> Note: Last class, we learned how to .....Check with students to make sure that everyone is comfortable with the materials covered in the last class.
+> Note: Last class, we learned how to Check with students to make sure that everyone is comfortable with the materials covered in the last class.
 
 <a name = "opening"></a>
 ## Introduction to Troubleshooting (10 min)

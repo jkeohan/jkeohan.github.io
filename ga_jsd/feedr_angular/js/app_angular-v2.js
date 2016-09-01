@@ -30,7 +30,6 @@ function Newsfeed(url,main,title,image,rank,description,tags,link) {
 }
 
 var Mashable = new Newsfeed('new','title','image','shares.total','content.plain','channel','link')
-console.log(Mashable)
 
 feedrApp.controller('apiCtrl', ['$scope','$rootScope','$http', function($scope,$rootScope,$http){
       $scope.activeSource = [];

@@ -1,133 +1,222 @@
-(function() { 
+d3.models = {};
+d3.models.maps = function() {
 
-  d3_queue.queue()
-        .defer(d3.json,"../D3/data/countries/mapshaper_output.json")
-        .defer(d3.csv,"../D3/data/countries/cities.csv")
-        .await(function(error,world,cities) { 
-            drawMap(world)
-            // drawTitle()
-            drawCities(cities)
-            
-        })
+  var fontSize = 15;
+  var width = 650;
+  var transX = 0;
+  var transY = 0;
+  var scale = 1;
+  var geoData = "";
+  var supportingData = "";
+  var color = d3.scale.category20()
+  var uniqueClass = "uniqueClass";
+  var proj = "mercator";
+  var dispatch = d3.dispatch("mouseOver", "mouseOut","onClick");
 
-var canvas = canvasSize('body')
-//console.log(canvas)
+  function render(selection) {
+    selection.each(function(data){
+      if(proj == "mercator") {
+        projection = d3.geo.mercator()
+        .scale(scale).translate([transX, transY]);
+        redraw(projection)
+      }
+      if(proj == "orthographic") {
+        projection = d3.geo.orthographic()
+         .scale(1).translate([0, 0])
+         .center([ 0, 0 ])
+      }
+      if(proj == "albersUsa") {
+      
+        projection = d3.geo.albersUsa()
+         .scale(scale).translate([transX, transY])
+         //.center([ 0, 0 ])
+          redraw(projection)
+      }  
+    })  
+      function redraw(projection) {   
+        var path = d3.geo.path().projection(projection);
+        map = selection.selectAll("path."+ uniqueClass)
+         .data(geoData)
+         .enter()
+         .append("path")
+         .attr("d",path)
+         .attr("class",uniqueClass)
+         .style("stroke", "white")
+         .style("stroke-width", 0.5);
+      } 
+  }//render()
 
-w = canvas[0]
-h = 600;
-
-//Define map projection
-var projection = d3.geo.mercator()
-  .center([ 0, 0 ])
-   .translate([ w/2, h/1.74026575872 ])
-   .scale([ w/6.5 ])
-
-var body = d3.select('.section.s1')
-var svg = body.append('svg').attr("width",w).attr("height",h)//style("background-color","#000000")
-
-function drawTitle(){
-  var data = "DATA VISUALIZATION AND STORYTELLING USING D3".split(" ")
-  //var data = "DATA".split("")
-  //console.log(data)
-  var g = svg.append("g").attr("transform","translate(" + 100 + "," + 100 + ")")
-  var text = g.selectAll("text").data(data)
-
-  text.enter().append("text") .text(function(d) { return d })
-       .style({
-        "fill":"black",
-        "font-size":"10px" ,
-        "font-family":"fantasy",
-        "font-weight":"800",
-        "text-anchor":"middle",
-        "opacity":"1"
-      })
-        .attr("x",function(d,i) { return i * 200 })
-        .attr("y",0).transition().duration(4000).ease("ease")//.delay(function(d,i) { return i/data.length * 5000 } ) 
-  //.style("fill","yellow")
-  .style("opacity",1)
-  .style("font-size","30px")
-  //.transition().duration(2000).delay(500)
-  .attr("y",0)
-
-  //text.exit().remove()
-} 
-
-function drawMap(countries) {
-
-  //Define path generator
-  var path = d3.geo.path()
-     .projection(projection);
-
-  svg.selectAll("path")
-     .data(countries.features)
-     .enter()
-     .append("path")
-     .style("fill",'#337ab7')//"#054bff")
-     .attr("d", path);
- }
-
-function drawCities(cities) {
-  console.log("inside drawCities")
-  var elem = svg.selectAll('g').data(cities)
-  var elemEnter = elem.enter().append('g')
-  .attr("transform", function(d,i) { 
-    return "translate(" + projection([d.lon, d.lat])[0] + "," + projection([d.lon, d.lat])[1]+ ")" } )
-
-  var circle = elemEnter.append('circle')
-    .attr("fill-opacity",0)
-    .style("stroke-width",0)
-    .attr("fill","#d4ee80")
-  .transition().delay(function(d,i) { 
-    // if(i % 2 === 0) { text(this) }
-    return i / cities.length * 6000})  
-    .attr("r",35)
-  .transition().duration(2000)
-    .attr("stroke", "rgba(230,230,230, .5)")
-    .attr("fill-opacity",1)
-    .attr("fill","#59b318")
-    .attr("r",20)
-    .style("stroke-width",10)
-    .attr("stroke-opacity",.8)
-  .transition()
-            .duration(1000)
-            .ease(Math.sqrt)
-        .attr("r",10)
-            //.style("fill-opacity", 1e-6)
-         .style("stroke-width",100)
-            .attr("stroke-opacity", 1e-6)
-  //transition will allow the stroke-width to be fully expanded and then 
-  //reset to 0 before growing in diam
-  //if the first trans() is removed then s-w trans to 0 and then back out
-  //I believe that transition() is aware of the previous trans\duration 
-  //even though they aren't chained 
-  circle.transition().duration(500).style("stroke-width",0).attr("stroke-opacity",0)
-  .transition().style("stroke-width",10).attr("stroke-opacity",.8)
-  //
-
-
-  function text () {
-   // console.log(this)
-    var text = elemEnter.append("text")
-    .attr("fill","white")
-    .transition().duration(1000)//.delay(500)
-    .transition().delay(function(d,i) { return i / cities.length * 11000})
-     .transition().duration(1000) 
-      .attr("dx", function(d){return -33})
-      .attr("dy", function(d) { return 20 } )
-      .text(function(d){return d.city})
-      .attr("fill","black")
-      .style("font-size",10).style("font-weight","bold")
-      .attr("text-anchor","start")
+  render.geoData = function(_x) {
+  if (!arguments.length) return geoData;
+  geoData = _x;
+  return this;
   }
-
+  render.uniqueClass = function(_x) {
+  if(!arguments.length) return uniqueClass
+  uniqueClass = _x;
+  return this;
+  }
+  render.supportingData = function(_x){
+  if(!arguments.length) return supportingData
+  supportingData = _x;
+  return this;
+  }
+  render.proj = function(_x){
+  if(!arguments.length) return proj;
+  proj = _x;
+  return this;
+  }
+  render.color = function(_x){
+    if(!arguments.length) return color;
+    color = _x;
+    return this;
+  }
+  render.fontSize = function(_x) {
+  if (!arguments.length) return fontSize;
+  fontSize = _x;
+  return this;
+  }
+  render.transX = function(_x) {
+    if(!arguments.length) return transX
+    transX = _x
+    return this;
+  }
+  render.transY = function(_x) {
+    if(!arguments.length) return transY
+    transY = _x
+    return this;
+  }
+  render.scale = function(_x){
+    if(!arguments.length) return scale
+    scale = _x
+    return this;
+  }
+  //https://github.com/mbostock/d3/wiki/Internals#rebind
+  d3.rebind(render, dispatch, "on")
+  return render
 }
-      //Load in GeoJSON data
-      function canvasSize(target) { 
-        var height = parseFloat(d3.select(target).node().clientHeight)
-        var width = parseFloat(d3.select(target).node().clientWidth)
-        console.log(d3.select(target).node().clientWidth)
-        
-        return [width,height]
-      }//canvasSize
+// We add the legend module, which is a simple function returning a function. The outer
+// function serves as the scoped closure for our module.
+d3.models.legend = function () {
+  // Some variables are available in the closure and not accessible from the outside (pri- vate). 
+  // They have default values.
+  var fontSize = 15;
+  var width = 650;
+  var height = 400;
+  var transX = 0;
+  var transY = 0;
+  //var translate = [0,0];
+  var legendValues;
+  var position = "vertical";
+  // One way for the module to expose events to the outside world is by using  d3.dispatch to declare 
+  // an event that we can then listen to from the out- side when it’s triggered in the module.
+  //Both d3.dispath and d3.rebind are classified as d3 Internals and are utilities for implementing reusable components.
+  var dispatch = d3.dispatch("mouseOver", "mouseOut","onClick");
 
-})()
+  function render(selection) {
+    //console.log(selection)
+    selection.each(function(data) { 
+      console.log(selection)
+      if(position === "vertical") { 
+          //D3 Vertical Legend//////////////////////////
+          var legend = selection.append('g').attr("transform", function (d, i) { return "translate(" + transX + "," + transY  + ")" })//attr("transform",function(d,i) { return "translate(" + transX + ',' + transY ")"} )
+          .selectAll("legend").data(legendValues).enter().append("g")
+              .attr("class", "legend")
+              .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")" })
+              .on("mouseover",dispatch.mouseOver) //dispath name cannot be same as event
+              .on("mouseout", dispatch.mouseOut)
+              .on("click", dispatch.onClick)
+          
+       legend.append('rect')
+          .attr({ x:width+5, y:5, width: 10, height: 10 })
+          .style("fill", function (d, i) { return d.color })
+
+        legend.append('text')
+          .attr({ x: width+25, y: 15})
+          .text(function (d, i) { return d.text})
+          .style("text-anchor", "start")
+          .style("font-size", fontSize)
+
+      } else {   
+
+        var legend = selection.selectAll("legend").data(legendValues).enter().append('div')
+          .attr("class", "legend")
+
+        legend
+          .html(function(d,i) {return d.text})
+          .style("color", function(d,i) {return d.color })
+          .style("display","inline-block")
+          .style("padding","0px 5px")
+          .style("margin",".2em")
+          .on("mouseover",dispatch.mouseOver)
+          .on("mouseout", dispatch.mouseOut)
+          .on("click", dispatch.onClick)
+        }//else
+    })//_selection.each()
+  }//render()
+  //Functions are also objects so we can add addtional properties and\or methods
+  // These “public” functions will be used as getters and setters at the same time. 
+  // They are getters when no argument is passed to the function; otherwise they set 
+  // the private variable to the new value passed as an argument. When setting, we return 
+  // the current context this, as we want these methods to be chainable.
+  render.fontSize = function(_x) {
+    if (!arguments.length) return fontSize;
+    fontSize = _x;
+    return this;
+  }
+  render.width = function(_x) {
+    if (!arguments.length) return width;
+    width = _x;
+    return this;
+  }
+  render.height = function(_x) {
+    if (!arguments.length) return height;
+    height = _x;
+    return this;
+  }
+  // render.translate = function(_x) {
+  //  if (!arguments.length) return translate;
+  //  translate = _x;
+  //  return this;
+  // }
+  render.transX = function(_x) {
+    if(!arguments.length) return transX
+    transX = _x
+    return this;
+  }
+  render.transY = function(_x) {
+    if(!arguments.length) return transY
+    transY = _x
+    return this;
+  }
+  render.inputScale = function(_x) {
+     if (!arguments.length) return inputScale;
+        scale = _x;
+        legendValues = [];
+        scale.domain().forEach(function (el) {
+          var cellObject = {color: scale(el), text: el} 
+          legendValues.push(cellObject)
+          //console.log(legendValues)
+      })
+    return this;
+  }
+  render.position = function(_x) {
+    if(!arguments.length) return position;
+    position = _x;
+    return this;
+  }
+  //https://github.com/mbostock/d3/wiki/Internals#rebind
+  d3.rebind(render, dispatch, "on")
+  return render
+}
+//d3.rebind(target,source,names)
+// Copies the methods with the specified names from source to target, and returns target. 
+// Calling one of the named methods on the target object invokes the same-named method on the source object, 
+// passing any arguments passed to the target method, and using the source object as the this context
+//Determine current width\height oftarget div
+function canvasSize(target) { 
+  var height = parseFloat(d3.select(target).node().clientHeight)
+  var width = parseFloat(d3.select(target).node().clientWidth)
+  console.log(d3.select(target).node().clientWidth)
+  return [width,height]
+}//canvasSize
