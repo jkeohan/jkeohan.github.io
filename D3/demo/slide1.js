@@ -1,12 +1,15 @@
-(function() { 
+// (function() { 
 
+  var cities;
   d3_queue.queue()
     .defer(d3.json,"data/countries/mapshaper_output.json")
-    .defer(d3.csv,"data/countries/cities2.csv")
-    .await(function(error,world,cities) { 
-      drawMap(world)
+    .defer(d3.csv,"data/countries/cities.csv")
+    .await(function(error,world,cities) {
+      cities = cities 
+      drawMap(world,cities)
+      storyline(cities)
       //drawTitle()
-      //drawCities(cities)          
+      //drawCities(cities)     
     })//await
 
 var canvas = canvasSize('.section.s1')
@@ -46,9 +49,9 @@ function drawTitle(){
 
   //text.exit().remove()
 } 
-debugger;
-function drawMap(countries) {
 
+function drawMap(countries,cities) {
+  console.log(cities)
   //Define map projection
   projection = d3.geo.mercator()
   //.center([ -5, 10 ])
@@ -79,6 +82,141 @@ function drawMap(countries) {
    
      if( i % 2 === 0) { return "rgb(52,81,103)" } else { return "rgb(35,54,69)" }})// "fill",'#337ab7')//"#054bff")
      .attr("d", path);
+
+    //drawCities(cities,projection) 
+    //drawCities(cities) 
+
+}
+
+//meteores takes in a an object
+//the obj must have lon & lat properties
+//the lon\lat must be interpolated by a projection
+function meteores(circleData) {
+   //console.log(circleData)
+   var lon = circleData.lon
+   var lat = circleData.lat
+
+  g = svg.append('g')
+  .attr("transform", function(d,i) { 
+     return "translate(" 
+      + lon + "," 
+      + lat + ")" 
+  } )
+   // .attr("transform", function(d,i) { 
+   //   return "translate(" + projection([lon, lat])[0] + "," + projection([lon, lat])[1] + ")" 
+   //  } )
+
+  var circle = g.append("circle")
+     .attr("fill-opacity",0)
+     .style("stroke-width",0)
+     .attr("fill","#d4ee80")
+     .attr("r",15)
+    // .transition().delay(function(d,i) { 
+    //   return i / cities.length * 2000}) 
+       
+    .transition().duration(500)
+      .attr("stroke", "#59b318")
+      .attr("fill-opacity",1)
+      .attr("fill","#59b318")
+      .attr("r",1)
+      .style("stroke-opacity",.8)
+    .transition().duration(1000)
+      .ease(Math.sqrt)
+      .attr("r",6)
+      .style("stroke-width",500)
+      .style("stroke-opacity", 1e-6)
+      .each("end",function(d,i) { 
+         (d3.select(this)).style("stroke-width",0).style("stroke-opacity",0)  } )
+      .transition().duration(1000).style("stroke-width",10).style("stroke-opacity",.5)
+
+      // function trans(sel) { 
+      //   console.log(d3.select(sel[0][0]).style("stroke-width",0))
+      // }
+
+  //this was a solution provided by MB but isn't being used
+  // .call(endall, function() {
+  //   console.log((d3.select(this)).style("stroke-width",0) )
+  //   console.log("all done"); })
+  function endall(transition, callback) { 
+    var n = 0; 
+    transition 
+        .each(function() { ++n; }) 
+        .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
+  } 
+}
+
+function drawCities(cities,projection){
+  console.log("drawCities - cities is: ", cities)
+  var circleData = [];
+  cities.filter(function(d,i){  
+    var lon = projection([d.lon,d.lat])[0]
+    var lat = projection([d.lon,d.lat])[1]
+    circleData.push({lon,lat})
+    console.log(circleData)
+  })
+  console.log("circleData is: ",circleData)
+  var i = 0
+  var drawCircles = setInterval(function(){
+    if(i >= circleData.length) { clearInterval(drawCircles)}
+    else { meteores(circleData[i]) 
+    i++ }
+  },1000) 
+  //meteores(circleData[i])
+  connectCities(circleData)
+}
+
+function connectCities(cities) {
+
+  console.log("connectCities - cities param", cities)
+  function sourceTarget(cities){
+    var links = [];
+     cities.map(function(d,i){
+        console.log(d,i)
+        links.push( { source: cities[0], target: cities[1] } )
+      })
+      console.log(links)
+      return links
+  }  
+
+
+  //    var links = [
+  //   {source: nodes[0], target: nodes[1]},
+  //   {source: nodes[2], target: nodes[1]}
+  // ]
+
+  var lineSource = d3.svg.line()
+    .x(function(d) { return d.source.lon })
+    .y(function(d) { return d.source.lat })
+
+  var lineTarget = d3.svg.line()
+    .x(function(d) { return d.source.lon })
+    .y(function(d) { return d.source.lat })
+
+  svg.selectAll(".line")
+   .data(sourceTarget(cities))
+   .enter()
+   .append("line")
+   .attr("x1", function(d) { return d.source.lon })
+   .attr("y1", function(d) { return d.source.lat})
+   .attr("x2", function(d) { return d.target.lon })
+   .attr("y2", function(d) { return d.target.lat })
+
+   .style("stroke", "rgb(6,120,155)");
+
+  //   var links = [
+  //   {source: nodes[0], target: nodes[1]},
+  //   {source: nodes[2], target: nodes[1]}
+  // ]
+
+  //   svg.selectAll(".line")
+  //    .data(cities)
+  //    .enter()
+  //    .append("line")
+  //    .attr("x1", function(d) { return d.source.x })
+  //    .attr("y1", function(d) { return d.source.y })
+  //    .attr("x2", function(d) { return d.target.x })
+  //    .attr("y2", function(d) { return d.target.y })
+  //    .style("stroke", "rgb(6,120,155)");
 }
 
 // function drawCities(cities) {
@@ -89,28 +227,51 @@ function drawMap(countries) {
 //   .attr("transform", function(d,i) { 
 //     return "translate(" + projection([d.lon, d.lat])[0] + "," + projection([d.lon, d.lat])[1]+ ")" } )
 
-//   var circle = elemEnter.append('circle')
-//     .attr("fill-opacity",0)
-//     .style("stroke-width",0)
-//     .attr("fill","#d4ee80")
-//   .transition().delay(function(d,i) { 
-//     if(i % 2 === 0) { text(this) }
-//     return i / cities.length * 6000})  
-//     .attr("r",35)
-//   .transition().duration(2000)
-//     .attr("stroke", "rgba(230,230,230, .5)")
-//     .attr("fill-opacity",1)
-//     .attr("fill","#59b318")
-//     .attr("r",20)
-//     .style("stroke-width",10)
-//     .attr("stroke-opacity",.8)
-//   .transition()
-//             .duration(1000)
-//             .ease(Math.sqrt)
-//         .attr("r",10)
-//             //.style("fill-opacity", 1e-6)
-//          .style("stroke-width",100)
-//             .attr("stroke-opacity", 1e-6)
+//   var circle = elemEnter.append('circle')//.attr("class","meteorEnter")
+//      .attr("fill-opacity",0)
+//      .attr("stroke-width",0)
+//      .attr("fill","#d4ee80")
+//     .transition().delay(function(d,i) { 
+//       return i / cities.length * 2000}) 
+//       .attr("r",15)
+//     .transition().duration(500)
+//       .attr("stroke", "#59b318")
+//       .attr("fill-opacity",1)
+//       .attr("fill","#59b318")
+//       .attr("r",5)
+//       .attr("stroke-opacity",.8)
+//     .transition().duration(1000)
+//       .ease(Math.sqrt)
+//       .attr("r",6)
+//       .attr("stroke-width",500)
+//       .attr("stroke-opacity", 1e-6)
+
+
+
+
+
+//   //   .attr("fill-opacity",0)
+//   //   .style("stroke-width",0)
+//   //   .attr("fill","#d4ee80")
+//   //   //.attr("r",35)
+//   // .transition().delay(function(d,i) { 
+//   //   if(i % 2 === 0) { text(this) }
+//   //   return i / cities.length * 6000})  
+//   //   .attr("r",35)
+//   // .transition().duration(2000)
+//   //   .attr("stroke", "rgba(230,230,230, .5)")
+//   //   .attr("fill-opacity",1)
+//   //   .attr("fill","#59b318")
+//   //   .attr("r",1) 
+//   //   .style("stroke-width",1)
+//   // .transition().duration(1000)
+//   //           .ease(Math.sqrt)
+//   //       .attr("r",5)
+         
+//   //   .attr("stroke-opacity",.8)
+//   //           //.style("fill-opacity", 1e-6)
+//   //        .style("stroke-width",100)
+//   //           .attr("stroke-opacity", 1e-6)
 //   //transition will allow the stroke-width to be fully expanded and then 
 //   //reset to 0 before growing in diam
 //   //if the first trans() is removed then s-w trans to 0 and then back out
@@ -141,13 +302,13 @@ function drawMap(countries) {
 function canvasSize(target) { 
   var height = parseFloat(d3.select(target).node().clientHeight)
   var width = parseFloat(d3.select(target).node().clientWidth)
-  console.log(d3.select(target).node().clientWidth)
+  //console.log(d3.select(target).node().clientWidth)
   
   return [width,height]
 }//canvasSize
 
 d3.select("#explore").on("click",function(d,i) { 
-  console.log(this)
+  //console.log(this)
   visibility(".section.s1 .wrapper")
 })
 
@@ -157,4 +318,4 @@ function visibility(sel,vis){
 }
 
 
-})()
+// })()

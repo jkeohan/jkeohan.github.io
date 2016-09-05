@@ -1,11 +1,14 @@
 Questions?
 
 1. what info does the object need to contain? cities, classes, number of classes per city
+var cities = [ { name: , location:[{lat: , lon: }], }]
 2. how to strucutre the object to contain all the info for classes\cities?
 
 Landing Page
 
-Circles will appear one at a time with an arrow originating from NY and then to each city as it became active as GA expanded
+The first circle to appear will be NY.  It will enter as a meteor strike and then increase it's radius with a line being drawn out to it's city name. Then the rest of the circles will enter as either:
+  - meteors with short delays between enter
+  -lines originating from NY to other city location with circle being drawn once the line reaches destination.
 
 Courses Tab:
 
