@@ -77,7 +77,7 @@
       <h1>General Assembly's Expansion</h1>
       <p class="p1">General Assembly has become a premier source for training, staffing, and career transitions.   Not only do they offer both immersive and part-time development classes, but they also foster a flourishing community of professionals pursuing careers they love</p>
        <p class="p1">Here is there story... </p>
-      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> was now on the radar and would soon become a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
+      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> was now on the <span class="radar">radar</span> and would soon become a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
       <p class="p4 delayed">.</p>
       <button id="explore">Explore Map</button>
       <button id="play"><span class="buttonText">Play</span>  
@@ -311,6 +311,15 @@ circle.meteorOut{
 /*[class^="tocolor-"] — starts with "tocolor-".
 [class*=" tocolor-"] — contains the substring "tocolor-" occurring directly after a space character.*/
 .section.s1 .wrapper [class*=" delayed"] { opacity:0;}
+
+.nyc {
+   vertical-align:0px;
+    margin-bottom: -10px;
+    display: inline-block;
+}
+.radar {
+   vertical-align:0px
+}
 
 /*[class*=" delayed"] { opacity:0;}*/
 /**[class*='delayed']{

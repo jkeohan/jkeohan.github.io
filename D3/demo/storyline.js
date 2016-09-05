@@ -15,8 +15,13 @@ function storyline(cities) {
     d3.select(".wrapper .nyc").transition().delay(750).duration(1000)
       .style('font-size',"20px")
       .style("color","#d4ee80")
+      .style("vertical-align","-2px")
     drawCities(cities,projection)
     d3.select(".wrapper .p3").transition().delay(4000).duration(1000).style("opacity",1)
+     d3.select(".wrapper .radar").transition().delay(5250).duration(1000)
+      .style('font-size',"20px")
+      .style("color","#d4ee80")
+      .style("vertical-align","-1px")
   }
 
   function func3() { 

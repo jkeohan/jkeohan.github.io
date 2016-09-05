@@ -253,7 +253,7 @@ function dualCircles(circleData) {
       setInterval(function() {
         //d3.selectAll('g').remove()
         d3.select(".circledemo10c").attr("r",10).style("stroke-opacity", 1)
-         .transition().duration(1000)
+         .transition().duration(750)
                     .attr("r",100)
                       .style("stroke-opacity", 1e-6) 
         //dualCircles(circleData)
