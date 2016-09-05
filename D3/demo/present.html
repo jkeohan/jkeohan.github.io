@@ -75,16 +75,15 @@
    </div>
    <div class="wrapper">
       <h1>General Assembly's Expansion</h1>
-      <p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. .</p>
-       <p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. </p>
-      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> soon was on the radar as a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
-      <p class="p4 delayed">The leading source for training, staffing, and career transitions, we foster a flourishing community of professionals pursuing careers they love.</p>
+      <p class="p1">General Assembly has become a premier source for training, staffing, and career transitions.   Not only do they offer both immersive and part-time development classes, but they also foster a flourishing community of professionals pursuing careers they love</p>
+       <p class="p1">Here is there story... </p>
+      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> was now on the radar and would soon become a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
+      <p class="p4 delayed">.</p>
       <button id="explore">Explore Map</button>
-      <button id="play">Play</button>   
+      <button id="play"><span class="buttonText">Play</span>  
+          <i class="fa fa-play"></i>
+          <i class="fa fa-pause hidden" ></i>
+      </button>   
    </div>
    <svg id="worldMap"></svg>
   </div>
@@ -298,13 +297,14 @@ circle.meteorOut{
 
 .section.s1 .wrapper {
   position:absolute;
-    left: 49%;
+    right:0;
     top: 20%;
-     width: 50%;
+     width: 60%;
      height:400px;
     text-align: left;
     line-height: 2.5;
     color: white;
+    letter-spacing: 1.5px;
 }
 
 /*.section.s1 .wrapper h1 { opacity:0;}*/
@@ -328,15 +328,21 @@ circle.meteorOut{
   bottom:0;
 }
 
+.hidden { display:none;}
+.show { display:inline-block;}
+
 .section.s1 .wrapper #explore { 
   display:none;
 }
 
 .section.s1 .wrapper button{
-      background: green;
+  position: absolute;
+    bottom: 0;
+        background: none;
     border: 0px;
-    padding: 3px 15px;
+    padding: 0px 15px;
     font-size: 1.2em;
+    border: 1px solid;
     /*opactiy: 1;*/
 }
 

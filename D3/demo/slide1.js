@@ -87,7 +87,9 @@ function drawMap(countries,cities) {
     //drawCities(cities) 
 
     d3.select("#play").on("click",function() {
-      d3.select(this).text("pause")
+      d3.select(".buttonText").text("Pause")
+      d3.select(".fa-play").classed("hidden",true)
+      d3.select(".fa-pause").classed("hidden",false)
       storyline(cities)})
 
 }
@@ -130,6 +132,8 @@ function meteores(circleData,params) {
         //   console.log(d3.select(sel[0][0]).style("stroke-width",0))
         // }
       dualCircles(circleData)
+      drawCityTitle(circleData)
+
     //this was a solution provided by MB but isn't being used
     // .call(endall, function() {
     //   console.log((d3.select(this)).style("stroke-width",0) )
@@ -140,6 +144,25 @@ function meteores(circleData,params) {
           .each(function() { ++n; }) 
           .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
     } 
+}
+
+function drawCityTitle(circleData){
+     var lon = circleData.lon
+   var lat = circleData.lat
+  //   var lineSource = d3.svg.line()
+  //   .x(function(d) { return d.source.lon })
+  //   .y(function(d) { return d.source.lat })
+
+  // var lineTarget = d3.svg.line()
+  //   .x(function(d) { return d.source.lon })
+  //   .y(function(d) { return d.source.lat })
+
+  // svg.append("line")
+  //  .attr("x1", function(d) { return lon + 15  })
+  //  .attr("y1", function(d) { return lat})
+  //  .attr("x2", function(d) { return lon + 30 })
+  //  .attr("y2", function(d) { return lat })
+  //  .style("stroke", "white");
 }
 
 function dualCircles(circleData) {
@@ -214,6 +237,17 @@ function dualCircles(circleData) {
       
 
     //radarSignal(circle3)
+
+
+
+    // var text = g3.append("text")
+    // .attr("fill","white")
+    //   .attr("dx", function(d){return 0})
+    //   .attr("dy", function(d) { return 0 } )
+    //   .text("New York")
+    //   .attr("fill","white")
+    //   .style("font-size",10).style("font-weight","bold")
+    //   .attr("text-anchor","start")
 
     function radarSignal(){
       setInterval(function() {
@@ -393,6 +427,7 @@ function canvasSize(target) {
 }//canvasSize
 
 d3.select("#explore").on("click",function(d,i) { 
+
   //console.log(this)
   visibility(".section.s1 .wrapper")
 })
