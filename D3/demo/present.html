@@ -75,13 +75,16 @@
    </div>
    <div class="wrapper">
       <h1>General Assembly's Expansion</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      <p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. .</p>
-       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+       <p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
       consequat. </p>
+      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> soon was on the radar as a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
+      <p class="p4 delayed">The leading source for training, staffing, and career transitions, we foster a flourishing community of professionals pursuing careers they love.</p>
       <button id="explore">Explore Map</button>
+      <button id="play">Play</button>   
    </div>
    <svg id="worldMap"></svg>
   </div>
@@ -165,20 +168,20 @@ rst question asked when building out a data viz?</h2>
    </div>
   </div>
 
-    <div class="section s7" id="s7">
-   <div class="wrapper">
-<!--      <h2>How about...</h2>
-     <ul>
-       <li>Which state(s) contributed the most funding?</li>
-       <li>Which state(s) contributedthe least?</li>
-       <li>What was the total sum of all contributions?</li>
-     </ul>
-    <h2>But the following are also viable questions to consider.</h2>
-      <ul>
-       <li>What was the average (mean) per state?</li>
-       <li>How much the average state contributed?</li>
-     </ul> -->
-   </div>
+  <div class="section s7" id="s7">
+     <div class="wrapper">
+     <!--      <h2>How about...</h2>
+       <ul>
+         <li>Which state(s) contributed the most funding?</li>
+         <li>Which state(s) contributedthe least?</li>
+         <li>What was the total sum of all contributions?</li>
+       </ul>
+      <h2>But the following are also viable questions to consider.</h2>
+        <ul>
+         <li>What was the average (mean) per state?</li>
+         <li>How much the average state contributed?</li>
+       </ul> -->
+     </div>
   </div>
 
   <div class="section s8" id="s8">
@@ -200,10 +203,10 @@ rst question asked when building out a data viz?</h2>
   </div>
 
    <div class="section s10" id="s10">
-    <div class="wrapper">
-      <h2>"Which state(s) provided the most funding?"</h2>
-      <div class="linear-scale"></div>
-    </div><!--wrapper-->
+      <div class="wrapper">
+        <h2>"Which state(s) provided the most funding?"</h2>
+        <div class="linear-scale"></div>
+      </div><!--wrapper-->
   </div>
 
   <h1></h1>
@@ -274,16 +277,23 @@ path {
 }
 
 .section.s1 {
+  position: relative;
   background:#486276;
   height:550px;
   overflow:hidden;
   transition: all 200ms;
 }
 
-circle.meteorEnter{
-   fill-opacity:0;
+circle.meteorIn{
+   fill-opacity:.3;
    stroke-width:0;
    fill:#d4ee80;
+}
+
+circle.meteorOut{
+    stroke: #59b318;
+    fill-opacity: 0;
+    fill: #59b318;
 }
 
 .section.s1 .wrapper {
@@ -291,10 +301,35 @@ circle.meteorEnter{
     left: 49%;
     top: 20%;
      width: 50%;
+     height:400px;
     text-align: left;
     line-height: 2.5;
     color: white;
+}
 
+/*.section.s1 .wrapper h1 { opacity:0;}*/
+/*[class^="tocolor-"] — starts with "tocolor-".
+[class*=" tocolor-"] — contains the substring "tocolor-" occurring directly after a space character.*/
+.section.s1 .wrapper [class*=" delayed"] { opacity:0;}
+
+/*[class*=" delayed"] { opacity:0;}*/
+/**[class*='delayed']{
+     opacity:0;
+}*/
+
+.gaicon {
+  width:25px;
+  border-radius: 50%;
+      margin-left: 10px;
+    margin-right: 5px;
+}
+.section.s1 .wrapper #play { 
+  position:absolute;
+  bottom:0;
+}
+
+.section.s1 .wrapper #explore { 
+  display:none;
 }
 
 .section.s1 .wrapper button{
@@ -302,6 +337,7 @@ circle.meteorEnter{
     border: 0px;
     padding: 3px 15px;
     font-size: 1.2em;
+    /*opactiy: 1;*/
 }
 
 .section.s1 #worldMap{

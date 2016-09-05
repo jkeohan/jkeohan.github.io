@@ -6,7 +6,7 @@ var cities = [ { name: , location:[{lat: , lon: }], }]
 
 Landing Page
 
-The first circle to appear will be NY.  It will enter as a meteor strike and then increase it's radius with a line being drawn out to it's city name. Then the rest of the circles will enter as either:
+The first circle to appear will be NY aIt will enter as a meteor strike and then increase it's radius with a line being drawn out to it's city name. Then the rest of the circles will enter as either:
   - meteors with short delays between enter
   -lines originating from NY to other city location with circle being drawn once the line reaches destination.
 

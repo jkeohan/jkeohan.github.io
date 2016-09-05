@@ -7,7 +7,7 @@
     .await(function(error,world,cities) {
       cities = cities 
       drawMap(world,cities)
-      storyline(cities)
+      
       //drawTitle()
       //drawCities(cities)     
     })//await
@@ -86,63 +86,146 @@ function drawMap(countries,cities) {
     //drawCities(cities,projection) 
     //drawCities(cities) 
 
+    d3.select("#play").on("click",function() {
+      d3.select(this).text("pause")
+      storyline(cities)})
+
 }
 
 //meteores takes in a an object
 //the obj must have lon & lat properties
 //the lon\lat must be interpolated by a projection
-function meteores(circleData) {
+function meteores(circleData,params) {
    //console.log(circleData)
    var lon = circleData.lon
    var lat = circleData.lat
 
-  g = svg.append('g')
-  .attr("transform", function(d,i) { 
-     return "translate(" 
-      + lon + "," 
-      + lat + ")" 
-  } )
-   // .attr("transform", function(d,i) { 
-   //   return "translate(" + projection([lon, lat])[0] + "," + projection([lon, lat])[1] + ")" 
-   //  } )
+    g = svg.append('g').attr("transform", function(d,i) { return "translate(" + lon + "," + lat + ")" } )
+    var circle = g.append("circle")
+       .attr("fill-opacity",0)
+       .style("stroke-width",0)
+       .attr("fill","#d4ee80")
+       .attr("r",30)
+      .transition().duration(250)      
+        .attr("stroke", "#59b318")
+        .attr("fill-opacity",0)
+        .attr("fill","#59b318")
+        .attr("r",0)
+        //.style("fill-opacity",0)
+        .style("stroke-opacity",1)
 
-  var circle = g.append("circle")
-     .attr("fill-opacity",0)
-     .style("stroke-width",0)
-     .attr("fill","#d4ee80")
-     .attr("r",15)
-    // .transition().delay(function(d,i) { 
-    //   return i / cities.length * 2000}) 
-       
-    .transition().duration(500)
-      .attr("stroke", "#59b318")
-      .attr("fill-opacity",1)
-      .attr("fill","#59b318")
-      .attr("r",1)
-      .style("stroke-opacity",.8)
-    .transition().duration(1000)
-      .ease(Math.sqrt)
-      .attr("r",6)
-      .style("stroke-width",500)
-      .style("stroke-opacity", 1e-6)
-      .each("end",function(d,i) { 
-         (d3.select(this)).style("stroke-width",0).style("stroke-opacity",0)  } )
-      .transition().duration(1000).style("stroke-width",10).style("stroke-opacity",.5)
+      .transition().duration(1000)
+        .attr("r",1)
+        .ease(Math.sqrt)
+        //.attr("r",6)
+        .style("stroke-width",1000)
+        .style("stroke-opacity", 1e-6)
+        // .each("end",function(d,i) { 
+        //    (d3.select(this)).style("stroke-width",0).style("stroke-opacity",0)  } )
+        // .transition().duration(1000).style("stroke-width",10).style("stroke-opacity",.5)
+        // .each("end",function(d,i){
+        //   dualCircles(circleData)
+        // })
+        // function trans(sel) { 
+        //   console.log(d3.select(sel[0][0]).style("stroke-width",0))
+        // }
+      dualCircles(circleData)
+    //this was a solution provided by MB but isn't being used
+    // .call(endall, function() {
+    //   console.log((d3.select(this)).style("stroke-width",0) )
+    //   console.log("all done"); })
+    function endall(transition, callback) { 
+      var n = 0; 
+      transition 
+          .each(function() { ++n; }) 
+          .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
+    } 
+}
 
-      // function trans(sel) { 
-      //   console.log(d3.select(sel[0][0]).style("stroke-width",0))
-      // }
+function dualCircles(circleData) {
 
-  //this was a solution provided by MB but isn't being used
-  // .call(endall, function() {
-  //   console.log((d3.select(this)).style("stroke-width",0) )
-  //   console.log("all done"); })
-  function endall(transition, callback) { 
-    var n = 0; 
-    transition 
-        .each(function() { ++n; }) 
-        .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
-  } 
+   var lon = circleData.lon
+   var lat = circleData.lat
+
+    g1 = svg.append('g')
+    .attr("transform", function(d,i) { 
+       return "translate(" 
+        + lon + "," 
+        + lat + ")" 
+    } )
+
+    g2 = svg.append('g').attr("class","g3")
+    .attr("transform", function(d,i) { 
+       return "translate(" 
+        + lon + "," 
+        + lat + ")" 
+    } )
+
+    g3 = svg.append('g').attr("class","group3")
+    .attr("transform", function(d,i) { 
+       return "translate(" 
+        + lon + "," 
+        + lat + ")" 
+    } )
+
+    var circle1 = g1.append("circle")
+    var circle2 = g2.append("circle")
+    var circle3 = g3.append("circle")
+
+    circle1
+        .attr("r",0)
+        .attr("fill","#59b318")
+        .attr("class","circledemo10a")
+      .transition().duration(1000) 
+        .attr("r",6)
+
+    circle2
+      //.transition().delay(1000)
+        .attr("fill","#59b318")
+        .attr("fill-opacity",0)
+        .attr("r",0)
+        .attr("class","circledemo10b")
+        //.attr("stroke","white")
+      .transition().duration(1000)
+        .attr("stroke","white")
+        .attr("stroke-width",1)
+        .style("stroke-opacity", 1)
+        .attr("r",10)
+
+     circle3
+      //.transition().delay(1000)
+        .attr("fill","#59b318")
+        .attr("fill-opacity",0)
+        .attr("r",0)
+        .attr("class","circledemo10c")
+        //.attr("stroke","white")
+      .transition().duration(1000)
+        .attr("stroke","white")
+        .attr("stroke-width",1)
+        .style("stroke-opacity", 1)
+        .attr("r",10)
+      .transition().delay(1500)
+        .each("end",function() {
+          radarSignal(circle3)
+        })
+      // .transition().duration(1000)
+      //               .attr("r",100)
+      //                 .style("stroke-opacity", 1e-6) 
+      
+
+    //radarSignal(circle3)
+
+    function radarSignal(){
+      setInterval(function() {
+        //d3.selectAll('g').remove()
+        d3.select(".circledemo10c").attr("r",10).style("stroke-opacity", 1)
+         .transition().duration(1000)
+                    .attr("r",100)
+                      .style("stroke-opacity", 1e-6) 
+        //dualCircles(circleData)
+  
+      },2000)
+    }
 }
 
 function drawCities(cities,projection){
@@ -158,11 +241,13 @@ function drawCities(cities,projection){
   var i = 0
   var drawCircles = setInterval(function(){
     if(i >= circleData.length) { clearInterval(drawCircles)}
-    else { meteores(circleData[i]) 
+    else { 
+      //dualCircles(circleData[i])
+      meteores(circleData[i],"meteorIn","meteorOut") 
     i++ }
   },1000) 
   //meteores(circleData[i])
-  connectCities(circleData)
+  //connectCities(circleData)
 }
 
 function connectCities(cities) {
