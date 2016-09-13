@@ -19,6 +19,10 @@ d3App.config(function($stateProvider, $urlRouterProvider) {
 			url:"/present",
 			templateUrl:"demo/present.html"
 		})
+		.state('geotest', {
+			url:"/geotest",
+			templateUrl:"demo/geotest.html"
+		})
 })
 
 // myApp.config(function($stateProvider, $urlRouterProvider) {

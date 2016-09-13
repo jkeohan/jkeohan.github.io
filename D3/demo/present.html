@@ -1,13 +1,15 @@
   <script src="http://d3js.org/d3-queue.v2.min.js"></script>
   <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src="https://d3js.org/d3-array.v1.min.js"></script>
-<script src="https://d3js.org/d3-geo.v1.min.js"></script>
-<!-- <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script> -->
-<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <script>
 
-  </script>
+
+  <script src="https://d3js.org/d3-array.v1.min.js"></script>
+ <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+ <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+
+ <script src="libraries/bower_components/d3-geo-projection.min.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+ <script src="demo/d3.resuseable.maps.js"></script>
   <div class="demo navbar navbar-default">
     <!-- ul>li.nav.nav-tabs -->
     <ul class="demo nav nav-tabs">
@@ -26,22 +28,20 @@
 
   <div class="section s1" id="s1">
      <script>
-      $('#explore').on("click",function() {
-        $('.mapNavs').css("height","100px")
-        $('aside.leftAside').css("left",0)
-        $('#worldMap').css("margin-left","250px")
-        $('aside.bottomAside').css(
-          {"top":"552px","opacity":"1"})
-         $('.section.s1').css("background","rgb(246,246,246)")
-         $('path.light').css("fill","rgb(220,220,220")
-         $('path.dark').css("fill","rgb(239,239,239")
-        })
-
+      // $('#explore').on("click",function() {
+      //   $('.mapNavs').css("height","100px")
+      //   $('aside.leftAside').css("left",0)
+      //   $('#worldMap').css("margin-left","250px")
+      //   $('aside.bottomAside')
+      //    $('.section.s1').css("background","rgb(246,246,246)")
+      //    $('path.light').css("fill","rgb(220,220,220")
+      //    $('path.dark').css("fill","rgb(239,239,239")
+      //   })
       </script>
    <div>
     <ul class="mapNavs">
         <li class="mapNav active" id="courses">Courses</li>
-        <li class="mapNav" id="location">Locations</li>
+        <li class="mapNav" id="location">Trends</li>
         <li class="mapNav" id="stories">Stories</li>
     </ul> 
     <aside class="leftAside">
@@ -50,8 +50,8 @@
 
         <h4 class="courses info-list-title">Active Full Time Courses</h4>
          <ol class="national-trends-list">
-            <li><span class="trends">Android Development</span> <span class="national-trends-total">5</span></li>   
-            <li><span class="trends">Data Scient Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends active">Android Development</span> <span class="national-trends-total">5</span></li>   
+            <li><span class="trends active">Data Science Development</span> <span class="national-trends-total">5</span></li>
             <li><span class="trends">IOS Development</span> <span class="national-trends-total">5</span></li>
             <li><span class="trends">UX Development</span> <span class="national-trends-total">5</span></li>  
             <li><span class="trends">Web Development</span> <span class="national-trends-total">5</span></li>
@@ -60,7 +60,7 @@
         <h4 class="courses info-list-title">Active Part Time Courses</h4>
          <ol class="national-trends-list">
             <li><span class="trends">Android Development</span> <span class="national-trends-total">5</span></li>   
-            <li><span class="trends">Data Scient Development</span> <span class="national-trends-total">5</span></li>
+            <li><span class="trends">Data Science Development</span> <span class="national-trends-total">5</span></li>
             <li><span class="trends">IOS Development</span> <span class="national-trends-total">5</span></li>
             <li><span class="trends">UX Development</span> <span class="national-trends-total">5</span></li>  
             <li><span class="trends">Web Development</span> <span class="national-trends-total">5</span></li>
@@ -69,23 +69,64 @@
     </aside>
     <aside class="bottomAside">
       <button id="dock-left" class="dock-nav" ><i class="fa fa-angle-left fa-3x" aria-hidden="true"></i></button>
+
       <button id="dock-right" class="dock-nav" ><i class="fa fa-angle-right fa-3x" aria-hidden="true"></i></button>
-      <div id="dock-container" style="bottom: 0px;"><ul id="corporate-dock"><li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);"></li>/ul></div>
+
+      <div id="dock-container" style="bottom: 0px;">
+        <ul id="corporate-dock">
+          <li class="className">WDI</li>
+          <li class="className">UXI</li>
+          <li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);">Android(I)</li>
+           <li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);">IOS(I)</li>
+          <li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);">Data Science(I)</li>
+          <li class="corp" id="c01" style="background-image: url(&quot;assets/dock_logos/Abbott_Laboratories_dock.png&quot;);">Data Visualization(I)</li>
+          </ul>
+      </div>
     </aside>
    </div>
-   <div class="wrapper">
-      <h1>General Assembly's Expansion</h1>
+   <div class="wrapper section1">
+    <aside class="intro">
+      <h1><img class="gaicon" src="images/gaicon2.png"/>General Assembly's Expansion</h1>
       <p class="p1">General Assembly has become a premier source for training, staffing, and career transitions.   Not only do they offer both immersive and part-time development classes, but they also foster a flourishing community of professionals pursuing careers they love</p>
        <p class="p1">Here is there story... </p>
-      <p class="p2 delayed">In 2010 General Assembly began offering classes in <span class="nyc">New York City</span> for web development.  <span class="p3 delayed">  <img class="gaicon" src="images/gaicon.png"/> was now on the <span class="radar">radar</span> and would soon become a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
-      <p class="p4 delayed">.</p>
       <button id="explore">Explore Map</button>
       <button id="play"><span class="buttonText">Play</span>  
           <i class="fa fa-play"></i>
           <i class="fa fa-pause hidden" ></i>
-      </button>   
+      </button>  
+    </aside>
+    <aside class="intial">
+      <p class="p2 delayed">In 2010 General Assembly began offering web development classes in <span class="nyc">New York City</span>
+      <span class="p3 delayed"><image class="gaicon" src="images/gaicon.png"/>   was now on the <span class="radar">radar</span> and would soon become a pioneer in education and career transformation, specializing in today’s most in-demand skills.</span></p>
+      <p class="p4 delayed"><span class"today">Today <image class="gaicon" src="images/gaicon.png"/>  has 15 offices</span><span class="countries"> in 5 countries</span>.</p>
+   
    </div>
-   <svg id="worldMap"></svg>
+   <svg id="worldMap">
+      <defs>
+        <pattern id="gacircle" class="pattern" patternContentUnits="objectBoundingBox" width="1" height="1"><image class="patternImage" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="images/gaicon.png" width="20" height="20" fill="red" stroke="blue"></image>
+        </pattern>
+      </defs>
+
+      <defs>
+          <pattern id="image" x="0" y="0" patternUnits="userSpaceOnUse" height="1" width="1">
+          <image x="0" y="0" xlink:href="images/gaicon.png"></image>
+        </pattern>
+         <circle id='top' cx="180" cy="120" r="80" fill="url(#image)"/>
+      </defs>
+
+      <clipPath id="clipCircle"><circle r="50" cx="50" cy="50"/></clipPath>
+    <!-- <rect width="100" height="100" clip-path="url(#clipCircle)"/> -->
+
+    <!-- <circle id='top' cx="180" cy="120" r="80" fill="url(#image)" /> -->
+
+      <defs>
+    <pattern id="image" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 512 512">
+      <image x="0%" y="0%" width="512" height="512" xlink:href="http://cdn.getforge.com/marcmonforte.getforge.io/1423693961/images/experienceLogos/generalAssemblyLogo.png"></image>
+    </pattern>
+  </defs>    
+<!--   <circle id="sd" class="medium" cx="5%" cy="40%" r="5%" fill="url(#image)" stroke="black" stroke-width="0.5%" /> -->
+
+   </svg>
   </div>
   <div class="section s2" id="s2">
     <div class="container">
@@ -298,13 +339,38 @@ circle.meteorOut{
 .section.s1 .wrapper {
   position:absolute;
     right:0;
-    top: 20%;
-     width: 60%;
-     height:400px;
+    top: 0%;
+    bottom:0%;
+     width: 100%;
+     height:100%;
     text-align: left;
     line-height: 2.5;
     color: white;
     letter-spacing: 1.5px;
+}
+
+.section.s1 .wrapper aside.intro{
+       position: absolute;
+    right: 0;
+    width: 750px;
+    padding: 76px 40px;
+    bottom: 0;
+    top: 0;
+}
+
+.section.s1 .wrapper aside.initial{
+       position: absolute;
+    right: 0;
+    width: 750px;
+    padding: 76px 40px;
+    bottom: 0;
+    top: 0;
+}
+.section.s1 .wrapper .p2 {
+       width: 198px;
+    line-height: 2.2;
+    margin-top: 30px;
+    margin-left: 27px;
 }
 
 /*.section.s1 .wrapper h1 { opacity:0;}*/
@@ -312,13 +378,30 @@ circle.meteorOut{
 [class*=" tocolor-"] — contains the substring "tocolor-" occurring directly after a space character.*/
 .section.s1 .wrapper [class*=" delayed"] { opacity:0;}
 
+.section.s1 .wrapper  span.p3{
+    position:absolute;
+    left: 22%;
+    top: 29%;
+    width:600px;
+}
+
 .nyc {
-   vertical-align:0px;
+   /*vertical-align:0px;*/
     margin-bottom: -10px;
     display: inline-block;
+
+  font-size:20px;
+  font-weight:800;
+  color:rgb(174,23,75);
+   vertical-align:-2px;
+   margin-left;10px;
+   text-shadow: 1px 0 rgba(0, 0, 0, 0), 
+                1 1px rgba(0, 0, 0, 0), 
+                1px 1 rgba(0, 0, 0, 0), 
+                1 5px rgba(0, 0, 0, 0)
 }
 .radar {
-   vertical-align:0px
+   vertical-align:-1px
 }
 
 /*[class*=" delayed"] { opacity:0;}*/
@@ -327,32 +410,47 @@ circle.meteorOut{
 }*/
 
 .gaicon {
-  width:25px;
-  border-radius: 50%;
-      margin-left: 10px;
-    margin-right: 5px;
+        width: 10%;
+    margin-right: 10px;
 }
 .section.s1 .wrapper #play { 
   position:absolute;
-  bottom:0;
+  bottom:20%;
 }
 
 .hidden { display:none;}
 .show { display:inline-block;}
 
 .section.s1 .wrapper #explore { 
-  display:none;
+  display:block;
 }
 
 .section.s1 .wrapper button{
   position: absolute;
     bottom: 0;
         background: none;
-    border: 0px;
     padding: 0px 15px;
     font-size: 1.2em;
     border: 1px solid;
     /*opactiy: 1;*/
+}
+
+button:active,
+button:focus,
+button.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btnd:active,
+.btnd:focus,
+.btnd.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .section.s1 #worldMap{
@@ -368,23 +466,83 @@ circle.meteorOut{
     position: absolute;
     transition: all 1s;
     height: 0px;
-    overflow: hidden;
+/*    overflow: hidden;*/
 }
 
 .section.s1 ul li {
-      display: inline-block;
-    padding: 10px;
+  /*    display: inline-block;*/
+    
+ /*   font-size: 2em;
+    font-weight: 100;
+    background-color: rgb(201,201,201);*/
+/*    margin: 0px;
+    width: 25%;
+    float: left;
+    color: white;
+    border-bottom: 0px solid white;
+    transition: all 200ms;*/
+ /*   position:absolute;*/
+}
+
+.section.s1 ul#corporate-dock {
+      list-style: none;
+    width: 100%;
+    float: right;
+    margin: 0px;
+    position: absolute;
+    transition: all 1s;
+    height: 0px;
+    position:absolute;
+/*    overflow: hidden;*/
+}
+.section.s1 ul#corporate-dock li {
+    display: inline-block;
+    position:relative;
+    float: left;
+    /*width: 25%;*/
+    height:50px;
+    margin: 0px;
+    padding:0 10px;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: fantasy;
+    /*background-color: rgb(201,201,201);  */     
+    color: black;
+    border-bottom: 0px solid white;
+    transition: all 200ms;
+    line-height: 2;
+}
+
+.section.s1 ul.mapNavs {
+      list-style: none;
+    width: 100%;
+    float: right;
+    margin: 0px;
+    position: absolute;
+    transition: all 1s;
+    height: 0px;
+    overflow: hidden;
+}
+
+.section.s1 ul li.mapNav {
+    display: inline-block;
+    float: left;
     font-size: 2em;
     font-weight: 100;
     background-color: rgb(201,201,201);
     margin: 0px;
+    padding:0px;
     width: 25%;
     float: left;
     color: white;
     border-bottom: 0px solid white;
     transition: all 200ms;
+    line-height: 1.8;
+    padding: 10px;
     position:absolute;
 }
+
+
 
 .section.s1 ul li:hover {
   /*border-bottom: 5px solid white*/
@@ -402,9 +560,10 @@ circle.meteorOut{
 .mapNav#location { background-color: rgb(174,23,75) }
 .mapNav#stories { background-color: rgb(52,81,103) }
 
-.mapNav#courses:hover { border-bottom: 5px solid rgba(201,201,201,.7)}
-/*.mapNav#location:hover { border-bottom: 5px solid rgba(174,23,100,1)}*/
-.mapNav#location:hover { border-bottom: 5px solid rgb(33,150,243)}
+.mapNav#courses:hover { border-bottom: 5px solid rgba(156,149,149,1)}
+.mapNav#location:hover { border-bottom: 5px solid rgba(236,4,122,1)}
+.mapNav#stories:hover { border-bottom: 5px solid rgb(119,146,169)}
+
 aside.leftAside {     width: 25%;
     height: 550px;
     position: absolute;
@@ -453,9 +612,11 @@ button#dock-left{
   float:left;
 }
 .section.s1 .wrapper h1,h2 {
-  font-family: fantasy;
-  font-weight: 800;
-  text-align: left;
+      font-family: fantasy;
+    font-weight: 800;
+    text-align: left;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
 }
 
 .section.s2 h3 { text-align:center; font-size: 35px; margin-bottom:50px;}
@@ -581,11 +742,13 @@ tbody td:last-child, thead th:last-child {
 }
 
 </style>
+
      <script src="demo/navigation.js"></script>
 <!--     // <script src="demo/scales-demo.js"></script> -->
    <!-- // <script src="demo/linear_scale.js"></script> -->
     <script src="demo/slide1.js"></script>
-    <script src="demo/storyline.js"></script>
+  <!--    // <script src="demo/storyline.js"></script> -->
+
 
  <!-- // <script src="demo/s1.js"></script> -->
 

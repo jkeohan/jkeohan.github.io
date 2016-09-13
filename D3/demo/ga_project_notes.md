@@ -20,3 +20,4 @@ Hovering over the class will highlight those states in which those classes are b
 
 Hovering over a circle will show a tooltip with additional info..what info?
 
+Play\Pausing Viz
