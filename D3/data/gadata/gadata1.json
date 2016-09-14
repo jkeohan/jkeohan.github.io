@@ -1,12 +1,12 @@
 [
- {"name":"Andy Hunt",
-  "title":"Big Boss",
-  "age": 68,
-  "bonus": true
+ {"class":"android",
+  "locations":["NYC","SF","LON"],
+  "active": 10,
+  "completed": 60
  },
- {"name":"Charles Mack",
-  "title":"Jr Dev",
-  "age":24,
-  "bonus": false
+ {"class":"wdi",
+  "locations":["NYC","SF","LON","SY"],
+  "active": 20,
+  "completed": 100
  }
 ]

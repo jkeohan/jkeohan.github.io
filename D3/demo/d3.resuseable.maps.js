@@ -217,7 +217,8 @@ d3.models.points = function() {
   var stroke = "#ae174b"
   var type = "simple";
   var data;
-  var identifier = "test"
+  var manualClass;
+  var dynamicClass;
 
   function render(selection) {
     selection.each(function(d) {
@@ -228,7 +229,10 @@ d3.models.points = function() {
           var outter = selection.selectAll("g.outter").data(data)
           outter.enter().append('g').classed("outter",true).attr("transform", 
             function(d,i) { return "translate(" + d.lon + "," + d.lat + ")" } )
-          .append("circle").classed(identifier,true)
+          .append("circle")//.classed(function(d) { return d.code },true)
+          //.classed(manualClass,true)//
+          // .attr("class",function(d) { 
+          //   return ( manualClass + " " + d[dynamicClass]) })
           .transition().delay(function(d,i) { return i/data.length * 5000 })
             .style("stroke", stroke)
             .style("stroke-width",1)
@@ -248,8 +252,7 @@ d3.models.points = function() {
            var inner = selection.selectAll("g.inner").data(data)
           inner.enter().append('g').classed("inner",true).attr("transform", 
             function(d,i) { return "translate(" + d.lon + "," + d.lat + ")" } )
-          .append("circle").classed(identifier,true)
-          // .classed(function(d) { return d.code },true)
+          .append("circle").attr("class",manualClass)
           .transition().delay(function(d,i) { return i/data.length * 5000 })
             .attr("r",0)
             .style("fill",fill)                 
@@ -342,12 +345,16 @@ d3.models.points = function() {
     end = _x
     return this
   }
-  render.identifier = function(_x){
-    if(!arguments.length) return identifier 
-    identifier = _x
+  render.manualClass = function(_x){
+    if(!arguments.length) return manualClass 
+    manualClass = _x
     return this
   }
-
+  render.dynamicClass = function(_x) {
+    if(!arguments.length) return dynamicClass
+    dynamicClass = _x
+    return this
+  }         
   return render
 }
 

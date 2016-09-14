@@ -1,5 +1,6 @@
 // (function() { 
 
+  var colors = ["rgba(145,59,71,.3)"]
   var cities;
   var points = d3.models.points()
   var canvas = canvasSize('.section.s1')
@@ -15,16 +16,19 @@
  //projection = d3.geoRobinson().scale([ width/6 ]).precision(.1).translate([ 450,300])//.scale([ width/5 ])
   //projection = d3.geoWinkel3().scale(200).precision(.1).translate([ 450,300])//.scale([ width/5 ])
 
+  // d3.json("data/countries/gadata1.json",function(error,data) { 
+  //   console.log(error,data)
+  // })
 
   d3_queue.queue()
     .defer(d3.json,"data/countries/mapshaper_output.json")
     .defer(d3.csv,"data/countries/cities2.csv",project)
-     .defer(d3.json,"data/countries/gadata1.json")
+    .defer(d3.json,"data/countries/gadata1.json")
     .await(function(error,world,cities,gadata) {
       countryScale.domain( ["Afghanistan","United States of America","United Kingdom","Australia"])
       cities = cities 
-      drawMap(world,cities)
-      console.log(gadata)
+      drawMap(world,cities,gadata)
+      //console.log(world,cities,gadata)
     })//await
   function project(d){
     d.lon = +(projection([+d.lon,+d.lat])[0])
@@ -66,7 +70,8 @@
     //text.exit().remove()
   } 
 
-function drawMap(countries,cities) {
+function drawMap(countries,cities,gadata) {
+  console.log(countries,cities)
   //Define path generator
   var path = d3.geo.path()
      .projection(projection);
@@ -85,8 +90,10 @@ function drawMap(countries,cities) {
       //storyline(cities)
       storyLineTransition(cities)
     })
-}
 
+    events(gadata)
+}
+   
     function storyLineTransition(cities) {
       var tE = 1000
       var nyc = cities.filter(function(d,i){ return d.city == "NYC"})
@@ -226,9 +233,15 @@ function drawMap(countries,cities) {
           .fill("#ff0033")// #ae174b
           .stroke("#e6e6e6")
           .strokeWidth(strokeWidth)
-          .identifier("city")
+          .manualClass("city")
           //.end(dualCircles)
         svg.call(points)
+
+        d3.selectAll(".city").each(
+          function(d) { 
+            var classname = d.code
+            d3.select(this).classed(classname,true)
+          })
     }
     function circlesWithRadius(circleData){
       console.log("inside circlesWithRadius")
@@ -266,7 +279,9 @@ function drawMap(countries,cities) {
 //     function endall(transition, callback) { 
 //       var n = 0; 
 //       transition 
-//           .each(function() { ++n; }) 
+//           .each(function() { ++n; })
+              //!--n .... n would need to be 0 for this to be true as
+              //0 = false and !false = true 
 //           .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
 //     } 
 // }
@@ -427,6 +442,7 @@ function canvasSize(target) {
     d3.select(".bottomAside").style("top","500px").style("opacity",1)
     d3.select('.mapNavs').style("height","100px")
     d3.select('aside.leftAside').style("left",0)
+    d3.select('.sidepanel').call(transFadeOut)
     d3.select('#worldMap').style("margin-left","250px")
     d3.select('.wrapper.section1').style("display","none")
     d3.selectAll('path.light').style("fill","rgb(220,220,220")
@@ -438,13 +454,40 @@ function canvasSize(target) {
   d3.selectAll(".className").on("mouseover",function(d) {
     // var active = d3.select(this).active ? true : false
     // d3.select(this).transition().duration(500).style("font-size","35px")  
-    d3.select(this).transition().style("transform","scaleY(1.3)")
+    d3.select(this).transition()
+    .style("font-size","35px")
+    //d3.select(this)
+    //.style("line-height",1.7)
+    //.style("transform","scaleY(1.3)")
     // d3.select(this).active = active
   })
 
   d3.selectAll(".className").on("mouseout",function(d) {
-      d3.select(this).transition().style("transform","scaleY(1)")
+      d3.select(this).transition().style("font-size","30px")
   })
+
+  function events(gadata){
+    var circleArr = []
+    d3.selectAll(".activeft").on("mouseover",function(d,i){
+      d3.select(d3.select(this).node().parentNode).style("background-color",colors[0])
+      var id = this.id //android or wdi
+      var obj = gadata.filter(function(d,i){ //obj that is id
+        return d.class == id
+      })
+      d3.selectAll(".inner .city").filter(function(d,i){
+        var location = d.city
+        if(obj[0].locations.indexOf(d.code) > -1) {
+          circleArr.push(d3.select(this))
+          d3.select(this).transition().duration(500).attr("r",15)
+            .style("stroke-width",10)
+        }
+      })
+    })
+    d3.selectAll(".activeft").on("mouseout",function(d,i){
+      d3.select(d3.select(this).node().parentNode).style("background-color","rgba(255,255,255,0)")
+
+    })
+  }
 
   // d3.select("#explore").on("click",function(d,i) { 
   //   d3.select(".bottomAside").style("top","500px").style("opacity",1)

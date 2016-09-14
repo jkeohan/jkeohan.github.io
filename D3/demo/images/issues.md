@@ -25,6 +25,8 @@ RESOLUTION: Moved this into it's own d3_queue
 ISSUE: SyntaxError: Unexpected token / in JSON at position 163(…). Using d3_queue to pull in gsdata.json using [{}] as format in file
 RESOLUTION: Removed // used for comments
 
+ISSUE: SyntaxError: Unexpected string in JSON at position 58(…) using d3_queue to pull in gsdata.json.  This was working before I changed file locations
+
 ISSUE: Using d3.json to pull gsdata.json returns null
 RESOLUTION: Not sure what I did but after several rounds of testing it works using both d3.json and d3_queue.queue()
 
