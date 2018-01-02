@@ -19,22 +19,22 @@
   // d3.json("data/countries/gadata1.json",function(error,data) { 
   //   console.log(error,data)
   // })
-
+  
   d3_queue.queue()
     .defer(d3.json,"data/countries/mapshaper_output.json")
     .defer(d3.csv,"data/countries/cities2.csv",project)
     .defer(d3.json,"data/countries/gadata1.json")
     .await(function(error,world,cities,gadata) {
       countryScale.domain( ["Afghanistan","United States of America","United Kingdom","Australia"])
-      cities = cities 
-      drawMap(world,cities,gadata)
-      //console.log(world,cities,gadata)
+      //cities = cities 
+      drawMap(world,cities,gadata)  
     })//await
-  function project(d){
-    d.lon = +(projection([+d.lon,+d.lat])[0])
-    d.lat = +(projection([+d.lon,+d.lat])[1])
-    return d 
-  }
+    function project(d){
+      d.lon = +(projection([+d.lon,+d.lat])[0])
+      d.lat = +(projection([+d.lon,+d.lat])[1])
+      return d 
+    }
+  
 
 //   d3.select("#explore").on("click",function(d,i) { 
 //   console.log(this)
@@ -70,28 +70,28 @@
     //text.exit().remove()
   } 
 
-function drawMap(countries,cities,gadata) {
-  console.log(countries,cities)
-  //Define path generator
-  var path = d3.geo.path()
-     .projection(projection);
+  function drawMap(countries,cities,gadata) {
+    console.log(countries,cities)
+    //Define path generator
+    var path = d3.geo.path()
+       .projection(projection);
 
-  svg.selectAll("path").data(countries.features).enter()
-     .append("path")
-     .attr("class",function(d,i) { if ( i % 2 === 0) { return "dark"} else { return "light" }})
-     .style("fill",function(d,i) { if( i % 2 === 0) { return "rgb(52,81,103)" } else { return "rgb(35,54,69)" }})// "fill",'#337ab7')//"#054bff")
-     .attr("d", path);
+    svg.selectAll("path").data(countries.features).enter()
+       .append("path")
+       .attr("class",function(d,i) { if ( i % 2 === 0) { return "dark"} else { return "light" }})
+       .style("fill",function(d,i) { if( i % 2 === 0) { return "rgb(52,81,103)" } else { return "rgb(35,54,69)" }})// "fill",'#337ab7')//"#054bff")
+       .attr("d", path);
 
-    //should be toggling fa-play & fa-pause
-    d3.select("#play").on("click",function() {
-      d3.select(".buttonText").text("Pause")
-      d3.select(".fa-play").classed("hidden",true)
-      d3.select(".fa-pause").classed("hidden",false)
-      //storyline(cities)
-      storyLineTransition(cities)
-    })
+      //should be toggling fa-play & fa-pause
+      d3.select("#play").on("click",function() {
+        //d3.select(".buttonText").text("Pause")
+        d3.select(".buttonText").remove()
+        d3.select(".fa-play").classed("hidden",true)
+        // d3.select(".fa-pause").classed("hidden",false)
+        storyLineTransition(cities)
+      })
 
-    events(gadata)
+      events(gadata)
 }
    
     function storyLineTransition(cities) {
@@ -100,6 +100,7 @@ function drawMap(countries,cities,gadata) {
 
       d3.transition().duration(1000).
         each("end",function(d,i) { d3.selectAll(".wrapper h1,.p1").call(transFadeOut)})
+        
      d3.select(".wrapper .p2")
      .transition().delay(2000).duration(1000).style("opacity",1)
      .transition().delay(7750).duration(1000) .style("opacity",0)
@@ -107,12 +108,14 @@ function drawMap(countries,cities,gadata) {
      d3.transition().delay(3200)
       .each("end",function(d,i){ newyorkcity(cities) })
      d3.transition().delay(5200) 
-      .each("end",function(d,i){ allCities(cities); sidePanelLayout(cities) })
+      .each("end",function(d,i){ 
+        allCities(cities); sidePanelLayout(cities) 
+      })
       //sidePanelInfo(cities)
      // d3.transition().delay(7500)
      //  .each("end",function(d,i) { redrawMap(cities) })
       
-      function transFadeOut(sel) {
+    function transFadeOut(sel) {
            sel.transition().duration(tE).style("opacity",0)
            .transition().style("display","none")
       }
@@ -133,23 +136,20 @@ function drawMap(countries,cities,gadata) {
         attr("r","1%").style("fill","url(#image)")
           .style("stroke","black").style("stroke-width","0.2%")    
         }
+    }
 
-   }
-
-    function transFadeOut(sel) {
-           sel.transition().duration(1000).style("opacity",0)
-           .transition().style("display","none")
-      }
+ 
 
    function redrawMap(cities) {
-    d3.selectAll("path").filter(function(d,i){
-      var country = d.properties.admin
-      console.log(country)
-      if(countryScale.domain().indexOf(country) > 0) { 
-        d3.select(this).style("fill",countryScale(country)) 
-      }
-    })
-  }
+      d3.selectAll("path").filter(function(d,i){
+        var country = d.properties.admin
+        console.log(country)
+        if(countryScale.domain().indexOf(country) > 0) { 
+          d3.select(this).style("fill",countryScale(country)) 
+        }
+      })
+    }
+
    function sidePanelLayout(circleData){
       var rows = Math.ceil(Math.sqrt(circleData.length))
       var columns = rows
@@ -170,7 +170,8 @@ function drawMap(countries,cities,gadata) {
       sidePanelInfo(circleData)
       return circleData
    }
-    function sidePanelInfo(circleData) {
+
+   function sidePanelInfo(circleData) {
       console.log("inside sidePanelInfo",circleData)
       var g = d3.select("#worldMap").append('g').classed("sidepanel",true)
        .attr("transform", function(d,i) { return "translate(" + 1000 + "," + 100 + ")" } )
@@ -203,21 +204,22 @@ function drawMap(countries,cities,gadata) {
           .attr("dx",0).attr("dy",2).style("opacity",0)//.style("font-size",0)
         .transition().delay(function(d,i) { return i/circleData.length * 5500 })
           .duration(1000).style("font-size",9).style("opacity",1).style("fill","white")
-    }
-    function newyorkcity(cities){
+   }
+
+   function newyorkcity(cities){
       var nyc = cities.filter(function(d,i){ 
-        var code = d.city == "NYC"
         return d.city == "NYC"
       })
-      console.log(nyc)
       meteores(nyc,800)
-    }
-    function nyc(cities){
-      cities.map(function(d,i){
-        return d.city == "NYC"
-      })
-      return cities
-    }
+   }
+
+    // function nyc(cities){
+    //   cities.map(function(d,i){
+    //     return d.city == "NYC"
+    //   })
+    //   return cities
+    // }
+
     function allCities(cities){
       console.log("inside allCities")
       var all = cities.filter(function(d,i){ 
@@ -225,39 +227,39 @@ function drawMap(countries,cities,gadata) {
       })
       meteores(all,100)
     }   
+
     function meteores(cities,strokeWidth){
-      console.log("inside meteores",cities)
         points.data(cities)
           .type("meteores")
           .radius(3)
           .fill("#ff0033")// #ae174b
           .stroke("#e6e6e6")
           .strokeWidth(strokeWidth)
-          .manualClass("city")
+          .classed(function(d,i) { return "city " + d.code})
           //.end(dualCircles)
         svg.call(points)
 
-        d3.selectAll(".city").each(
-          function(d) { 
-            var classname = d.code
-            d3.select(this).classed(classname,true)
-          })
+        // d3.selectAll(".city").each(
+        //   function(d) { 
+        //     var classname = d.code
+        //     d3.select(this).classed(classname,true)
+        //   })
     }
-    function circlesWithRadius(circleData){
-      console.log("inside circlesWithRadius")
-      var circles = svg.selectAll(".city").data(circleData)
-      //circles.enter().append("circle")
-      circles
-        .attr("fill","#ae174b")
-        .attr("r",0)
-        .attr("stroke", "rgba(230,230,230, .8)")
-        .attr("stroke-width",1)
-        .transition().delay(function(d,i) { return i / 14 * 2000})
-        .transition().duration(1000)
-        .ease("bounce")
-        .attr("r",5)
-        .attr("stroke-width",3)
-    }
+    // function circlesWithRadius(circleData){
+    //   console.log("inside circlesWithRadius")
+    //   var circles = svg.selectAll(".city").data(circleData)
+    //   //circles.enter().append("circle")
+    //   circles
+    //     .attr("fill","#ae174b")
+    //     .attr("r",0)
+    //     .attr("stroke", "rgba(230,230,230, .8)")
+    //     .attr("stroke-width",1)
+    //     .transition().delay(function(d,i) { return i / 14 * 2000})
+    //     .transition().duration(1000)
+    //     .ease("bounce")
+    //     .attr("r",5)
+    //     .attr("stroke-width",3)
+    // }
 
 //         // .each("end",function(d,i) { 
 //         //    (d3.select(this)).style("stroke-width",0).style("stroke-opacity",0)  } )
@@ -289,117 +291,124 @@ function drawMap(countries,cities,gadata) {
 
 
 
-function dualCircles(circleData) {
+  function dualCircles(circleData) {
 
-   var lon = circleData.lon
-   var lat = circleData.lat
+     var lon = circleData.lon
+     var lat = circleData.lat
 
-    g1 = svg.append('g')
-    .attr("transform", function(d,i) { 
-       return "translate(" 
-        + lon + "," 
-        + lat + ")" 
-    } )
+      g1 = svg.append('g')
+      .attr("transform", function(d,i) { 
+         return "translate(" 
+          + lon + "," 
+          + lat + ")" 
+      } )
 
-    g2 = svg.append('g').attr("class","g3")
-    .attr("transform", function(d,i) { 
-       return "translate(" 
-        + lon + "," 
-        + lat + ")" 
-    } )
+      g2 = svg.append('g').attr("class","g3")
+      .attr("transform", function(d,i) { 
+         return "translate(" 
+          + lon + "," 
+          + lat + ")" 
+      } )
 
-    g3 = svg.append('g').attr("class","group3")
-    .attr("transform", function(d,i) { 
-       return "translate(" 
-        + lon + "," 
-        + lat + ")" 
-    } )
+      g3 = svg.append('g').attr("class","group3")
+      .attr("transform", function(d,i) { 
+         return "translate(" 
+          + lon + "," 
+          + lat + ")" 
+      } )
 
-    var circle1 = g1.append("circle")
-    var circle2 = g2.append("circle")
-    var circle3 = g3.append("circle").attr("class","cradar")
+      var circle1 = g1.append("circle")
+      var circle2 = g2.append("circle")
+      var circle3 = g3.append("circle").attr("class","cradar")
 
-    circle1
-        .attr("r",0)
-        .attr("fill","#ae174b")
-        .attr("class","circledemo10a")
-      .transition().duration(1000) 
-        .attr("r",6)
+      circle1
+          .attr("r",0)
+          .attr("fill","#ae174b")
+          .attr("class","circledemo10a")
+        .transition().duration(1000) 
+          .attr("r",6)
 
-    circle2
-      //.transition().delay(1000)
-        .attr("fill","#ae174b")
-        .attr("fill-opacity",0)
-        .attr("r",0)
-        .attr("class","circledemo10b")
-        //.attr("stroke","white")
-      .transition().duration(1000)
-        .attr("stroke","white")
-        .attr("stroke-width",1)
-        .style("stroke-opacity", 1)
-        .attr("r",10)
+      circle2
+        //.transition().delay(1000)
+          .attr("fill","#ae174b")
+          .attr("fill-opacity",0)
+          .attr("r",0)
+          .attr("class","circledemo10b")
+          //.attr("stroke","white")
+        .transition().duration(1000)
+          .attr("stroke","white")
+          .attr("stroke-width",1)
+          .style("stroke-opacity", 1)
+          .attr("r",10)
 
-     circle3
-      //.transition().delay(1000)
-        .style("fill", "url(#gacircle)")
-        .attr("fill-opacity",1)
-        .attr("r",0)
-        .attr("class","circledemo10c")
-        //.attr("stroke","white")
-      .transition().duration(1000)
-        .attr("stroke","white")
-        .attr("stroke-width",1)
-        .style("stroke-opacity", 1)
-        .attr("r",10)
-      .transition().delay(1500)
-        .each("end",function() {
-          radarSignal(circle3)
-        })
-      // .transition().duration(1000)
-      //               .attr("r",100)
-      //                 .style("stroke-opacity", 1e-6) 
-      
+       circle3
+        //.transition().delay(1000)
+          .style("fill", "url(#gacircle)")
+          .attr("fill-opacity",1)
+          .attr("r",0)
+          .attr("class","circledemo10c")
+          //.attr("stroke","white")
+        .transition().duration(1000)
+          .attr("stroke","white")
+          .attr("stroke-width",1)
+          .style("stroke-opacity", 1)
+          .attr("r",10)
+        .transition().delay(1500)
+          .each("end",function() {
+            radarSignal(circle3)
+          })
+        // .transition().duration(1000)
+        //               .attr("r",100)
+        //                 .style("stroke-opacity", 1e-6) 
+        
 
-    //radarSignal(circle3)
+      //radarSignal(circle3)
 
 
 
-    // var text = g3.append("text")
-    // .attr("fill","white")
-    //   .attr("dx", function(d){return 0})
-    //   .attr("dy", function(d) { return 0 } )
-    //   .text("New York")
-    //   .attr("fill","white")
-    //   .style("font-size",10).style("font-weight","bold")
-    //   .attr("text-anchor","start")
+      // var text = g3.append("text")
+      // .attr("fill","white")
+      //   .attr("dx", function(d){return 0})
+      //   .attr("dy", function(d) { return 0 } )
+      //   .text("New York")
+      //   .attr("fill","white")
+      //   .style("font-size",10).style("font-weight","bold")
+      //   .attr("text-anchor","start")
 
-    function radarSignal(sel,times,radi){
-      var counter = 0;
-      var si = setInterval(function() {
-        //d3.selectAll('g').remove()
-        if(counter > 2) {  clearInterval(si) }
-        else{
-          counter++
-          d3.select(".circledemo10c").attr("r",10).style("stroke-opacity", 1)
-           .transition().duration(1000)
-              .attr("r",200).style("stroke-width",5).style("stroke-opacity", 1e-6) 
-          //dualCircles(circleData)
+      function radarSignal(sel,repeat,radi){
+        repeat = repeat || 300;
+        radi = radi || 200;
+        var counter = repeat;
+        var si = setInterval(function() {
+          //d3.selectAll('g').remove()
+          if(counter > 2) {  clearInterval(si) }
+          else{
+            counter++
+            var innerCircle = d3.select(sel)
+            var outterCircle = getInner(innerCirle)
+            d3.select(sel).attr("r",10).style("stroke-opacity", 1)
+             .transition().duration(1000)
+                .attr("r",radi).style("stroke-width",5).style("stroke-opacity", 1e-6) 
+            //dualCircles(circleData)
+          }
+        },2000)
+        function getInner(sel,ref){
+          d3.selectAll(sel).filter(function(d){ return d = ref.datum})
         }
-      },2000)
-    }
-}
+      }
+  }
 
-function connectCities(cities) {
+  function connectCities(cities) {
 
-  console.log("connectCities - cities param", cities)
-  function sourceTarget(cities){
-    var links = [];
-     cities.map(function(d,i){
-        console.log(d,i)
-        links.push( { source: cities[0], target: cities[1] } )
-      })
-      console.log(links)
-      return links
+    console.log("connectCities - cities param", cities)
+    function sourceTarget(cities){
+      var links = [];
+       cities.map(function(d,i){
+          console.log(d,i)
+          links.push( { source: cities[0], target: cities[1] } )
+        })
+        console.log(links)
+        return links
   }  
 
 
@@ -427,14 +436,7 @@ function connectCities(cities) {
 
    .style("stroke", "rgb(6,120,155)");
 }
-//Determine current width\height oftarget div
-function canvasSize(target) { 
-  var height = parseFloat(d3.select(target).node().clientHeight)
-  var width = parseFloat(d3.select(target).node().clientWidth)
-  //console.log(d3.select(target).node().clientWidth)
-  
-  return [width,height]
-}//canvasSize
+
 
   d3.select("#explore").on("click",function(d,i) {
     d3.select(this).call(transFadeOut)
@@ -500,10 +502,7 @@ function canvasSize(target) {
   //   visibility(".section.s1 .wrapper")
   // })
 
-  function visibility(sel,vis){
-    //d3.select(".bottomAside").style("top","500px").style("opacity",1)
-    d3.select(sel).style("display","none")
-  }
+ 
 
 
 function storyline(cities) {
@@ -563,3 +562,24 @@ function storyline(cities) {
   var interval = setInterval(myFunction, counter);
 
 }
+
+///// TRANSITIONS /////
+ function visibility(sel,vis){
+    //d3.select(".bottomAside").style("top","500px").style("opacity",1)
+    d3.select(sel).style("display","none")
+  }
+
+  function transFadeOut(sel,duration) {
+     duration = duration || 1000;
+     sel.transition().duration(1000).style("opacity",0)
+     .transition().style("display","none")
+  }
+
+//Determine current width\height oftarget div
+function canvasSize(target) { 
+  var height = parseFloat(d3.select(target).node().clientHeight)
+  var width = parseFloat(d3.select(target).node().clientWidth)
+  //console.log(d3.select(target).node().clientWidth)
+  
+  return [width,height]
+}//canvasSize
