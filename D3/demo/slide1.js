@@ -85,7 +85,7 @@
       //should be toggling fa-play & fa-pause
       d3.select("#play").on("click",function() {
         //d3.select(".buttonText").text("Pause")
-        d3.select(this).remove()
+        //d3.select(this).remove()
         d3.select(".buttonText").remove()
         d3.select(".fa-play").classed("hidden",true)
         // d3.select(".fa-pause").classed("hidden",false)
