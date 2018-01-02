@@ -84,11 +84,9 @@
 
       //should be toggling fa-play & fa-pause
       d3.select("#play").on("click",function() {
-        //d3.select(".buttonText").text("Pause")
-        //d3.select(this).remove()
-        d3.select(".buttonText").remove()
+        d3.select(".buttonText").text("Pause")
         d3.select(".fa-play").classed("hidden",true)
-        // d3.select(".fa-pause").classed("hidden",false)
+        d3.select(".fa-pause").classed("hidden",false)
         storyLineTransition(cities)
       })
 
@@ -109,9 +107,7 @@
      d3.transition().delay(3200)
       .each("end",function(d,i){ newyorkcity(cities) })
      d3.transition().delay(5200) 
-      .each("end",function(d,i){ 
-        allCities(cities); sidePanelLayout(cities) 
-      })
+      .each("end",function(d,i){ allCities(cities); sidePanelLayout(cities) })
       //sidePanelInfo(cities)
      // d3.transition().delay(7500)
      //  .each("end",function(d,i) { redrawMap(cities) })
