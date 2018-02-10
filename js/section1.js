@@ -43,11 +43,12 @@ var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
   		.attr({  class: "xlabel", x: width/2 , y: 50})
   		.text("2002 Renewable Energy Output").style("font-size",20)
 //API call for csv data and all formatting of data
-d3.csv("data/data_regions.csv", function(data) {
+ d3.csv("data/data_regions.csv", function(data) {
 	 alldata = data;
 	//d3.nest to rollup Region and mean of years
 	var regions = d3.set(data.map(ƒ('Region')))//testing jetpack
 		.values().filter(function(d) { return !(d == "World")}).sort(d3.acscending) 
+		
 	colorScale.domain(regions)
 
 	// 	var regions = d3.set(data.map(function(d) { return d.Region } ) )
@@ -86,7 +87,7 @@ d3.csv("data/data_regions.csv", function(data) {
 	var yearMeanNoWorld = yearMean.filter(function(d) { return !(d.key == "World") })
 
 	//Converted yearMean object to format consistent with csv import.  
-formatYear = (function () {
+ formatYear = (function () {
 		var array = []
 		yearMean.forEach(function(d) {
 			var obj = {};
@@ -114,7 +115,7 @@ formatYear = (function () {
 	regionChart(data,yearMean,currentYear,formatYear)
 })//end csv
 
-function countryChart(data,year,yearMean,formatYear) { 
+	function countryChart(data,year,yearMean,formatYear) { 
 	console.log(data,year,yearMean,formatYear)
 	grouped = false;
 	var yearMean = formatYear
@@ -230,7 +231,7 @@ function regionChart(data,yearMean,year,formatYear) {
 			.on("mouseout", mouseOut)
 			.append('title')
 
-		circles.transition().duration(3000).style("opacity",.8)
+		circles.transition().duration(2000).style("opacity",.8)
 			.attr("r", function(d) { d.radius = radiusScale(+d.countries.length)
 				return radiusScale(+d.countries.length)})
 				.attr("cy", function(d,i) { return yScale(+d["2012"]) })
@@ -238,7 +239,7 @@ function regionChart(data,yearMean,year,formatYear) {
 				.attr("stroke-width",0)
 			.attr("stroke", "rgba(230,230,230, .8)")
 
-		d3.selectAll(".Country").transition().duration(3000)
+		d3.selectAll(".Country").transition().duration(2000)
 				.attr("cy", function(d) { 
 					var val;
 					yearMean.forEach(function(obj) { if(d.Region == obj.Region) { 
@@ -319,7 +320,7 @@ function regionChart(data,yearMean,year,formatYear) {
 
 	function mouseOut(d) {
 
-		var transitionTime = 1000
+		var transitionTime = 1500
 	
 		var c = d3.select(this)
 		c.transition().duration(transitionTime)

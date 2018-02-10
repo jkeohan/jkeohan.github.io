@@ -127,11 +127,11 @@ d3.models.legend = function () {
               .on("mouseout", dispatch.mouseOut)
               .on("click", dispatch.onClick)
           
-       legend.append('rect')
+         legend.append('rect')
           .attr({ x:width+5, y:5, width: 10, height: 10 })
           .style("fill", function (d, i) { return d.color })
 
-        legend.append('text')
+         legend.append('text')
           .attr({ x: width+25, y: 15})
           .text(function (d, i) { return d.text})
           .style("text-anchor", "start")
@@ -217,19 +217,17 @@ d3.models.points = function() {
   var stroke = "#ae174b"
   var type = "simple";
   var data;
-  var manualClass;
-  var dynamicClass;
+  var classed;
 
   function render(selection) {
     selection.each(function(d) {
       if(type == "simple") {
-
       }
       else if ( type == "meteores") {
           var outter = selection.selectAll("g.outter").data(data)
-          outter.enter().append('g').classed("outter",true).attr("transform", 
-            function(d,i) { return "translate(" + d.lon + "," + d.lat + ")" } )
-          .append("circle")//.classed(function(d) { return d.code },true)
+          outter.enter().append('g').classed("outter",true)
+            .attr("transform", (d,i) => { return "translate(" + d.lon + "," + d.lat + ")" } )
+            .append("circle")//.classed(function(d) { return d.code },true)
           //.classed(manualClass,true)//
           // .attr("class",function(d) { 
           //   return ( manualClass + " " + d[dynamicClass]) })
@@ -252,7 +250,7 @@ d3.models.points = function() {
            var inner = selection.selectAll("g.inner").data(data)
           inner.enter().append('g').classed("inner",true).attr("transform", 
             function(d,i) { return "translate(" + d.lon + "," + d.lat + ")" } )
-          .append("circle").attr("class",manualClass)
+          .append("circle").attr("class",classed)
           .transition().delay(function(d,i) { return i/data.length * 5000 })
             .attr("r",0)
             .style("fill",fill)                 
@@ -345,9 +343,9 @@ d3.models.points = function() {
     end = _x
     return this
   }
-  render.manualClass = function(_x){
-    if(!arguments.length) return manualClass 
-    manualClass = _x
+  render.classed = function(_x){
+    if(!arguments.length) return classed 
+    classed = _x
     return this
   }
   render.dynamicClass = function(_x) {
