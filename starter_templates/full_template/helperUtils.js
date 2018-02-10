@@ -15,13 +15,6 @@ function removeDuplicatesFilterMethod(arr) {
   })
 }
 
-//D3 SPECIFIC
-//Method1
-//d3.set(us.features.map(function(d) { return d.properties.region } )).values()
-//Method2
-// var data = us.features
-// d3.keys(d3.nest().key(function(d) { return d.properties.region } ).map(data))
-
 ///////////  COLORS ////////////////
 function getRandomColor1() {
   var letters = "0123456789ABCDEF";
@@ -43,3 +36,9 @@ function rgbToHex(rgb) {
   }).join("");
 }
 
+//D3 SPECIFIC
+//Method1
+//d3.set(us.features.map(function(d) { return d.properties.region } )).values()
+//Method2
+// var data = us.features
+// d3.keys(d3.nest().key(function(d) { return d.properties.region } ).map(data))

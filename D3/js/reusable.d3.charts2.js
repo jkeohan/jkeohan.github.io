@@ -1,6 +1,5 @@
 d3.models = {};
 d3.models.maps = function() {
-
 	var fontSize = 15;
 	var width = 650;
 	var transX = 0;
@@ -10,14 +9,10 @@ d3.models.maps = function() {
 
 	function render(selection) {
 		selection.each(function(data){
-			
-			var projection = d3.geo.mercator()
-      .scale(scale)
-      .translate( [transX, transY]);
+			var projection = d3.geo.mercator().scale(scale).translate( [transX, transY]);
       var path = d3.geo.path().projection(projection);
-
       var map = selection.selectAll("path")
-      .data(geo_data.features)
+      .data(geoData.features)
       .enter()
       .append("path")
         .attr("d", path)

@@ -2,7 +2,9 @@
 
   var colors = ["rgba(145,59,71,.3)"]
   var cities;
-  var points = d3.models.points()
+  // d3.models is imported from d3.reusable.maps.js
+  var points = d3.models.points(); 
+  debugger;
   var canvas = canvasSize('.section.s1')
   var margins = { top:200,bottom:100,left:200,right:200}
   var countryScale = d3.scale.ordinal().range(["yellow","blue","green","orange"])
@@ -34,41 +36,34 @@
       d.lat = +(projection([+d.lon,+d.lat])[1])
       return d 
     }
-  
 
-//   d3.select("#explore").on("click",function(d,i) { 
-//   console.log(this)
-//   //visibility(".section.s1 .wrapper")
-// })
+    var svg = d3.select('#worldMap').attr("width",width).attr("height",height)
+    function drawTitle(){
+      var data = "DATA VISUALIZATION AND STORYTELLING USING D3".split(" ")
+      //var data = "DATA".split("")
+      //console.log(data)
+      var g = svg.append("g").attr("transform","translate(" + 100 + "," + 100 + ")")
+      var text = g.selectAll("text").data(data)
 
+      text.enter().append("text") .text(function(d) { return d })
+           .style({
+            "fill":"black",
+            "font-size":"10px" ,
+            "font-family":"fantasy",
+            "font-weight":"800",
+            "text-anchor":"middle",
+            "opacity":"1"
+          })
+            .attr("x",function(d,i) { return i * 200 })
+            .attr("y",0).transition().duration(4000).ease("ease")//.delay(function(d,i) { return i/data.length * 5000 } ) 
+      //.style("fill","yellow")
+      .style("opacity",1)
+      .style("font-size","30px")
+      //.transition().duration(2000).delay(500)
+      .attr("y",0)
 
-  var svg = d3.select('#worldMap').attr("width",width).attr("height",height)
-  function drawTitle(){
-    var data = "DATA VISUALIZATION AND STORYTELLING USING D3".split(" ")
-    //var data = "DATA".split("")
-    //console.log(data)
-    var g = svg.append("g").attr("transform","translate(" + 100 + "," + 100 + ")")
-    var text = g.selectAll("text").data(data)
-
-    text.enter().append("text") .text(function(d) { return d })
-         .style({
-          "fill":"black",
-          "font-size":"10px" ,
-          "font-family":"fantasy",
-          "font-weight":"800",
-          "text-anchor":"middle",
-          "opacity":"1"
-        })
-          .attr("x",function(d,i) { return i * 200 })
-          .attr("y",0).transition().duration(4000).ease("ease")//.delay(function(d,i) { return i/data.length * 5000 } ) 
-    //.style("fill","yellow")
-    .style("opacity",1)
-    .style("font-size","30px")
-    //.transition().duration(2000).delay(500)
-    .attr("y",0)
-
-    //text.exit().remove()
-  } 
+      //text.exit().remove()
+    } 
 
   function drawMap(countries,cities,gadata) {
     console.log(countries,cities)
@@ -134,8 +129,6 @@
           .style("stroke","black").style("stroke-width","0.2%")    
         }
     }
-
- 
 
    function redrawMap(cities) {
       d3.selectAll("path").filter(function(d,i){
@@ -566,7 +559,7 @@ function storyline(cities) {
     d3.select(sel).style("display","none")
   }
 
-  function transFadeOut(sel,duration) {
+function transFadeOut(sel,duration) {
      duration = duration || 1000;
      sel.transition().duration(1000).style("opacity",0)
      .transition().style("display","none")

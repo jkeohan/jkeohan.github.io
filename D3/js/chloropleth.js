@@ -32,6 +32,7 @@
 
 			// //Load in GeoJSON data
 			d3.json("../D3/data/countries/mapshaper_output.json", function(json) {
+				console.log('inside of mapping page...here is json: ', json)
 				brew.domain([json.features.length])
 				//Bind data and create one path per GeoJSON feature
 				svg.append('g').selectAll("path")

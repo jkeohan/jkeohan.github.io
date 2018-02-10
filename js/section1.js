@@ -115,7 +115,7 @@ var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
 	regionChart(data,yearMean,currentYear,formatYear)
 })//end csv
 
-	function countryChart(data,year,yearMean,formatYear) { 
+function countryChart(data,year,yearMean,formatYear) { 
 	console.log(data,year,yearMean,formatYear)
 	grouped = false;
 	var yearMean = formatYear
@@ -347,8 +347,7 @@ function regionChart(data,yearMean,year,formatYear) {
 				.attr("class","line1")
 				.transition().duration(500)
 				.attr("x2",xScale(0) )
-				.attr("y2", yScale(+this.datum()["2012"] )  )
-			
+				.attr("y2", yScale(+this.datum()["2012"] )  )	
 	}
 
 	function createLine2(){
